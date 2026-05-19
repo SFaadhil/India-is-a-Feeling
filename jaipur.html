@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaipur — India is a Feeling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Indian Cultural Animated Background -->
+    <div class="bg-indian">
+        <canvas id="bg-canvas"></canvas>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <img class="mandala-bl" src="mandala.svg" alt="">
+        <img class="mandala-tr" src="mandala.svg" alt="">
+        <img class="mandala-center" src="mandala.svg" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="images/IIAF.webp" alt="IIAF" class="nav-logo-img"></a>
+            <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="cities.html" class="active">Cities</a>
+                    <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Amravati</a></li>
+                        <li><a href="hyderabad.html">Bengaluru</a></li>
+                        <li><a href="hyderabad.html">Chandigarh</a></li>
+                        <li><a href="hyderabad.html">Chennai</a></li>
+                        <li><a href="hyderabad.html">Dehradun</a></li>
+                        <li><a href="hyderabad.html">Delhi IIT</a></li>
+                        <li><a href="hyderabad.html">Delhi University</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="hyderabad.html">Indore</a></li>
+                        <li><a href="jaipur.html" class="active">Jaipur</a></li>
+                        <li><a href="hyderabad.html">Jalandhar</a></li>
+                        <li><a href="hyderabad.html">Kolkata</a></li>
+                        <li><a href="hyderabad.html">Ludhiana</a></li>
+                        <li><a href="hyderabad.html">MAHE</a></li>
+                        <li><a href="hyderabad.html">Mumbai</a></li>
+                        <li><a href="hyderabad.html">Navi Mumbai</a></li>
+                        <li><a href="hyderabad.html">Patiala</a></li>
+                        <li><a href="hyderabad.html">Pune</a></li>
+                        <li><a href="hyderabad.html">Surat</a></li>
+                        <li><a href="hyderabad.html">Visakhapatnam</a></li>
+                        <li><a href="hyderabad.html">Noida</a></li>
+                        <li><a href="hyderabad.html">VVN</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- City Hero with Full-screen Video -->
+    <section class="city-hero">
+        <div class="city-hero-media">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1600&q=80">
+                <source src="https://videos.pexels.com/video-files/4273312/4273312-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1600&q=80" alt="Jaipur Amber Fort">
+            </video>
+        </div>
+        <div class="city-hero-overlay"></div>
+        <div class="city-hero-content">
+            <span class="city-hero-state">Rajasthan, India</span>
+            <h1>Welcome to Jaipur</h1>
+            <p class="city-hero-tagline">The Feeling of Royalty</p>
+            <p class="city-hero-feeling">Padharo Ni Mhare Desh — Welcome to My Country. A majestic gateway to forts, palaces, and flavours.</p>
+        </div>
+    </section>
+
+    <!-- Quick Facts -->
+    <section class="city-facts">
+        <div class="container">
+            <div class="facts-grid">
+                <div class="fact-item"><span class="fact-value">Est. 1998</span><span class="fact-label">AIESEC Presence</span></div>
+                <div class="fact-item"><span class="fact-value">Founded 1727</span><span class="fact-label">By Maharaja Jai Singh II</span></div>
+                <div class="fact-item"><span class="fact-value">Pink City</span><span class="fact-label">UNESCO Heritage</span></div>
+                <div class="fact-item"><span class="fact-value">Semi-Arid</span><span class="fact-label">Desert Climate</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- City Introduction -->
+    <section class="section city-intro">
+        <div class="container">
+            <div class="city-intro-grid">
+                <div class="city-intro-text">
+                    <h2>Discover Jaipur</h2>
+                    <p>Padharo Ni Mhare Desh — Welcome to My Country. This is how Jaipur greets every visitor, and it's not just words, it's a promise. The Pink City, founded in 1727 by the visionary mathematician and astronomer Maharaja Jai Singh II, is a majestic gateway to Rajasthan's royal heritage.</p>
+                    <p>Since 1998, AIESEC in Jaipur has proudly been part of this city, sharing its rich beauty, colours, and honour with the world. From the geometric precision of Jantar Mantar — home to the world's largest stone sundial — to the bustling bazaars of Johari and Bapu, Jaipur is where history lives and breathes alongside modern India.</p>
+                </div>
+                <div class="city-intro-image">
+                    <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600&q=80" alt="Hawa Mahal Palace of Winds Jaipur" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Highlight Cards with Images -->
+    <section class="section city-highlights" style="background: var(--bg-alt);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">City Highlights</h2>
+                <p class="section-desc">What makes Jaipur unforgettable.</p>
+            </div>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=500&q=80" alt="Hawa Mahal" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Mysteries of Palaces</h3><p>The City Palace, Hawa Mahal, and Nahargarh Fort tell tales of royal grandeur and centuries of Rajput heritage.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&q=80" alt="Rajasthani crafts" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Traditional Heritage</h3><p>Block-printed textiles, blue pottery, and handcrafted jewellery — treasures of Rajasthani artisanship.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=500&q=80" alt="Jaipur festivals" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Vibrancy of Culture</h3><p>From the Jaipur Literature Festival to Gangaur and Teej, the city bursts with colourful celebrations year-round.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&q=80" alt="Amber Fort" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Gateway to Forts</h3><p>Amber Fort, Jaigarh Fort, and Nahargarh Fort form a spectacular hilltop trio with panoramic views.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=500&q=80" alt="Rajasthani food" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Famous Delicacies</h3><p>Dal Baati Churma, Laal Maas, Ghewar, and Pyaaz Kachori — Rajasthani cuisine is bold and unforgettable.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=500&q=80" alt="Thar Desert" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Desert Adventures</h3><p>Camel safaris, desert camping under the stars, and the golden sand dunes of the Thar Desert.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Jantar Mantar observatory" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Jantar Mantar</h3><p>The world's largest stone sundial and a UNESCO World Heritage Site — Maharaja Jai Singh II's extraordinary 18th-century astronomical observatory.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1607823489283-1deb240f0e24?w=500&q=80" alt="Jaipur bazaars" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Pink City Bazaars</h3><p>Johari Bazaar, Bapu Bazaar, and Tripolia — Jaipur's markets overflow with silver jewellery, block-printed fabrics, and precious gemstones.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1549366021-9f761d450615?w=500&q=80" alt="Elephant experience Jaipur" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Royal Elephant Experiences</h3><p>Meet the gentle giants of Rajasthan at ethical elephant sanctuaries near Amber Fort — a uniquely royal Jaipur encounter.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Information — right below city highlights -->
+    <section class="section city-practical" style="background: var(--bg);">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Practical Information</h2><p class="section-desc">Everything you need to know before arriving in Jaipur.</p></div>
+            <div class="practical-grid">
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Accommodation</h4><p>Options include hostels, host families, and shared flats — ideally within a 4 km radius of your workplace. Your local committee arranges everything.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><h4>Cost of Living</h4><p>Jaipur is very affordable for exchange participants. Your local committee will provide a detailed cost breakdown based on your program.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div><h4>Transportation</h4><p>Get around via cabs (Ola/Uber), auto-rickshaws, and local Rajasthan Roadways buses. The city is compact and easy to navigate.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h4>Visa</h4><p>You'll need a valid Indian visa for your exchange. Your local committee will provide a detailed visa guide and assist with the application.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h4>Health &amp; Safety</h4><p>Jaipur has quality healthcare facilities. Your local committee shares health and safety guidelines and quarantine depends on government protocols.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Language</h4><p>Rajasthani and Hindi are primary languages. English is understood in urban areas. The locals are famously warm and happy to help.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><h4>SIM Card &amp; Internet</h4><p>Jio and Airtel provide strong 4G/5G coverage in Jaipur. Grab a prepaid SIM at Jaipur Airport or any mobile store — all you need is your passport.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Cultural Etiquette</h4><p>Dress modestly at temples and forts; cover shoulders and knees. Remove shoes at religious entrances. Bargaining is expected and welcomed at the bazaars!</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Best Time to Visit</h4><p>October to March is ideal — cool, clear, and festival-rich. Summers (April–June) are intense at 40°C+. The Jaipur Literature Festival in January is world-class.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Emergency Contacts</h4><p>Police: 100 · Ambulance: 108 · Fire: 101. Your local committee provides a dedicated 24/7 emergency number to all participants before arrival.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h4>Food &amp; Diet</h4><p>Rajasthani cuisine is predominantly vegetarian and utterly delicious. Let your host family know about any restrictions — they take great pride in feeding guests well.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner">
+        <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1600&q=80" alt="Hawa Mahal at golden hour">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text"><h2>The Pink City Awaits</h2><p>Where royal heritage meets modern vibrancy since 1727</p></div>
+    </div>
+
+    <!-- Exchange Programs -->
+    <section class="section city-programs" data-entity-id="jaipur">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Exchange Programs</h2><p class="section-desc">Three ways to experience Jaipur through AIESEC.</p></div>
+            <div class="programs-grid">
+                <div class="program-card gv" data-program="gv">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="Volunteering in Jaipur"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gv">iGV</span><h3>Global Volunteer</h3><p>A 6–8 week volunteering exchange for ages 18–30. Step outside your comfort zone and contribute to youth development and sustainable impact in Rajasthan.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card gta" data-program="gta">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&q=80" alt="Professional internship Jaipur"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gta">iGTa</span><h3>Global Talent</h3><p>A professional internship designed to advance your career in global markets. Gain real-world exposure in Jaipur's growing business and creative industries.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card gte" data-program="gte">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80" alt="Teaching in Jaipur schools"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gte">iGTe</span><h3>Global Teacher</h3><p>Bridge educational gaps by teaching in Jaipur's schools and communities. Build culturally responsive learning and inspire the next generation.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner short">
+        <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1600&q=80" alt="Amber Fort panorama">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text"><h2>Padharo Mhare Desh</h2><p>Welcome to the Pink City — where royalty meets warmth</p></div>
+    </div>
+
+    <!-- Voices from Jaipur — Testimonial Auto-scroll -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Voices from Jaipur</h2>
+                <p class="section-desc">Real stories from exchange participants who experienced the magic of the Pink City.</p>
+            </div>
+        </div>
+        <div class="testimonial-scroll-track">
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Léa Dupont">
+                    <div class="testimonial-scroll-info"><strong>Léa Dupont</strong><span>France &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Jaipur welcomed me like royalty. The AIESEC team organised a heritage walk on my very first day, and I was immediately captivated by the pink-washed walls and the warmth of the people. Padharo Mhare Desh isn't just a phrase — it's a lived promise."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Alejandro García">
+                    <div class="testimonial-scroll-info"><strong>Alejandro García</strong><span>Colombia &middot; Global Talent, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"I came for a professional internship and left with a new understanding of heritage and community. Watching artisans hand-block-print textiles at dawn in the bazaars is something I'll never forget. The city lives and breathes history."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&q=80" alt="Yuki Tanaka">
+                    <div class="testimonial-scroll-info"><strong>Yuki Tanaka</strong><span>Japan &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"The desert sunset camel safari my local team arranged was peak Jaipur. I sat on a dune with teammates from six countries, watching the sky turn gold and pink. That moment — that's why I chose AIESEC. That's what exchange is about."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=80" alt="Thomas Müller">
+                    <div class="testimonial-scroll-info"><strong>Thomas Müller</strong><span>Germany &middot; Global Teacher, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Teaching in Jaipur's schools changed how I see education. The students' curiosity was unlike anything I'd experienced before. The local team made sure I was never just a visitor — I was part of the community from day one."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1546961342-ea5f62d51b05?w=200&q=80" alt="Isabella Rossi">
+                    <div class="testimonial-scroll-info"><strong>Isabella Rossi</strong><span>Italy &middot; Global Volunteer, 2023</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Jaipur exceeded every expectation. The Amber Fort at sunrise, the chaos and colour of the bazaars, the Dal Baati Churma — and above all, the genuine warmth of every single person I met. I came back a completely different person."</blockquote>
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Léa Dupont">
+                    <div class="testimonial-scroll-info"><strong>Léa Dupont</strong><span>France &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Jaipur welcomed me like royalty. The AIESEC team organised a heritage walk on my very first day, and I was immediately captivated by the pink-washed walls and the warmth of the people. Padharo Mhare Desh isn't just a phrase — it's a lived promise."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Alejandro García">
+                    <div class="testimonial-scroll-info"><strong>Alejandro García</strong><span>Colombia &middot; Global Talent, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"I came for a professional internship and left with a new understanding of heritage and community. Watching artisans hand-block-print textiles at dawn in the bazaars is something I'll never forget. The city lives and breathes history."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&q=80" alt="Yuki Tanaka">
+                    <div class="testimonial-scroll-info"><strong>Yuki Tanaka</strong><span>Japan &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"The desert sunset camel safari my local team arranged was peak Jaipur. I sat on a dune with teammates from six countries, watching the sky turn gold and pink. That moment — that's why I chose AIESEC. That's what exchange is about."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=80" alt="Thomas Müller">
+                    <div class="testimonial-scroll-info"><strong>Thomas Müller</strong><span>Germany &middot; Global Teacher, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Teaching in Jaipur's schools changed how I see education. The students' curiosity was unlike anything I'd experienced before. The local team made sure I was never just a visitor — I was part of the community from day one."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1546961342-ea5f62d51b05?w=200&q=80" alt="Isabella Rossi">
+                    <div class="testimonial-scroll-info"><strong>Isabella Rossi</strong><span>Italy &middot; Global Volunteer, 2023</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Jaipur exceeded every expectation. The Amber Fort at sunrise, the chaos and colour of the bazaars, the Dal Baati Churma — and above all, the genuine warmth of every single person I met. I came back a completely different person."</blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Team -->
+    <section class="section city-team">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Local Committee Team</h2><p class="section-desc">Your dedicated team in Jaipur, led by LC President <strong>Kawaldeep Singh</strong>.</p></div>
+            <div class="team-grid">
+                <div class="contact-card"><div class="contact-avatar">JS</div><h4>Jasmanjot Singh Sarna</h4><span class="contact-role">Head Incoming Global Volunteer</span><div class="contact-details"><a href="mailto:amankrishna@aiesecmember.in">amankrishna@aiesecmember.in</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">HJ</div><h4>Harshita Jaiswal</h4><span class="contact-role">Head Incoming Global Talent</span><div class="contact-details"><a href="mailto:harshita.jaiswal@aiesecmember.in">harshita.jaiswal@aiesecmember.in</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">VM</div><h4>Vikas Meena</h4><span class="contact-role">Head Incoming Global Teacher</span><div class="contact-details"><a href="mailto:vikasmeena@aiesecmember.in">vikasmeena@aiesecmember.in</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">JB</div><h4>Jaimini Bhakar</h4><span class="contact-role">Head of Marketing</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- National Contact -->
+    <section class="section contact">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">National Contact</h2><p class="section-desc">Reach out to our national team for any questions about exchanges in Jaipur.</p></div>
+            <div class="contact-grid">
+                <div class="contact-card"><div class="contact-avatar">GS</div><h4>Guruday Singh</h4><span class="contact-role">MCVP Incoming Global Volunteer</span><div class="contact-details"><a href="mailto:guruday.singh@aiesec.in">guruday.singh@aiesec.in</a><a href="tel:+918544836988">+91 854 483 6988</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">RA</div><h4>Ria Aggarwal</h4><span class="contact-role">MCVP Incoming Global Talent & Teacher</span><div class="contact-details"><a href="mailto:ria.aggarwal@aiesec.in">ria.aggarwal@aiesec.in</a><a href="tel:+918360266784">+91 836 026 6784</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">LJ</div><h4>Levi Jacob</h4><span class="contact-role">MCVP CXO</span><div class="contact-details"><a href="mailto:levi.jacob@aiesec.in">levi.jacob@aiesec.in</a><a href="tel:+919398642201">+91 939 864 2201</a></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a><p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="index.html#products">Our Programs</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+                <div class="footer-links"><h4>Cities</h4><ul><li><a href="cities.html">All Cities</a></li><li><a href="ahmedabad.html">Ahmedabad</a></li><li><a href="hyderabad.html">Hyderabad</a></li><li><a href="jaipur.html">Jaipur</a></li></ul></div>
+                <div class="footer-links"><h4>Programs</h4><ul><li><a href="index.html#products">Global Volunteer</a></li><li><a href="index.html#products">Global Talent</a></li><li><a href="index.html#products">Global Teacher</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 AIESEC India. India is a Feeling.</p><div class="footer-social"><a href="https://www.instagram.com/aiesecinjaipur/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/sheets-loader.js"></script>
+</body>
+</html>

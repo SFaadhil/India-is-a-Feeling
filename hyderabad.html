@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad — India is a Feeling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Indian Cultural Animated Background -->
+    <div class="bg-indian">
+        <canvas id="bg-canvas"></canvas>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <img class="mandala-bl" src="mandala.svg" alt="">
+        <img class="mandala-tr" src="mandala.svg" alt="">
+        <img class="mandala-center" src="mandala.svg" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="images/IIAF.webp" alt="IIAF" class="nav-logo-img"></a>
+            <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="cities.html" class="active">Cities</a>
+                    <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Amravati</a></li>
+                        <li><a href="hyderabad.html">Bengaluru</a></li>
+                        <li><a href="hyderabad.html">Chandigarh</a></li>
+                        <li><a href="hyderabad.html">Chennai</a></li>
+                        <li><a href="hyderabad.html">Dehradun</a></li>
+                        <li><a href="hyderabad.html">Delhi IIT</a></li>
+                        <li><a href="hyderabad.html">Delhi University</a></li>
+                        <li><a href="hyderabad.html" class="active">Hyderabad</a></li>
+                        <li><a href="hyderabad.html">Indore</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                        <li><a href="hyderabad.html">Jalandhar</a></li>
+                        <li><a href="hyderabad.html">Kolkata</a></li>
+                        <li><a href="hyderabad.html">Ludhiana</a></li>
+                        <li><a href="hyderabad.html">MAHE</a></li>
+                        <li><a href="hyderabad.html">Mumbai</a></li>
+                        <li><a href="hyderabad.html">Navi Mumbai</a></li>
+                        <li><a href="hyderabad.html">Patiala</a></li>
+                        <li><a href="hyderabad.html">Pune</a></li>
+                        <li><a href="hyderabad.html">Surat</a></li>
+                        <li><a href="hyderabad.html">Visakhapatnam</a></li>
+                        <li><a href="hyderabad.html">Noida</a></li>
+                        <li><a href="hyderabad.html">VVN</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- City Hero with Full-screen Video -->
+    <section class="city-hero">
+        <div class="city-hero-media">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1603813507806-0c1eae30f110?w=1600&q=80">
+                <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1603813507806-0c1eae30f110?w=1600&q=80" alt="Hyderabad Charminar">
+            </video>
+        </div>
+        <div class="city-hero-overlay"></div>
+        <div class="city-hero-content">
+            <span class="city-hero-state">Telangana, India</span>
+            <h1>Welcome to Hyderabad</h1>
+            <p class="city-hero-tagline">The Feeling of being Kiraak</p>
+            <p class="city-hero-feeling">Where royal Mughal heritage meets cutting-edge tech innovation — unforgettable moments that stay with you for life.</p>
+        </div>
+    </section>
+
+    <!-- Quick Facts -->
+    <section class="city-facts">
+        <div class="container">
+            <div class="facts-grid">
+                <div class="fact-item"><span class="fact-value">Est. 1985</span><span class="fact-label">AIESEC Presence</span></div>
+                <div class="fact-item"><span class="fact-value">&#8377;10K+</span><span class="fact-label">Monthly Expenses</span></div>
+                <div class="fact-item"><span class="fact-value">Green City</span><span class="fact-label">World Green City 2022</span></div>
+                <div class="fact-item"><span class="fact-value">Tropical</span><span class="fact-label">Warm Climate</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- City Introduction -->
+    <section class="section city-intro">
+        <div class="container">
+            <div class="city-intro-grid">
+                <div class="city-intro-text">
+                    <h2>Discover Hyderabad</h2>
+                    <p>Hyderabad is a city that feels like a warm embrace. Known as the City of Pearls, it seamlessly blends royal Mughal heritage with cutting-edge tech innovation. Late-night drives with chai, laughter that stretches past midnight, and biryani that tastes better in good company — that's the Hyderabad experience.</p>
+                    <p>AIESEC in Hyderabad has been operating since 1985, making it one of India's most established local chapters and a top-performing committee. With over 35 years of hosting exchange participants, Hyderabad knows how to deliver <strong>Kiraak Experiences</strong> — unforgettable moments that stay with you for life.</p>
+                </div>
+                <div class="city-intro-image">
+                    <img src="https://images.unsplash.com/photo-1572435555646-7ad9a149ad91?w=600&q=80" alt="Hyderabad Charminar and old city" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Highlight Cards with Images -->
+    <section class="section city-highlights" style="background: var(--bg-alt);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">City Highlights</h2>
+                <p class="section-desc">What makes Hyderabad unforgettable.</p>
+            </div>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80" alt="Mughlai cuisine" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Royal Mughlai Cuisine</h3><p>Hyderabad's biryani is legendary worldwide. From Dum Biryani to haleem and double ka meetha, every meal is a royal affair.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1603813507806-0c1eae30f110?w=500&q=80" alt="Charminar architecture" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Indo-Islamic Architecture</h3><p>The iconic Charminar, Golconda Fort, and Qutb Shahi Tombs showcase centuries of Indo-Islamic architectural brilliance.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=500&q=80" alt="Laad Bazaar" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Bustling Streets</h3><p>From the pearl markets of Laad Bazaar to Moazzam Jahi Market, Hyderabad's streets are alive with colour and commerce.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=500&q=80" alt="Green spaces" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Green City</h3><p>Awarded World Green City 2022, Hyderabad leads India's environmental sustainability movement.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&q=80" alt="Tech hub HITEC City" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Tech Hub of India</h3><p>Home to HITEC City and major global tech companies, Hyderabad is India's innovation powerhouse.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&q=80" alt="Pearl markets" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>City of Pearls</h3><p>Historically the global centre of the pearl trade, Hyderabad's legacy of pearls and precious stones sparkles on.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=500&q=80" alt="Hussain Sagar Lake" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Hussain Sagar Lake</h3><p>The iconic heart-shaped lake stretching across the city centre, home to the Buddha statue and scenic waterfront evenings.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&q=80" alt="Ramoji Film City" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Ramoji Film City</h3><p>The world's largest film studio complex — a sprawling entertainment universe and a fascinating glimpse into Indian cinema's creative magic.</p></div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-card-img"><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&q=80" alt="Irani chai culture" loading="lazy"></div>
+                    <div class="highlight-card-body"><h3>Irani Chai Culture</h3><p>Hyderabad's beloved Irani chai cafés are institutions — sip thick milky chai with Osmania biscuits and watch the city come alive at any hour.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Information — right below city highlights -->
+    <section class="section city-practical" style="background: var(--bg);">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Practical Information</h2><p class="section-desc">Everything you need to know before arriving in Hyderabad.</p></div>
+            <div class="practical-grid">
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Accommodation</h4><p>Arranged through your host entity. Options include staff quarters, PGs, and hostels — prioritised for proximity to your workplace.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><h4>Cost of Living</h4><p>Minimum &#8377;10,000 per month, varying based on your opportunity's included benefits. Hyderabad offers excellent value.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div><h4>Transportation</h4><p>Excellent connectivity via cabs (Ola/Uber), bikes (rental), metro rail, and local TSRTC buses. The metro is fast and affordable.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h4>Visa</h4><p>A student visa is required for exchange participants. Your local committee will guide you through the full application process.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h4>Health &amp; Safety</h4><p>Hyderabad has world-class healthcare facilities. Your local committee provides comprehensive safety guidelines and 24/7 support.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h4>Language</h4><p>Telugu and Urdu are the local languages, with Hindi and English widely spoken. Hyderabad's cosmopolitan nature makes communication easy.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><h4>SIM Card &amp; Internet</h4><p>Jio and Airtel offer excellent 4G/5G coverage across Hyderabad. Pick up a prepaid SIM at the airport or any authorised store with just your passport.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4>Cultural Etiquette</h4><p>Dress modestly at mosques, temples, and heritage sites. Remove footwear at religious entrances. A simple "Adaab" or "Namaste" goes a long way with locals.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h4>Best Time to Visit</h4><p>November to February offers pleasant weather. Summers (March–May) are hot at 35–40°C. Monsoon (June–September) brings greenery and cooler temperatures.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Emergency Contacts</h4><p>Police: 100 · Ambulance: 108 · Fire: 101. Your local committee provides a 24/7 emergency contact number before you arrive in Hyderabad.</p></div>
+                <div class="practical-card"><div class="practical-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h4>Food &amp; Diet</h4><p>Hyderabad caters to all diets — from legendary Dum Biryani to South Indian vegetarian. Inform your host about dietary needs and they'll ensure you're well fed.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner">
+        <img src="https://images.unsplash.com/photo-1572435555646-7ad9a149ad91?w=1600&q=80" alt="Golconda Fort at sunset">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text"><h2>Where Heritage Meets Innovation</h2><p>35+ years of hosting international exchange participants</p></div>
+    </div>
+
+    <!-- Exchange Programs -->
+    <section class="section city-programs" data-entity-id="hyderabad">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Exchange Programs</h2><p class="section-desc">Three ways to experience Hyderabad through AIESEC.</p></div>
+            <div class="programs-grid">
+                <div class="program-card gv" data-program="gv">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="Volunteering in Hyderabad"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gv">iGV</span><h3>Global Volunteer</h3><p>A 6–8 week volunteering exchange for ages 18–30. Create real impact in Hyderabad's communities while experiencing its legendary warmth and hospitality.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card gta" data-program="gta">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&q=80" alt="Professional internship Hyderabad"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gta">iGTa</span><h3>Global Talent</h3><p>A professional internship in Hyderabad's booming tech and business landscape. Gain real-world skills in one of India's most dynamic professional ecosystems.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-card gte" data-program="gte">
+                    <div class="program-card-img"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80" alt="Teaching in Hyderabad"></div>
+                    <div class="program-card-body">
+                        <span class="program-badge gte">iGTe</span><h3>Global Teacher</h3><p>Teach in Hyderabad's schools and educational institutions. Partner with organisations like DRS International and Edify World School.</p>
+                        <div class="program-card-links">
+                            <a href="#" class="program-link" data-link="searchtool"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Opportunities</a>
+                            <a href="#" class="program-link" data-link="booklet"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Booklet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner short">
+        <img src="https://images.unsplash.com/photo-1603813507806-0c1eae30f110?w=1600&q=80" alt="Charminar at night">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text"><h2>City of Pearls</h2><p>Kiraak experiences that stay with you for life</p></div>
+    </div>
+
+    <!-- Voices from Hyderabad — Testimonial Auto-scroll -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Voices from Hyderabad</h2>
+                <p class="section-desc">Real stories from exchange participants who made Hyderabad their second home.</p>
+            </div>
+        </div>
+        <div class="testimonial-scroll-track">
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80" alt="Priya Nakamura">
+                    <div class="testimonial-scroll-info"><strong>Priya Nakamura</strong><span>Japan &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Hyderabad is unlike anything I expected. I came for the work, but stayed for the biryani and the people. My AIESEC team took me to Golconda Fort at sunset on my first weekend — that moment alone was worth the entire trip."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&q=80" alt="Carlos Rivera">
+                    <div class="testimonial-scroll-info"><strong>Carlos Rivera</strong><span>Mexico &middot; Global Talent, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Interning in HITEC City gave me exposure to India's tech world that no classroom could replicate. But the Kiraak experience? That's the late-night chai drives, the spontaneous Old City walks, the sheer energy of Hyderabad after dark."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&q=80" alt="Emma Wilson">
+                    <div class="testimonial-scroll-info"><strong>Emma Wilson</strong><span>Australia &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"I arrived nervous and left transformed. Every evening chai session turned into a life lesson. Hyderabad taught me to slow down, be present, and embrace every experience fully. AIESEC here genuinely cares about each participant."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&q=80" alt="Fatima Al-Rashid">
+                    <div class="testimonial-scroll-info"><strong>Fatima Al-Rashid</strong><span>UAE &middot; Global Teacher, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Teaching in Hyderabad was the most meaningful thing I've ever done. The students were hungry to learn, the local committee was endlessly supportive, and the city's mix of ancient heritage and modern energy made every day feel like an adventure."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80" alt="Marco De Luca">
+                    <div class="testimonial-scroll-info"><strong>Marco De Luca</strong><span>Italy &middot; Global Talent, 2023</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Hyderabad blew my mind. I expected a business internship — I got a complete life experience. The food, the forts, the friendships I made here are irreplaceable. AIESEC Hyderabad genuinely cared about every single participant's experience."</blockquote>
+            </div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&q=80" alt="Priya Nakamura">
+                    <div class="testimonial-scroll-info"><strong>Priya Nakamura</strong><span>Japan &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Hyderabad is unlike anything I expected. I came for the work, but stayed for the biryani and the people. My AIESEC team took me to Golconda Fort at sunset on my first weekend — that moment alone was worth the entire trip."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&q=80" alt="Carlos Rivera">
+                    <div class="testimonial-scroll-info"><strong>Carlos Rivera</strong><span>Mexico &middot; Global Talent, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Interning in HITEC City gave me exposure to India's tech world that no classroom could replicate. But the Kiraak experience? That's the late-night chai drives, the spontaneous Old City walks, the sheer energy of Hyderabad after dark."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&q=80" alt="Emma Wilson">
+                    <div class="testimonial-scroll-info"><strong>Emma Wilson</strong><span>Australia &middot; Global Volunteer, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"I arrived nervous and left transformed. Every evening chai session turned into a life lesson. Hyderabad taught me to slow down, be present, and embrace every experience fully. AIESEC here genuinely cares about each participant."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&q=80" alt="Fatima Al-Rashid">
+                    <div class="testimonial-scroll-info"><strong>Fatima Al-Rashid</strong><span>UAE &middot; Global Teacher, 2024</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Teaching in Hyderabad was the most meaningful thing I've ever done. The students were hungry to learn, the local committee was endlessly supportive, and the city's mix of ancient heritage and modern energy made every day feel like an adventure."</blockquote>
+            </div>
+            <div class="testimonial-scroll-card">
+                <div class="testimonial-scroll-header">
+                    <img class="testimonial-scroll-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80" alt="Marco De Luca">
+                    <div class="testimonial-scroll-info"><strong>Marco De Luca</strong><span>Italy &middot; Global Talent, 2023</span></div>
+                </div>
+                <div class="testimonial-scroll-stars">★★★★★</div>
+                <blockquote>"Hyderabad blew my mind. I expected a business internship — I got a complete life experience. The food, the forts, the friendships I made here are irreplaceable. AIESEC Hyderabad genuinely cared about every single participant's experience."</blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Team -->
+    <section class="section city-team">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Local Committee Team</h2><p class="section-desc">Your dedicated team in Hyderabad, led by LC President <strong>Hari Mudiganti</strong>.</p></div>
+            <div class="team-grid">
+                <div class="contact-card"><div class="contact-avatar">AG</div><h4>Aditi Gurjal</h4><span class="contact-role">Incoming Global Volunteer</span><div class="contact-details"><a href="tel:+917989680923">+91 798 968 0923</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">VR</div><h4>Vallabh Rahul</h4><span class="contact-role">Incoming Global Talent</span><div class="contact-details"><a href="tel:+917013558458">+91 701 355 8458</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">SA</div><h4>Subiya Ambreen</h4><span class="contact-role">Incoming Global Teacher</span><div class="contact-details"><a href="tel:+919121619030">+91 912 161 9030</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">MC</div><h4>Manasvee Chavan</h4><span class="contact-role">Marketing & Brand</span><div class="contact-details"><a href="tel:+919052703939">+91 905 270 3939</a></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- National Contact -->
+    <section class="section contact">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">National Contact</h2><p class="section-desc">Reach out to our national team for any questions about exchanges in Hyderabad.</p></div>
+            <div class="contact-grid">
+                <div class="contact-card"><div class="contact-avatar">GS</div><h4>Guruday Singh</h4><span class="contact-role">MCVP Incoming Global Volunteer</span><div class="contact-details"><a href="mailto:guruday.singh@aiesec.in">guruday.singh@aiesec.in</a><a href="tel:+918544836988">+91 854 483 6988</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">RA</div><h4>Ria Aggarwal</h4><span class="contact-role">MCVP Incoming Global Talent & Teacher</span><div class="contact-details"><a href="mailto:ria.aggarwal@aiesec.in">ria.aggarwal@aiesec.in</a><a href="tel:+918360266784">+91 836 026 6784</a></div></div>
+                <div class="contact-card"><div class="contact-avatar">LJ</div><h4>Levi Jacob</h4><span class="contact-role">MCVP CXO</span><div class="contact-details"><a href="mailto:levi.jacob@aiesec.in">levi.jacob@aiesec.in</a><a href="tel:+919398642201">+91 939 864 2201</a></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a><p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="index.html#products">Our Programs</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+                <div class="footer-links"><h4>Cities</h4><ul><li><a href="cities.html">All Cities</a></li><li><a href="ahmedabad.html">Ahmedabad</a></li><li><a href="hyderabad.html">Hyderabad</a></li><li><a href="jaipur.html">Jaipur</a></li></ul></div>
+                <div class="footer-links"><h4>Programs</h4><ul><li><a href="index.html#products">Global Volunteer</a></li><li><a href="index.html#products">Global Talent</a></li><li><a href="index.html#products">Global Teacher</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 AIESEC India. India is a Feeling.</p><div class="footer-social"><a href="https://www.instagram.com/aiesecinhyderabad/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/sheets-loader.js"></script>
+</body>
+</html>

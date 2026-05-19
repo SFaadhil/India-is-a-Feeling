@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:www.indiaisafeeling.com)",
+      "WebFetch(domain:www.coffee-tech.com)",
+      "PowerShell(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\\\\css\" -Force)",
+      "PowerShell(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\\\\js\" -Force)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Recurse -File | Where-Object {$_.Extension -eq '.html'} | Select-Object FullName)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Recurse -File)",
+      "Bash(Sort-Object FullName)",
+      "PowerShell($path = \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\"; Get-ChildItem -Path $path -Recurse -File | ForEach-Object { $_.FullName })",
+      "WebFetch(domain:images.unsplash.com)",
+      "Bash(ConvertTo-Json)",
+      "Bash(Out-String -Width 300)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Recurse | Where-Object {$_.PSIsContainer -eq $false} | Select-Object FullName | ForEach-Object {$_.FullName})",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -File)",
+      "Bash(Select-Object Name, Length)"
+    ]
+  }
+}

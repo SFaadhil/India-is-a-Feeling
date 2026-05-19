@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India is a Feeling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Indian Cultural Animated Background -->
+    <div class="bg-indian">
+        <canvas id="bg-canvas"></canvas>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <img class="mandala-bl" src="mandala.svg" alt="">
+        <img class="mandala-tr" src="mandala.svg" alt="">
+        <img class="mandala-center" src="mandala.svg" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="images/IIAF.webp" alt="IIAF" class="nav-logo-img">
+                
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="cities.html">Cities</a>
+                    <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Amravati</a></li>
+                        <li><a href="hyderabad.html">Bengaluru</a></li>
+                        <li><a href="hyderabad.html">Chandigarh</a></li>
+                        <li><a href="hyderabad.html">Chennai</a></li>
+                        <li><a href="hyderabad.html">Dehradun</a></li>
+                        <li><a href="hyderabad.html">Delhi IIT</a></li>
+                        <li><a href="hyderabad.html">Delhi University</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="hyderabad.html">Indore</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                        <li><a href="hyderabad.html">Jalandhar</a></li>
+                        <li><a href="hyderabad.html">Kolkata</a></li>
+                        <li><a href="hyderabad.html">Ludhiana</a></li>
+                        <li><a href="hyderabad.html">MAHE</a></li>
+                        <li><a href="hyderabad.html">Mumbai</a></li>
+                        <li><a href="hyderabad.html">Navi Mumbai</a></li>
+                        <li><a href="hyderabad.html">Patiala</a></li>
+                        <li><a href="hyderabad.html">Pune</a></li>
+                        <li><a href="hyderabad.html">Surat</a></li>
+                        <li><a href="hyderabad.html">Visakhapatnam</a></li>
+                        <li><a href="hyderabad.html">Noida</a></li>
+                        <li><a href="hyderabad.html">VVN</a></li>
+                    </ul>
+                </li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero with Video Background -->
+    <section class="hero">
+        <div class="hero-video-wrap">
+            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80">
+                <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80" alt="India landscape">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tag">Welcome to</p>
+            <h1 class="hero-title">India is a <span>Feeling</span></h1>
+            <p class="hero-subtitle">A land of vibrant cultures, timeless traditions, and transformative experiences. Discover India through the lens of exchange, growth, and human connection.</p>
+            <div class="hero-actions">
+                <a href="#cities" class="btn btn-primary">Explore Cities</a>
+                <a href="about.html" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Introduction with Image -->
+    <section class="section intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2 class="section-title">More Than a Destination</h2>
+                    <p class="section-desc">India isn't just a place on the map — it's a feeling you carry with you long after you've left. From the snow-capped Himalayas to the tropical coasts of Kerala, every corner offers a new story, a new flavour, a new perspective.</p>
+                    <p class="section-desc">Through AIESEC's exchange programs, you'll go beyond tourism. You'll live with local communities, work on impactful projects, and discover a version of yourself you never knew existed.</p>
+                </div>
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=700&q=80" alt="Colourful streets of India with vibrant market stalls" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Cards with Images -->
+    <section class="section" style="background: var(--bg-alt); padding: 80px 0;">
+        <div class="container">
+            <div class="intro-cards">
+                <div class="intro-card">
+                    <img src="https://images.unsplash.com/photo-1532664189809-02133fee698d?w=500&q=80" alt="AIESEC volunteers working in India">
+                    <div class="intro-card-body">
+                        <h3>25+ Cities</h3>
+                        <p>Local committees across India ready to host you and make your exchange unforgettable.</p>
+                    </div>
+                </div>
+                <div class="intro-card">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Group of international exchange participants">
+                    <div class="intro-card-body">
+                        <h3>Global Network</h3>
+                        <p>Join thousands of exchange participants from 120+ countries worldwide.</p>
+                    </div>
+                </div>
+                <div class="intro-card">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="Volunteering impact project in India">
+                    <div class="intro-card-body">
+                        <h3>Real Impact</h3>
+                        <p>Contribute to sustainable development goals through meaningful projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner">
+        <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=1600&q=80" alt="Panoramic view of Indian landscape with mountains and rivers">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text">
+            <h2>A Country of a Billion Stories</h2>
+            <p>Diverse in culture, united in heart and mind</p>
+        </div>
+    </div>
+
+    <!-- MCP Note -->
+    <section class="section mcp-note">
+        <div class="container">
+            <div class="mcp-card">
+                <div class="mcp-quote-mark">&ldquo;</div>
+                <blockquote>
+                    India transcends geography. It is a feeling you carry with you long after you've left. Through our exchange programs, we invite you to explore a nation bursting with diversity and energy — where every interaction becomes a personal journey of growth and cultural understanding.
+                </blockquote>
+                <div class="mcp-author-info" style="text-align:center;">
+                    <strong>Nitin Prakash Dhulipudi</strong>
+                    <span>Member Committee President, AIESEC India 2025–2026</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Carousel -->
+    <section class="carousel-section" style="background: var(--bg-alt);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience India</h2>
+                <p class="section-desc">A glimpse into the incredible moments that await you.</p>
+            </div>
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1200&q=80" alt="Taj Mahal at sunrise">
+                        <div class="carousel-slide-overlay"></div>
+                        <div class="carousel-slide-content">
+                            <h3>Timeless Monuments</h3>
+                            <p>From the Taj Mahal to ancient temples, India's architectural heritage spans millennia.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=1200&q=80" alt="Holi festival of colours">
+                        <div class="carousel-slide-overlay"></div>
+                        <div class="carousel-slide-content">
+                            <h3>Vibrant Festivals</h3>
+                            <p>Experience Holi, Diwali, Navratri, and hundreds of celebrations that light up the country.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1200&q=80" alt="Indian street food and spices">
+                        <div class="carousel-slide-overlay"></div>
+                        <div class="carousel-slide-content">
+                            <h3>Incredible Cuisine</h3>
+                            <p>A feast for the senses — from street food to royal Mughlai kitchens, every meal tells a story.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=1200&q=80" alt="Colourful Indian marketplace">
+                        <div class="carousel-slide-overlay"></div>
+                        <div class="carousel-slide-content">
+                            <h3>Bustling Markets</h3>
+                            <p>Navigate vibrant bazaars filled with textiles, spices, jewellery, and local craftsmanship.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1200&q=80" alt="Rajasthan desert fort">
+                        <div class="carousel-slide-overlay"></div>
+                        <div class="carousel-slide-content">
+                            <h3>Royal Heritage</h3>
+                            <p>Explore majestic forts and palaces that whisper tales of kings and kingdoms past.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev" aria-label="Previous">&larr;</button>
+                <button class="carousel-btn next" aria-label="Next">&rarr;</button>
+            </div>
+            <div class="carousel-dots">
+                <button class="carousel-dot active"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+                <button class="carousel-dot"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Preview -->
+    <section class="section cities-preview" id="cities">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Explore Our Cities</h2>
+                <p class="section-desc">23 AIESEC Local Committees across India — each offering a unique cultural immersion experience.</p>
+            </div>
+            <div class="cities-grid-responsive">
+                <a href="ahmedabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1595658658481-d53d3f999875?w=400&q=80" alt="Ahmedabad" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Ahmedabad</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Gujarat</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=400&q=80" alt="Amravati" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Amravati</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Maharashtra</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=400&q=80" alt="Bengaluru" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Bengaluru</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Karnataka</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&q=80" alt="Chandigarh" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Chandigarh</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Punjab</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400&q=80" alt="Chennai" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Chennai</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Tamil Nadu</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&q=80" alt="Dehradun" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Dehradun</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Uttarakhand</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+            </div>
+            <div class="cities-view-all">
+                <a href="cities.html" class="btn btn-outline">View All 23 Cities &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery Strip -->
+    <section style="padding: 0;">
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500&q=80" alt="Taj Mahal" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=500&q=80" alt="India Gate Delhi" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=500&q=80" alt="Kerala backwaters" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=500&q=80" alt="Varanasi ghats at dawn" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Products with Images and Colors -->
+    <section class="section products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Exchange Programs</h2>
+                <p class="section-desc">Three pathways to experience India — each designed to challenge, inspire, and transform.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card gv">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80" alt="Global Volunteer — community impact project">
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Global Volunteer</h3>
+                        <p>A 6–8 week volunteering program for ages 18–30. Work on projects aligned with the UN Sustainable Development Goals while immersing yourself in Indian culture.</p>
+                        <ul class="product-features">
+                            <li>Cross-cultural leadership development</li>
+                            <li>Community impact projects</li>
+                            <li>Full cultural immersion</li>
+                        </ul>
+                        <a href="#" class="btn btn-gv" style="font-size:0.85rem; padding:10px 24px;">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card gta">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80" alt="Global Talent — professional internship">
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Global Talent</h3>
+                        <p>A professional internship experience that accelerates your career in a global market. Gain real-world skills while contributing to India's dynamic industries.</p>
+                        <ul class="product-features">
+                            <li>Professional skill development</li>
+                            <li>Industry exposure in India</li>
+                            <li>Global career network</li>
+                        </ul>
+                        <a href="#" class="btn btn-gta" style="font-size:0.85rem; padding:10px 24px;">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card gte">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Global Teacher — teaching in Indian classroom">
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Global Teacher</h3>
+                        <p>Bridge educational gaps by teaching in Indian schools and communities. Develop culturally responsive pedagogy while making a lasting impact on young learners.</p>
+                        <ul class="product-features">
+                            <li>Classroom teaching experience</li>
+                            <li>Culturally responsive learning</li>
+                            <li>Educational impact</li>
+                        </ul>
+                        <a href="#" class="btn btn-gte" style="font-size:0.85rem; padding:10px 24px;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Banner -->
+    <div class="split-banner">
+        <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=1600&q=80" alt="Varanasi ghats at golden hour">
+        <div class="split-banner-overlay"></div>
+        <div class="split-banner-text">
+            <h2>Ready to Feel India?</h2>
+            <p>Your journey starts with a single step</p>
+        </div>
+    </div>
+
+    <!-- Life in India — Auto-scroll Carousel -->
+    <section class="auto-scroll-section">
+        <div class="section-header" style="padding: 0 24px;">
+            <h2 class="section-title">Life in India</h2>
+            <p class="section-desc">What your everyday experience could look like.</p>
+        </div>
+        <div class="auto-scroll-track">
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&q=80" alt="Street food experience in India">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Street Food Adventures</h4><p>Discover flavours you never knew existed</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80" alt="Yoga and meditation in India">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Wellness & Yoga</h4><p>Find your centre in the land where yoga was born</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Meeting new friends during exchange">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Lifelong Friendships</h4><p>Bonds that cross borders and last forever</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=600&q=80" alt="Holi celebrations">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Festival Celebrations</h4><p>Dance in colours during Holi and light up Diwali</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" alt="Visiting monuments">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Iconic Landmarks</h4><p>Walk through history at the world's greatest monuments</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Kerala backwaters">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Natural Wonders</h4><p>From backwaters to mountains, nature at its finest</p></div>
+            </div>
+            <!-- Duplicated set for seamless loop -->
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&q=80" alt="Street food experience in India">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Street Food Adventures</h4><p>Discover flavours you never knew existed</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80" alt="Yoga and meditation in India">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Wellness & Yoga</h4><p>Find your centre in the land where yoga was born</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Meeting new friends during exchange">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Lifelong Friendships</h4><p>Bonds that cross borders and last forever</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=600&q=80" alt="Holi celebrations">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Festival Celebrations</h4><p>Dance in colours during Holi and light up Diwali</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" alt="Visiting monuments">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Iconic Landmarks</h4><p>Walk through history at the world's greatest monuments</p></div>
+            </div>
+            <div class="auto-scroll-card">
+                <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600&q=80" alt="Kerala backwaters">
+                <div class="auto-scroll-card-overlay"></div>
+                <div class="auto-scroll-card-text"><h4>Natural Wonders</h4><p>From backwaters to mountains, nature at its finest</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-desc">Have questions about coming to India? Our national team is here to help.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-avatar">GS</div>
+                    <h4>Guruday Singh</h4>
+                    <span class="contact-role">MCVP Incoming Global Volunteer</span>
+                    <div class="contact-details">
+                        <a href="mailto:guruday.singh@aiesec.in">guruday.singh@aiesec.in</a>
+                        <a href="tel:+918544836988">+91 854 483 6988</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-avatar">RA</div>
+                    <h4>Ria Aggarwal</h4>
+                    <span class="contact-role">MCVP Incoming Global Talent & Teacher</span>
+                    <div class="contact-details">
+                        <a href="mailto:ria.aggarwal@aiesec.in">ria.aggarwal@aiesec.in</a>
+                        <a href="tel:+918360266784">+91 836 026 6784</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-avatar">LJ</div>
+                    <h4>Levi Jacob</h4>
+                    <span class="contact-role">MCVP CXO</span>
+                    <div class="contact-details">
+                        <a href="mailto:levi.jacob@aiesec.in">levi.jacob@aiesec.in</a>
+                        <a href="tel:+919398642201">+91 939 864 2201</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a>
+                    <p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About India</a></li>
+                        <li><a href="#products">Our Programs</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Cities</h4>
+                    <ul>
+                        <li><a href="cities.html">All Cities</a></li>
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#products">Global Volunteer</a></li>
+                        <li><a href="#products">Global Talent</a></li>
+                        <li><a href="#products">Global Teacher</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AIESEC India. India is a Feeling.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/aiesecindia/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

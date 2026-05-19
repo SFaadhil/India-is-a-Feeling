@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore All Cities — India is a Feeling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Indian Cultural Animated Background -->
+    <div class="bg-indian">
+        <canvas id="bg-canvas"></canvas>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <img class="mandala-bl" src="mandala.svg" alt="">
+        <img class="mandala-tr" src="mandala.svg" alt="">
+        <img class="mandala-center" src="mandala.svg" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="images/IIAF.webp" alt="IIAF" class="nav-logo-img"></a>
+            <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="cities.html">Cities</a>
+                    <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Amravati</a></li>
+                        <li><a href="hyderabad.html">Bengaluru</a></li>
+                        <li><a href="hyderabad.html">Chandigarh</a></li>
+                        <li><a href="hyderabad.html">Chennai</a></li>
+                        <li><a href="hyderabad.html">Dehradun</a></li>
+                        <li><a href="hyderabad.html">Delhi IIT</a></li>
+                        <li><a href="hyderabad.html">Delhi University</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="hyderabad.html">Indore</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                        <li><a href="hyderabad.html">Jalandhar</a></li>
+                        <li><a href="hyderabad.html">Kolkata</a></li>
+                        <li><a href="hyderabad.html">Ludhiana</a></li>
+                        <li><a href="hyderabad.html">MAHE</a></li>
+                        <li><a href="hyderabad.html">Mumbai</a></li>
+                        <li><a href="hyderabad.html">Navi Mumbai</a></li>
+                        <li><a href="hyderabad.html">Patiala</a></li>
+                        <li><a href="hyderabad.html">Pune</a></li>
+                        <li><a href="hyderabad.html">Surat</a></li>
+                        <li><a href="hyderabad.html">Visakhapatnam</a></li>
+                        <li><a href="hyderabad.html">Noida</a></li>
+                        <li><a href="hyderabad.html">VVN</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="cities-page-hero">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Explore All Cities</h1>
+                <p class="section-desc">23 AIESEC Local Committees across India — each offering a unique cultural immersion and exchange experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Grid -->
+    <section class="cities-page-grid">
+        <div class="container">
+            <div class="cities-grid-responsive">
+
+                <a href="ahmedabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1595658658481-d53d3f999875?w=400&q=80" alt="Ahmedabad" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Ahmedabad</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Gujarat</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=400&q=80" alt="Amravati" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Amravati</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Maharashtra</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=400&q=80" alt="Bengaluru" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Bengaluru</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Karnataka</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=400&q=80" alt="Chandigarh" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Chandigarh</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Punjab</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400&q=80" alt="Chennai" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Chennai</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Tamil Nadu</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=400&q=80" alt="Dehradun" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Dehradun</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Uttarakhand</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&q=80" alt="Delhi IIT" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Delhi IIT</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Delhi</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=80" alt="Delhi University" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Delhi University</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Delhi</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=400&q=80" alt="Hyderabad" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Hyderabad</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Telangana</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=400&q=80" alt="Indore" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Indore</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Madhya Pradesh</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="jaipur.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=400&q=80" alt="Jaipur" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Jaipur</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Rajasthan</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=400&q=80" alt="Jalandhar" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Jalandhar</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Punjab</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&q=80" alt="Kolkata" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Kolkata</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">West Bengal</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&q=80" alt="Ludhiana" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Ludhiana</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Punjab</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" alt="MAHE" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">MAHE</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Karnataka</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1572435555646-7ad9a149ad91?w=400&q=80" alt="Mumbai" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Mumbai</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Maharashtra</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80" alt="Navi Mumbai" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Navi Mumbai</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Maharashtra</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400&q=80" alt="Patiala" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Patiala</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Punjab</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Pune" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Pune</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Maharashtra</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80" alt="Surat" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Surat</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Gujarat</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80" alt="Visakhapatnam" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Visakhapatnam</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Andhra Pradesh</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&q=80" alt="Noida" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">Noida</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Uttar Pradesh</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+                <a href="hyderabad.html" class="city-mini-card">
+                        <div class="city-mini-img">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80" alt="VVN" loading="lazy">
+                            <div class="city-mini-overlay"></div>
+                            <div class="city-mini-name">VVN</div>
+                        </div>
+                        <div class="city-mini-content">
+                            <span class="city-mini-state">Tamil Nadu</span>
+                            <span class="city-mini-explore">Explore →</span>
+                        </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a>
+                    <p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About India</a></li>
+                        <li><a href="index.html#products">Our Programs</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Cities</h4>
+                    <ul>
+                        <li><a href="cities.html">All Cities</a></li>
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="index.html#products">Global Volunteer</a></li>
+                        <li><a href="index.html#products">Global Talent</a></li>
+                        <li><a href="index.html#products">Global Teacher</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AIESEC India. India is a Feeling.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/aiesecindia/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

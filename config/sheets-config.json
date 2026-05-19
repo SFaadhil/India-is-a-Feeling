@@ -1,0 +1,52 @@
+{
+  "_readme": [
+    "1. Create a Google Sheet and share it (File → Share → Anyone with the link → Viewer).",
+    "2. The sheet must have a tab named exactly 'National' plus one tab per entity (e.g. 'Ahmedabad').",
+    "3. Row 1 in every tab is the header row — column names must match exactly as listed in 'columns'.",
+    "4. Copy the Sheet ID from the URL:  https://docs.google.com/spreadsheets/d/SHEET_ID/edit",
+    "5. Paste that ID into 'sheetId' below, then save this file.",
+    "6. The sheets-loader.js script reads this file automatically — no other changes needed."
+  ],
+
+  "sheetId": "YOUR_GOOGLE_SHEET_ID_HERE",
+
+  "nationalTab": "National",
+
+  "columns": {
+    "name":           "Name",
+    "id":             "ID",
+    "igv_searchtool": "IGV Searchtool",
+    "igv_booklet":    "IGV Booklet",
+    "igv_status":     "IGV Status",
+    "igta_searchtool":"IGTa Searchtool",
+    "igta_booklet":   "IGTa Booklet",
+    "igta_status":    "IGTa Status",
+    "igte_searchtool":"IGTe Searchtool",
+    "igte_booklet":   "IGTe Booklet",
+    "igte_status":    "IGTe Status"
+  },
+
+  "entities": [
+    { "name": "Ahmedabad", "id": "ahmedabad", "page": "ahmedabad.html", "tab": "Ahmedabad" },
+    { "name": "Hyderabad", "id": "hyderabad", "page": "hyderabad.html", "tab": "Hyderabad" },
+    { "name": "Jaipur",    "id": "jaipur",    "page": "jaipur.html",    "tab": "Jaipur"    }
+  ],
+
+  "_sheetTemplate": {
+    "description": "Each tab (National + entity tabs) must have these 11 columns in row 1:",
+    "headers": [
+      "Name",
+      "ID",
+      "IGV Searchtool",
+      "IGV Booklet",
+      "IGV Status",
+      "IGTa Searchtool",
+      "IGTa Booklet",
+      "IGTa Status",
+      "IGTe Searchtool",
+      "IGTe Booklet",
+      "IGTe Status"
+    ],
+    "statusValues": "TRUE or FALSE  (Google Sheets checkbox, or type TRUE/FALSE)"
+  }
+}
