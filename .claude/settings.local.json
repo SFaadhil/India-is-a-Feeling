@@ -18,7 +18,9 @@
       "Bash(Out-String -Width 300)",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Recurse | Where-Object {$_.PSIsContainer -eq $false} | Select-Object FullName | ForEach-Object {$_.FullName})",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -File)",
-      "Bash(Select-Object Name, Length)"
+      "Bash(Select-Object Name, Length)",
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\GitHub CLI\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\\\\gh\" -ErrorAction SilentlyContinue; winget list gh 2>&1)",
+      "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth status 2>&1)"
     ]
   }
 }
