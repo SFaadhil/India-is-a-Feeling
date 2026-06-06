@@ -209,14 +209,7 @@ section[style*="background"] { background: transparent !important; }
 .product-card h3 { color: var(--text) !important; }
 .product-card p { color: var(--text-secondary) !important; }
 
-.contact-card {
-    background: rgba(100, 13, 20, 0.88) !important;
-    border-color: rgba(251, 139, 36, 0.22) !important;
-}
-.contact-card:hover { border-color: #FB8B24 !important; box-shadow: 0 4px 20px rgba(251, 139, 36, 0.25) !important; }
-.contact-card h4 { color: #fff !important; }
-.contact-role { color: rgba(255,255,255,0.55) !important; }
-.contact-details a { color: #FB8B24 !important; }
+/* Contact cards — portrait design; no dark background override needed */
 
 .highlight-card {
     background: rgba(100, 13, 20, 0.88) !important;
@@ -263,15 +256,11 @@ section[style*="background"] { background: transparent !important; }
 .mcp-quote-mark { color: #FB8B24 !important; }
 .mcp-card blockquote { color: rgba(255,255,255,0.88) !important; }
 
-/* Testimonial cards */
-.testimonial-scroll-card {
-    background: rgba(100, 13, 20, 0.88) !important;
-    border-color: rgba(251, 139, 36, 0.2) !important;
-}
-.testimonial-scroll-card::before { color: #FB8B24 !important; }
-.testimonial-scroll-info strong { color: #fff !important; }
-.testimonial-scroll-info span { color: rgba(255,255,255,0.55) !important; }
-.testimonial-scroll-card blockquote { color: rgba(255,255,255,0.82) !important; }
+/* Testimonial cards — portrait card design */
+.testimonial-scroll-card { background: #fff !important; border: none !important; box-shadow: 0 6px 28px rgba(0,0,0,0.10) !important; }
+.tcard-name { color: var(--text) !important; }
+.tcard-tag { color: var(--text-light) !important; }
+.tcard-quote { color: var(--text-secondary) !important; }
 
 /* Footer — deep maroon */
 .footer { background: #2E071E !important; }
@@ -816,21 +805,104 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 .program-card.gte { border-top: 3px solid var(--gte); }
 
 /* ============================================
-   CONTACT
+   CONTACT — Portrait Card Style
    ============================================ */
-.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .contact-card {
-    background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
-    border: 1px solid var(--border-light); border-radius: var(--radius);
-    padding: 32px 24px; text-align: center; transition: all var(--transition);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.10);
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.contact-card:hover { border-color: var(--primary); box-shadow: 0 4px 20px var(--primary-glow); }
-.contact-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 600; margin: 0 auto 16px; }
-.contact-card h4 { margin-bottom: 4px; font-size: 1rem; }
-.contact-role { display: block; font-size: 0.82rem; color: var(--text-light); margin-bottom: 16px; }
-.contact-details { display: flex; flex-direction: column; gap: 6px; }
-.contact-details a { font-size: 0.85rem; color: var(--primary); word-break: break-all; }
-.contact-details a:hover { text-decoration: underline; }
+.contact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.14); }
+.contact-card .tcard-body { padding: 30px 18px 24px; }
+.contact-details { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.contact-details a { font-size: 0.78rem; color: var(--primary); word-break: break-all; text-decoration: none; transition: opacity 0.2s; }
+.contact-details a:hover { opacity: 0.72; text-decoration: underline; }
+
+/* ============================================
+   PREMIUM PROFILE CARDS (pcard)
+   ============================================ */
+.pcard {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pcard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(154,3,30,0.15);
+}
+.pcard-header {
+    height: 90px;
+    position: relative;
+}
+.pcard-avatar {
+    position: absolute;
+    bottom: -44px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.20);
+}
+.pcard-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+.pcard-body {
+    padding: 56px 24px 28px;
+    text-align: center;
+}
+.pcard-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 6px;
+}
+.pcard-role {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+.pcard-links { display: flex; flex-direction: column; gap: 8px; }
+.pcard-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: var(--bg-alt);
+    transition: background 0.2s ease, color 0.2s ease;
+    word-break: break-all;
+}
+.pcard-link:hover { background: var(--primary); color: #fff; }
+.pcard-link svg { flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+.pcard-link:hover svg { opacity: 1; }
+@media (max-width: 768px) {
+    .pcard-body { padding: 52px 18px 22px; }
+    .pcard-name { font-size: 0.95rem; }
+}
 
 /* ============================================
    CITY FACTS
@@ -882,7 +954,7 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 /* ============================================
    TEAM
    ============================================ */
-.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; }
 
 /* ============================================
    ABOUT SECTIONS
@@ -1035,7 +1107,6 @@ h4 { font-size: 1.1rem; font-weight: 600; }
     .bg-orb { filter: blur(50px); }
     .bg-orb:nth-child(3), .bg-orb:nth-child(4) { display: none; }
 
-    .contact-card { padding: 24px 16px; }
     .contact-details a { font-size: 0.8rem; }
 }
 
@@ -1081,65 +1152,104 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 .program-card.gte .program-link:hover { background: var(--gte); color: #fff; }
 
 /* ============================================
-   TESTIMONIAL AUTO-SCROLL (replaces Life auto-scroll)
+   TESTIMONIAL AUTO-SCROLL — Portrait Card Design
    ============================================ */
 .testimonial-section { padding: 80px 0; background: var(--bg-warm); overflow: hidden; }
 .testimonial-scroll-track {
     display: flex;
     gap: 24px;
     width: max-content;
-    padding: 16px 0 40px;
+    padding: 16px 24px 40px;
     animation: autoScroll 60s linear infinite;
 }
 .testimonial-scroll-track:hover { animation-play-state: paused; }
 .testimonial-scroll-card {
-    flex: 0 0 420px;
-    background: rgba(255,255,255,0.95);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-xl);
-    padding: 28px 32px 32px;
-    box-shadow: var(--shadow-md);
+    flex: 0 0 260px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.10);
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-scroll-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.15);
+}
+.testimonial-scroll-card::before { display: none; }
+.tcard-img-wrap {
+    width: 100%;
+    height: 210px;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
     position: relative;
 }
-.testimonial-scroll-card::before {
-    content: '\201C';
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-family: var(--font-display);
-    font-size: 4rem;
-    color: var(--primary);
-    opacity: 0.1;
-    line-height: 1;
-    pointer-events: none;
+.tcard-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
 }
-.testimonial-scroll-header {
+.tcard-badge {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #fff;
+    border: 3px solid #fff;
+    z-index: 3;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.20);
+    letter-spacing: 0;
 }
-.testimonial-scroll-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--primary-light);
-    flex-shrink: 0;
+.tcard-body {
+    padding: 30px 18px 24px;
+    text-align: center;
 }
-.testimonial-scroll-info strong { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-.testimonial-scroll-info span { font-size: 0.75rem; color: var(--text-light); }
-.testimonial-scroll-stars { color: #f5a623; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 12px; }
-.testimonial-scroll-card blockquote {
+.tcard-name {
     font-family: var(--font-display);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 5px;
+}
+.tcard-tag {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+.tcard-stars {
+    color: #f5a623;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+.tcard-quote {
+    font-family: var(--font-display);
+    font-size: 0.82rem;
     font-style: italic;
     color: var(--text-secondary);
-    line-height: 1.75;
+    line-height: 1.65;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
-    .testimonial-scroll-card { flex: 0 0 320px; padding: 24px; }
+    .testimonial-scroll-card { flex: 0 0 220px; }
+    .tcard-img-wrap { height: 170px; }
 }
 
 /* ============================================
