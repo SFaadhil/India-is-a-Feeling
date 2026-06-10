@@ -22,7 +22,10 @@
       "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\GitHub CLI\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\Programs\\\\gh\" -ErrorAction SilentlyContinue; winget list gh 2>&1)",
       "PowerShell(& \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth status 2>&1)",
       "Bash(python3 -c ' *)",
-      "Bash(cd \"/c/Users/faadh/OneDrive/Desktop/IXP DSP/IIAF v1.0\" && grep -n \"E36414\\\\|FB8B24\" index.html hyderabad.html jaipur.html ahmedabad.html 2>/dev/null | head -20)"
+      "Bash(cd \"/c/Users/faadh/OneDrive/Desktop/IXP DSP/IIAF v1.0\" && grep -n \"E36414\\\\|FB8B24\" index.html hyderabad.html jaipur.html ahmedabad.html 2>/dev/null | head -20)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:commons.wikimedia.org)"
     ]
   }
 }

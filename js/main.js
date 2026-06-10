@@ -163,6 +163,41 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name && content) content.insertBefore(name, content.firstChild);
     });
 
+    // --- India Map Tooltip ---
+    const indiaMapSvg = document.querySelector('.india-map-svg');
+    const mapTooltip  = document.getElementById('mapTooltip');
+    if (indiaMapSvg && mapTooltip) {
+        const wrap = indiaMapSvg.closest('.india-map-wrap');
+        document.querySelectorAll('.city-pin').forEach(pin => {
+            pin.addEventListener('mouseenter', () => {
+                const dot = pin.querySelector('.pin-dot');
+                const pt  = indiaMapSvg.createSVGPoint();
+                pt.x = parseFloat(dot.getAttribute('cx'));
+                pt.y = parseFloat(dot.getAttribute('cy'));
+                const screenPt  = pt.matrixTransform(indiaMapSvg.getScreenCTM());
+                const wrapRect  = wrap.getBoundingClientRect();
+                const x = screenPt.x - wrapRect.left;
+                const y = screenPt.y - wrapRect.top;
+
+                mapTooltip.querySelector('.map-tooltip-name').textContent    = pin.dataset.city;
+                mapTooltip.querySelector('.map-tooltip-state').textContent   = pin.dataset.state;
+                mapTooltip.querySelector('.map-tooltip-explore').textContent = 'Explore →';
+                mapTooltip.style.left = x + 'px';
+                mapTooltip.style.top  = y + 'px';
+
+                // Flip below pin when too close to the top edge
+                if (y < 90) {
+                    mapTooltip.classList.add('flip-below');
+                } else {
+                    mapTooltip.classList.remove('flip-below');
+                }
+                mapTooltip.classList.add('visible');
+            });
+            pin.addEventListener('mouseleave', () => mapTooltip.classList.remove('visible'));
+            pin.addEventListener('click',      () => { window.location.href = pin.dataset.href; });
+        });
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const targetId = anchor.getAttribute('href');
