@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '.section-header', '.fact-item',
         '.experience-card', '.intro-image',
         '.split-content-inner', '.split-image',
-        '.image-banner'
+        '.image-banner', '.intro-prose', '.searchtool-banner'
     ];
 
     animateSelectors.forEach(selector => {
@@ -153,6 +153,21 @@ document.addEventListener('DOMContentLoaded', () => {
             el.style.transitionDelay = `${i % 4 * 0.1}s`;
             observer.observe(el);
         });
+    });
+
+    // --- Testimonial video: show placeholder until the file is added ---
+    document.querySelectorAll('.video-banner').forEach(banner => {
+        const video = banner.querySelector('video');
+        if (!video) return;
+        const markMissing = () => banner.classList.add('video-missing');
+        video.addEventListener('error', markMissing);
+        video.querySelectorAll('source').forEach(src => src.addEventListener('error', markMissing));
+        // The source may already have failed before these listeners attached
+        const checkFailed = () => {
+            if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) markMissing();
+        };
+        checkFailed();
+        setTimeout(checkFailed, 1500);
     });
 
     // --- Smooth scroll for anchor links ---

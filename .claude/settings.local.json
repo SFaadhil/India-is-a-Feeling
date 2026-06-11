@@ -34,7 +34,9 @@
       "Bash(node)",
       "Bash(del \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\\\\india-states-raw.svg\")",
       "PowerShell(git mv Images images-tmp)",
-      "PowerShell(git mv images-tmp images)"
+      "PowerShell(git mv images-tmp images)",
+      "PowerShell(Get-ChildItem css, js | Select-Object Name, Length; \\(Get-Content css\\\\style.css | Measure-Object -Line\\).Lines)",
+      "WebFetch(domain:whereitallbegins.aiesec.org.eg)"
     ]
   }
 }
