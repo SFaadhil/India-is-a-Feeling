@@ -25,7 +25,16 @@
       "Bash(cd \"/c/Users/faadh/OneDrive/Desktop/IXP DSP/IIAF v1.0\" && grep -n \"E36414\\\\|FB8B24\" index.html hyderabad.html jaipur.html ahmedabad.html 2>/dev/null | head -20)",
       "WebSearch",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:commons.wikimedia.org)"
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:upload.wikimedia.org)",
+      "WebFetch(domain:gist.github.com)",
+      "WebFetch(domain:gist.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(node -e ' *)",
+      "Bash(node)",
+      "Bash(del \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\\\\india-states-raw.svg\")",
+      "PowerShell(git mv Images images-tmp)",
+      "PowerShell(git mv images-tmp images)"
     ]
   }
 }
