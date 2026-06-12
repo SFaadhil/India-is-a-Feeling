@@ -36,7 +36,9 @@
       "PowerShell(git mv Images images-tmp)",
       "PowerShell(git mv images-tmp images)",
       "PowerShell(Get-ChildItem css, js | Select-Object Name, Length; \\(Get-Content css\\\\style.css | Measure-Object -Line\\).Lines)",
-      "WebFetch(domain:whereitallbegins.aiesec.org.eg)"
+      "WebFetch(domain:whereitallbegins.aiesec.org.eg)",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
     ]
   }
 }
