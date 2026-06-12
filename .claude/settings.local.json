@@ -38,7 +38,9 @@
       "PowerShell(Get-ChildItem css, js | Select-Object Name, Length; \\(Get-Content css\\\\style.css | Measure-Object -Line\\).Lines)",
       "WebFetch(domain:whereitallbegins.aiesec.org.eg)",
       "mcp__visualize__read_me",
-      "mcp__visualize__show_widget"
+      "mcp__visualize__show_widget",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Force)",
+      "Bash(Select-Object Name, FullName, PSIsContainer)"
     ]
   }
 }

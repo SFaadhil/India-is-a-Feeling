@@ -56,19 +56,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mobile Navigation Toggle ---
     const toggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
+
+    function closeNav() {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('active');
+        document.body.classList.remove('nav-open');
+    }
+    function openNav() {
+        navLinks.classList.add('open');
+        toggle.classList.add('active');
+        document.body.classList.add('nav-open');
+    }
+
     if (toggle && navLinks) {
         toggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            toggle.classList.toggle('active');
+            if (navLinks.classList.contains('open')) { closeNav(); } else { openNav(); }
         });
-        // Close menu when a non-dropdown link is clicked
+
+        // Close when any link is clicked except the dropdown parent toggles
         navLinks.querySelectorAll('a').forEach(link => {
-            if (!link.closest('.dropdown-menu') && !link.parentElement.classList.contains('dropdown')) {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('open');
-                    toggle.classList.remove('active');
-                });
+            if (!link.parentElement.classList.contains('dropdown')) {
+                link.addEventListener('click', closeNav);
             }
+        });
+
+        // Close on click outside the nav + toggle button
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('open') &&
+                !navLinks.contains(e.target) &&
+                !toggle.contains(e.target)) {
+                closeNav();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) closeNav();
         });
     }
 
