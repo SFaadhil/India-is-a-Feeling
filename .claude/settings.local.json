@@ -40,7 +40,12 @@
       "mcp__visualize__read_me",
       "mcp__visualize__show_widget",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\faadh\\\\OneDrive\\\\Desktop\\\\IXP DSP\\\\IIAF v1.0\" -Force)",
-      "Bash(Select-Object Name, FullName, PSIsContainer)"
+      "Bash(Select-Object Name, FullName, PSIsContainer)",
+      "Bash(python -c ' *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\faadh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-faadh-OneDrive-Desktop-IXP-DSP-IIAF-v1-0\\\\5ed17c22-0bc4-4a1b-aa31-0481539d1e6b\\\\tasks\\\\afe45d9812abbf8cd.output\")",
+      "Bash(Select-Object -Last 20)",
+      "Bash(Get-Content \"C:\\\\Users\\\\faadh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-faadh-OneDrive-Desktop-IXP-DSP-IIAF-v1-0\\\\5ed17c22-0bc4-4a1b-aa31-0481539d1e6b\\\\tasks\\\\a8e37890b9347d813.output\")",
+      "Bash(Get-Content \"C:\\\\Users\\\\faadh\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-faadh-OneDrive-Desktop-IXP-DSP-IIAF-v1-0\\\\5ed17c22-0bc4-4a1b-aa31-0481539d1e6b\\\\tasks\\\\a6bbfbc58a681d9e1.output\")"
     ]
   }
 }
