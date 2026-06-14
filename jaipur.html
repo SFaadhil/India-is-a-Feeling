@@ -8,6 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+    .city-brand-badge-spin {
+        background: conic-gradient(from 0deg,
+            #E64A19 0deg, #7B1FA2 120deg, #E64A19 240deg, #E64A19 360deg
+        );
+    }
+    </style>
 </head>
 <body>
 
@@ -331,6 +338,15 @@
             <div class="footer-bottom"><p>&copy; 2025 AIESEC India. India is a Feeling.</p><div class="footer-social"><a href="https://www.instagram.com/aiesecinjaipur/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div></div>
         </div>
     </footer>
+    <!-- Jaipur Brand Badge — fixed, lives in root stacking context -->
+    <div class="city-brand-badge">
+        <div class="city-brand-badge-beam">
+            <div class="city-brand-badge-spin"></div>
+        </div>
+        <div class="city-brand-badge-inner">
+            <img src="images/feelings/image_1727342383_11.jpg" alt="The feeling of Royalty">
+        </div>
+    </div>
     <script src="js/main.js"></script>
     <script src="js/sheets-loader.js"></script>
 </body>
