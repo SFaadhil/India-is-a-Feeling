@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities — India is a Feeling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ── OPPORTUNITIES PAGE ─────────────────────────────── */
+        .opp-page { padding: 108px 0 80px; min-height: 100vh; }
+
+        /* Header */
+        .opp-header { text-align: center; padding: 40px 24px 36px; }
+        .opp-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            color: var(--text); font-weight: 700; line-height: 1.15;
+        }
+        .opp-header p { color: var(--text-secondary); font-size: 1.0625rem; margin-top: 10px; }
+
+        /* ── SEARCH ROW ─── */
+        .opp-search-row {
+            display: flex; gap: 12px; align-items: center;
+            max-width: 680px; margin: 0 auto 20px;
+            padding: 0 24px;
+        }
+        .opp-search-input {
+            flex: 1; padding: 14px 20px;
+            border: 1.5px solid var(--border);
+            border-radius: 50px; font-size: 0.9375rem;
+            font-family: var(--font-body);
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(16px);
+            color: var(--text); outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .opp-search-input::placeholder { color: var(--text-light); }
+        .opp-search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(248,90,64,0.1); }
+        .opp-filter-toggle {
+            width: 50px; height: 50px; border-radius: 50%; border: none;
+            background: var(--primary); color: #fff; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.25s;
+        }
+        .opp-filter-toggle:hover { background: var(--primary-dark); transform: scale(1.06); }
+        .opp-filter-toggle.active { background: var(--text); }
+
+        /* ── FILTER PANEL ─── */
+        .opp-filter-wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px 24px; }
+        .opp-filter-panel {
+            background: rgba(255,255,255,0.86);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 24px 28px 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .opp-filter-panel.collapsed { display: none; }
+
+        .filter-row { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+        .filter-row:last-child { margin-bottom: 0; }
+
+        .filter-label {
+            font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--text-light); margin-bottom: 9px;
+        }
+
+        /* Type pills */
+        .type-pills-group { flex: 0 0 auto; }
+        .type-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .type-pill {
+            padding: 7px 18px; border-radius: 50px;
+            border: 1.5px solid var(--border);
+            background: white; font-size: 0.8125rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+        .type-pill:hover { border-color: var(--text-secondary); color: var(--text); }
+        .type-pill[data-type="all"].active    { background: var(--text); border-color: var(--text); color: #fff; }
+        .type-pill[data-type="igv"].active    { background: var(--gv); border-color: var(--gv); color: #fff; }
+        .type-pill[data-type="igta"].active   { background: var(--gta); border-color: var(--gta); color: #fff; }
+        .type-pill[data-type="igte"].active   { background: var(--gte); border-color: var(--gte); color: #fff; }
+
+        /* Dropdowns */
+        .filter-dropdowns { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; width: 100%; }
+        .filter-select-wrap { position: relative; }
+        .filter-select-wrap select {
+            width: 100%; padding: 10px 36px 10px 14px;
+            border: 1.5px solid var(--border); border-radius: 10px;
+            background: white; font-size: 0.875rem; font-family: var(--font-body);
+            color: var(--text); appearance: none; cursor: pointer; outline: none;
+            transition: border-color 0.2s;
+        }
+        .filter-select-wrap select:focus { border-color: var(--primary); }
+        .filter-select-wrap::after {
+            content: '';
+            position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+            width: 0; height: 0;
+            border-left: 5px solid transparent; border-right: 5px solid transparent;
+            border-top: 6px solid var(--text-light);
+            pointer-events: none;
+        }
+
+        /* Fee slider */
+        .fee-group { width: 100%; }
+        .fee-header { display: flex; justify-content: space-between; align-items: center; }
+        .fee-value { color: var(--primary); font-weight: 700; font-size: 0.875rem; }
+        .fee-slider {
+            width: 100%; margin-top: 10px; height: 4px;
+            accent-color: var(--primary); cursor: pointer;
+            border-radius: 2px;
+        }
+
+        /* Project pills */
+        .project-pills-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .project-pill {
+            padding: 6px 14px; border-radius: 50px;
+            border: 1.5px solid var(--border-light);
+            background: white; font-size: 0.78125rem; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .project-pill:hover { border-color: var(--primary); color: var(--primary); }
+        .project-pill.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+        /* ── RESULTS AREA ─── */
+        .opp-results-area { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .opp-meta-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; flex-wrap: wrap; gap: 8px;
+        }
+        .opp-count { font-size: 0.9375rem; color: var(--text-secondary); }
+        .opp-count strong { color: var(--text); }
+        .opp-synced { font-size: 0.8125rem; color: var(--text-light); }
+
+        /* ── CARDS GRID ─── */
+        .opp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+        @media (max-width:1024px) { .opp-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width:600px)  { .opp-grid { grid-template-columns: 1fr; } }
+
+        /* ── CARD ─── */
+        .opp-card {
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+            border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 22px; cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .opp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+            border-color: rgba(248,90,64,0.35);
+        }
+
+        .card-badges { display: flex; justify-content: space-between; align-items: center; }
+        .sdg-badge {
+            padding: 4px 11px; border-radius: 50px;
+            background: #f0a030; color: #fff;
+            font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .card-type-badge {
+            padding: 3px 10px; border-radius: 50px;
+            font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .card-type-badge.igv  { background: var(--gv-light);  color: var(--gv);  }
+        .card-type-badge.igta { background: var(--gta-light); color: var(--gta); }
+        .card-type-badge.igte { background: var(--gte-light); color: var(--gte); }
+
+        .card-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .card-title {
+            font-family: var(--font-display); font-size: 1.1875rem;
+            font-weight: 700; color: var(--text); line-height: 1.25;
+        }
+        .card-org { font-size: 0.8125rem; color: var(--text-secondary); }
+        .card-lc  { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+        .card-desc {
+            font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.55;
+            margin-top: 8px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-details {
+            background: rgba(0,0,0,0.028); border-radius: 10px;
+            padding: 10px 14px;
+        }
+        .detail-row {
+            display: flex; justify-content: space-between;
+            padding: 5px 0; font-size: 0.8125rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-row .dl { color: var(--text-secondary); font-weight: 500; }
+        .detail-row .dv { color: var(--text); font-weight: 600; }
+
+        .card-actions { display: flex; gap: 10px; align-items: center; }
+        .btn-apply {
+            flex: 1; padding: 11px; border: none; border-radius: 10px;
+            background: var(--primary); color: #fff; font-size: 0.875rem;
+            font-weight: 600; font-family: var(--font-body);
+            cursor: pointer; transition: all 0.2s; text-align: center;
+        }
+        .btn-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-icon {
+            width: 40px; height: 40px; flex-shrink: 0;
+            border-radius: 10px; border: 1.5px solid var(--border);
+            background: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-light); transition: all 0.2s;
+        }
+        .btn-icon:hover { border-color: var(--text); color: var(--text); }
+        .btn-icon.copied { border-color: #22c55e; color: #22c55e; }
+
+        /* ── EMPTY STATE ─── */
+        .opp-empty {
+            grid-column: 1/-1; text-align: center;
+            padding: 72px 24px; color: var(--text-secondary);
+        }
+        .opp-empty svg { opacity: 0.25; margin-bottom: 16px; }
+        .opp-empty p { font-size: 1rem; }
+
+        /* ── MODAL ─── */
+        .opp-overlay {
+            position: fixed; inset: 0; z-index: 900;
+            background: rgba(26,26,46,0.5); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+            opacity: 0; pointer-events: none; transition: opacity 0.25s;
+        }
+        .opp-overlay.open { opacity: 1; pointer-events: all; }
+        .opp-modal {
+            background: #fff; border-radius: 20px;
+            max-width: 540px; width: 100%; max-height: 90vh;
+            overflow-y: auto; position: relative;
+            transform: translateY(24px) scale(0.98);
+            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+        .opp-overlay.open .opp-modal { transform: translateY(0) scale(1); }
+
+        .modal-close {
+            position: absolute; top: 16px; right: 16px;
+            width: 34px; height: 34px; border-radius: 50%;
+            border: 1.5px solid var(--border); background: #fff;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); transition: all 0.2s; z-index: 2;
+        }
+        .modal-close:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+        .modal-inner { padding: 28px; }
+        .modal-badges { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .modal-title {
+            font-family: var(--font-display); font-size: 1.625rem;
+            font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 4px;
+        }
+        .modal-org { font-size: 0.9375rem; color: var(--primary); font-weight: 600; margin-bottom: 4px; }
+        .modal-lc  { font-size: 0.8125rem; color: var(--text-light); margin-bottom: 18px; }
+
+        .modal-desc-box {
+            background: rgba(0,0,0,0.03); border-radius: 12px;
+            padding: 14px 16px; font-size: 0.9rem;
+            color: var(--text-secondary); line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .modal-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+        .modal-detail-tile {
+            background: rgba(0,0,0,0.03); border-radius: 10px; padding: 12px 14px;
+        }
+        .modal-detail-tile .mdl { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+        .modal-detail-tile .mdv { font-size: 1rem; font-weight: 600; color: var(--text); }
+
+        .modal-divider { border: none; border-top: 1px solid var(--border-light); margin-bottom: 20px; }
+        .modal-actions { display: flex; gap: 10px; align-items: center; }
+        .modal-apply {
+            flex: 1; padding: 14px; border: none; border-radius: 12px;
+            background: var(--primary); color: #fff;
+            font-size: 0.9375rem; font-weight: 600; font-family: var(--font-body);
+            cursor: pointer; transition: all 0.2s; text-align: center; text-decoration: none;
+            display: block;
+        }
+        .modal-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .filter-dropdowns { grid-template-columns: 1fr 1fr; }
+            .opp-page { padding: 90px 0 60px; }
+            .modal-details-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .filter-dropdowns { grid-template-columns: 1fr; }
+            .modal-details-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Indian Cultural Animated Background -->
+    <div class="bg-indian">
+        <canvas id="bg-canvas"></canvas>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <div class="bg-orb"></div><div class="bg-orb"></div>
+        <img class="mandala-bl" src="mandala.svg" alt="">
+        <img class="mandala-tr" src="mandala.svg" alt="">
+        <img class="mandala-center" src="mandala.svg" alt="">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="images/IIAF.webp" alt="IIAF" class="nav-logo-img"></a>
+            <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="opportunities.html" class="active">Opportunities</a></li>
+                <li class="dropdown">
+                    <a href="cities.html">Cities</a>
+                    <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="ahmedabad.html">Ahmedabad</a></li>
+                        <li><a href="amravati.html">Amravati</a></li>
+                        <li><a href="anand.html">Anand</a></li>
+                        <li><a href="bengaluru.html">Bengaluru</a></li>
+                        <li><a href="chandigarh.html">Chandigarh</a></li>
+                        <li><a href="chennai.html">Chennai</a></li>
+                        <li><a href="dehradun.html">Dehradun</a></li>
+                        <li><a href="delhi-iit.html">Delhi IIT</a></li>
+                        <li><a href="delhi-university.html">Delhi University</a></li>
+                        <li><a href="hyderabad.html">Hyderabad</a></li>
+                        <li><a href="indore.html">Indore</a></li>
+                        <li><a href="jaipur.html">Jaipur</a></li>
+                        <li><a href="jalandhar.html">Jalandhar</a></li>
+                        <li><a href="kolkata.html">Kolkata</a></li>
+                        <li><a href="ludhiana.html">Ludhiana</a></li>
+                        <li><a href="mahe.html">MAHE</a></li>
+                        <li><a href="mumbai.html">Mumbai</a></li>
+                        <li><a href="navi-mumbai.html">Navi Mumbai</a></li>
+                        <li><a href="noida.html">Noida</a></li>
+                        <li><a href="patiala.html">Patiala</a></li>
+                        <li><a href="pune.html">Pune</a></li>
+                        <li><a href="surat.html">Surat</a></li>
+                        <li><a href="visakhapatnam.html">Visakhapatnam</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#products">Products</a>
+                    <button class="dropdown-chevron" aria-label="Toggle products"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+                    <ul class="dropdown-menu products-menu">
+                        <li><a href="global-volunteer.html">Global Volunteer</a></li>
+                        <li><a href="global-talent.html">Global Talent</a></li>
+                        <li><a href="global-teacher.html">Global Teacher</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="opp-page">
+
+        <!-- Page header -->
+        <div class="opp-header">
+            <h1>Find Your Exchange</h1>
+            <p>Browse live volunteer, talent &amp; teaching opportunities across 24 cities in India</p>
+        </div>
+
+        <!-- Search row -->
+        <div class="opp-search-row">
+            <input type="text" class="opp-search-input" id="opp-search" placeholder="Search projects, roles, or organizations…" autocomplete="off">
+            <button class="opp-filter-toggle active" id="filter-toggle-btn" title="Toggle filters">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            </button>
+        </div>
+
+        <!-- Filter panel -->
+        <div class="opp-filter-wrap">
+            <div class="opp-filter-panel" id="filter-panel">
+
+                <!-- Row 1: Opportunity type + dropdowns -->
+                <div class="filter-row" style="align-items:flex-end; gap:20px; flex-wrap:wrap;">
+                    <!-- Type -->
+                    <div class="type-pills-group">
+                        <div class="filter-label">Opportunity Type</div>
+                        <div class="type-pills" id="type-pills">
+                            <button class="type-pill active" data-type="all">All</button>
+                            <button class="type-pill" data-type="igv">IGV</button>
+                            <button class="type-pill" data-type="igta">IGTA</button>
+                            <button class="type-pill" data-type="igte">IGTE</button>
+                        </div>
+                    </div>
+                    <!-- Dropdowns -->
+                    <div class="filter-dropdowns" style="flex:1; min-width:280px;">
+                        <div>
+                            <div class="filter-label">LC / City</div>
+                            <div class="filter-select-wrap">
+                                <select id="filter-lc">
+                                    <option value="all">All Cities</option>
+                                    <option>Ahmedabad</option><option>Amravati</option><option>Anand</option>
+                                    <option>Bengaluru</option><option>Chandigarh</option><option>Chennai</option>
+                                    <option>Dehradun</option><option>Delhi IIT</option><option>Delhi University</option>
+                                    <option>Hyderabad</option><option>Indore</option><option>Jaipur</option>
+                                    <option>Jalandhar</option><option>Kolkata</option><option>Ludhiana</option>
+                                    <option>MAHE</option><option>Mumbai</option><option>Navi Mumbai</option>
+                                    <option>Noida</option><option>Patiala</option><option>Pune</option>
+                                    <option>Surat</option><option>Visakhapatnam</option><option>VVN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="filter-label">Duration</div>
+                            <div class="filter-select-wrap">
+                                <select id="filter-duration">
+                                    <option value="all">Any Duration</option>
+                                    <option>4 Weeks</option><option>6 Weeks</option>
+                                    <option>8 Weeks</option><option>12 Weeks</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="filter-label">Accommodation</div>
+                            <div class="filter-select-wrap">
+                                <select id="filter-accom">
+                                    <option value="all">Any</option>
+                                    <option value="yes">Included</option>
+                                    <option value="no">Not Included</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Fee slider -->
+                <div class="filter-row">
+                    <div class="fee-group">
+                        <div class="filter-label fee-header">
+                            <span>Max Fee</span>
+                            <span class="fee-value" id="fee-display">$1,000</span>
+                        </div>
+                        <input type="range" class="fee-slider" id="filter-fee" min="0" max="1000" step="50" value="1000">
+                    </div>
+                </div>
+
+                <!-- Row 3: Project pills -->
+                <div class="filter-row">
+                    <div style="width:100%">
+                        <div class="filter-label">Project</div>
+                        <div class="project-pills-row" id="project-pills">
+                            <button class="project-pill active" data-project="all">All Projects</button>
+                            <button class="project-pill" data-project="Heartbeat">Heartbeat</button>
+                            <button class="project-pill" data-project="Equify">Equify</button>
+                            <button class="project-pill" data-project="Raise Your Voice">Raise Your Voice</button>
+                            <button class="project-pill" data-project="Youth 4 Impact">Youth 4 Impact</button>
+                            <button class="project-pill" data-project="FingerPrint">FingerPrint</button>
+                            <button class="project-pill" data-project="Global Classroom">Global Classroom</button>
+                            <button class="project-pill" data-project="Skill Up">Skill Up</button>
+                            <button class="project-pill" data-project="Scale Up">Scale Up</button>
+                            <button class="project-pill" data-project="Rooted">Rooted</button>
+                            <button class="project-pill" data-project="Happy Bus">Happy Bus</button>
+                            <button class="project-pill" data-project="Green Leaders">Green Leaders</button>
+                            <button class="project-pill" data-project="Eat 4 Change">Eat 4 Change</button>
+                            <button class="project-pill" data-project="Eco City">Eco City</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="opp-results-area">
+            <div class="opp-meta-bar">
+                <div class="opp-count">Showing <strong id="result-count">0</strong> opportunities</div>
+                <div class="opp-synced" id="last-synced">Sample data — live sync coming soon</div>
+            </div>
+            <div class="opp-grid" id="opp-grid"></div>
+        </div>
+
+    </main>
+
+    <!-- Modal -->
+    <div class="opp-overlay" id="opp-overlay" role="dialog" aria-modal="true">
+        <div class="opp-modal" id="opp-modal">
+            <button class="modal-close" id="modal-close" aria-label="Close">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="modal-inner" id="modal-inner"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a>
+                    <p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p>
+                </div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="opportunities.html">Opportunities</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+                <div class="footer-links"><h4>Programs</h4><ul><li><a href="global-volunteer.html">Global Volunteer</a></li><li><a href="global-talent.html">Global Talent</a></li><li><a href="global-teacher.html">Global Teacher</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AIESEC India. India is a Feeling.</p>
+                <div class="footer-social"><a href="https://www.instagram.com/aiesecindia/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+    // ── MOCK DATA ────────────────────────────────────────────────────────────
+    const OPPS = [
+      { id:1,  title:"Caretaker",                  org:"Sadhana Institute for Mentally Challenged",   desc:"Taking care of mentally challenged children and assisting in classes with daily activities and learning support.",              project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Mumbai",          link:"https://aiesec.org/opportunity/india" },
+      { id:2,  title:"Nursing Assistant",           org:"Sadhana Institute for Mentally Challenged",   desc:"Helping patients with dressing of wounds and providing basic medical care and companionship to residents.",                   project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Pune",            link:"https://aiesec.org/opportunity/india" },
+      { id:3,  title:"Dentistry Assistant",         org:"Sadhana Institute for Mentally Challenged",   desc:"Maintaining dental check-ups for patients and assisting dentists in community health camps and outreach.",                   project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Bengaluru",       link:"https://aiesec.org/opportunity/india" },
+      { id:4,  title:"English Language Educator",   org:"Vidya Foundation",                            desc:"Teaching English to underprivileged children using interactive and activity-based learning methods in schools.",              project:"Global Classroom", sdg:4,  fee:200, accommodation:true,  duration:"8 Weeks",  type:"igte", lc:"Delhi University",link:"https://aiesec.org/opportunity/india" },
+      { id:5,  title:"STEM Educator",               org:"Asha for Education",                          desc:"Designing and delivering STEM curriculum for school students aged 10–16 to spark curiosity in science and math.",             project:"Global Classroom", sdg:4,  fee:200, accommodation:false, duration:"8 Weeks",  type:"igte", lc:"Chennai",         link:"https://aiesec.org/opportunity/india" },
+      { id:6,  title:"Youth Leadership Trainer",    org:"Youth India Foundation",                      desc:"Facilitating workshops and leadership camps for college students to develop soft skills and civic consciousness.",             project:"Youth 4 Impact",  sdg:10, fee:150, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Hyderabad",       link:"https://aiesec.org/opportunity/india" },
+      { id:7,  title:"Women Empowerment Fellow",    org:"Sakhi Trust",                                 desc:"Running skill-building and awareness sessions for women in rural communities on health, finance, and rights.",                project:"Equify",           sdg:10, fee:0,   accommodation:true,  duration:"4 Weeks",  type:"igv",  lc:"Jaipur",          link:"https://aiesec.org/opportunity/india" },
+      { id:8,  title:"Environmental Educator",      org:"Greenfield Society",                          desc:"Conducting tree-plantation drives and environmental workshops in schools and local communities to raise climate awareness.",   project:"Green Leaders",   sdg:13, fee:100, accommodation:false, duration:"6 Weeks",  type:"igv",  lc:"Dehradun",        link:"https://aiesec.org/opportunity/india" },
+      { id:9,  title:"Urban Sustainability Intern", org:"EcoSense NGO",                                desc:"Supporting research on sustainable urban practices and helping implement waste-management initiatives in the city.",          project:"Eco City",        sdg:11, fee:0,   accommodation:false, duration:"8 Weeks",  type:"igta", lc:"Bengaluru",       link:"https://aiesec.org/opportunity/india" },
+      { id:10, title:"Hunger Alleviation Volunteer",org:"Annadana Trust",                              desc:"Working at community kitchens and food-distribution drives to support food-insecure families across the district.",          project:"Eat 4 Change",    sdg:2,  fee:100, accommodation:true,  duration:"4 Weeks",  type:"igv",  lc:"Kolkata",         link:"https://aiesec.org/opportunity/india" },
+      { id:11, title:"Social Media & PR Fellow",    org:"Ibtada",                                      desc:"Creating content and managing digital campaigns to amplify the voice of grassroots organisations working with marginalised.",  project:"Raise Your Voice", sdg:16, fee:0,   accommodation:true,  duration:"6 Weeks",  type:"igta", lc:"Noida",           link:"https://aiesec.org/opportunity/india" },
+      { id:12, title:"Entrepreneurship Mentor",     org:"Startup Gurukul",                             desc:"Coaching young entrepreneurs through business model validation, market research, and pitching at local startup events.",       project:"Scale Up",        sdg:8,  fee:250, accommodation:false, duration:"8 Weeks",  type:"igta", lc:"Ahmedabad",       link:"https://aiesec.org/opportunity/india" },
+      { id:13, title:"Skill Development Trainer",   org:"Don Bosco Tech",                              desc:"Delivering vocational training in digital literacy and basic computing to youth from low-income backgrounds.",               project:"Skill Up",        sdg:8,  fee:150, accommodation:true,  duration:"6 Weeks",  type:"igte", lc:"Mumbai",          link:"https://aiesec.org/opportunity/india" },
+      { id:14, title:"Agroecology Volunteer",       org:"Sahaja Aharam",                               desc:"Supporting organic farmers with documentation, knowledge-sharing workshops, and connecting them to sustainable markets.",     project:"Rooted",          sdg:2,  fee:50,  accommodation:true,  duration:"4 Weeks",  type:"igv",  lc:"Chennai",         link:"https://aiesec.org/opportunity/india" },
+      { id:15, title:"Transport & Road Safety Aide",org:"Save LIFE Foundation",                        desc:"Joining road-safety awareness drives and helping develop educational materials for schools and highway communities.",         project:"Happy Bus",       sdg:11, fee:0,   accommodation:false, duration:"6 Weeks",  type:"igv",  lc:"Delhi IIT",       link:"https://aiesec.org/opportunity/india" },
+      { id:16, title:"Mental Health Advocate",      org:"iCall - TISS",                                desc:"Supporting mental health awareness campaigns and helping deliver peer-support workshops at colleges and community centres.",   project:"Heartbeat",       sdg:3,  fee:200, accommodation:false, duration:"8 Weeks",  type:"igv",  lc:"Navi Mumbai",     link:"https://aiesec.org/opportunity/india" },
+      { id:17, title:"Climate Policy Researcher",   org:"Centre for Science & Environment",            desc:"Researching local climate adaptation policies and contributing to reports that influence urban planning and governance.",      project:"Eco City",        sdg:13, fee:300, accommodation:false, duration:"12 Weeks", type:"igta", lc:"Delhi University",link:"https://aiesec.org/opportunity/india" },
+      { id:18, title:"Disability Inclusion Fellow", org:"NAB India",                                   desc:"Creating accessible learning materials and running inclusion workshops for teachers working with students with disabilities.",  project:"Equify",           sdg:10, fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Chandigarh",      link:"https://aiesec.org/opportunity/india" },
+      { id:19, title:"Youth Journalism Trainer",    org:"Chunauti Foundation",                         desc:"Training adolescent students in fact-checking, ethical journalism and digital storytelling to combat misinformation.",        project:"Raise Your Voice", sdg:16, fee:150, accommodation:true,  duration:"8 Weeks",  type:"igte", lc:"Patiala",         link:"https://aiesec.org/opportunity/india" },
+      { id:20, title:"Financial Literacy Coach",    org:"Mann Deshi Foundation",                       desc:"Conducting finance and savings workshops for women micro-entrepreneurs in semi-urban and rural clusters.",                   project:"Skill Up",        sdg:8,  fee:0,   accommodation:true,  duration:"4 Weeks",  type:"igv",  lc:"Pune",            link:"https://aiesec.org/opportunity/india" },
+      { id:21, title:"Waste Management Intern",     org:"Saahas Zero Waste",                           desc:"Supporting on-ground dry-waste segregation drives and process documentation at residential communities and offices.",       project:"Eco City",        sdg:12, fee:100, accommodation:false, duration:"6 Weeks",  type:"igta", lc:"Bengaluru",       link:"https://aiesec.org/opportunity/india" },
+      { id:22, title:"Arts & Culture Educator",     org:"Kiran Nadar Museum of Art",                   desc:"Designing art-based learning programmes for children and facilitating museum education tours for school groups.",           project:"Global Classroom", sdg:4,  fee:200, accommodation:false, duration:"8 Weeks",  type:"igte", lc:"Noida",           link:"https://aiesec.org/opportunity/india" },
+      { id:23, title:"Rural Health Worker",         org:"Karuna Trust",                                desc:"Assisting primary health centres in remote areas with patient outreach, community health drives and health data collection.", project:"Heartbeat",       sdg:3,  fee:50,  accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Visakhapatnam",   link:"https://aiesec.org/opportunity/india" },
+      { id:24, title:"Agri-Tech Volunteer",         org:"Digital Green",                               desc:"Supporting farmers in adopting digital tools for crop management and documenting success stories for rural communities.",    project:"Rooted",          sdg:2,  fee:0,   accommodation:true,  duration:"8 Weeks",  type:"igta", lc:"Indore",          link:"https://aiesec.org/opportunity/india" },
+      { id:25, title:"Child Protection Educator",   org:"CRY — Child Rights and You",                  desc:"Running child-rights awareness sessions in schools and slum communities, and training local volunteers as advocates.",       project:"Youth 4 Impact",  sdg:16, fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Kolkata",         link:"https://aiesec.org/opportunity/india" },
+      { id:26, title:"Business Development Associate",org:"Jagriti Yatra",                             desc:"Supporting grassroots entrepreneurs with market analysis, partnership outreach and social media strategy.",                  project:"Scale Up",        sdg:8,  fee:300, accommodation:false, duration:"12 Weeks", type:"igta", lc:"Jalandhar",       link:"https://aiesec.org/opportunity/india" },
+      { id:27, title:"Solar Energy Educator",       org:"Gram Power",                                  desc:"Spreading awareness about solar energy benefits in off-grid villages and supporting community training on renewable energy.", project:"Green Leaders",   sdg:7,  fee:50,  accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Jaipur",          link:"https://aiesec.org/opportunity/india" },
+      { id:28, title:"Inclusive Sports Coach",      org:"Special Olympics Bharat",                     desc:"Coaching athletes with intellectual disabilities in track events and team sports while supporting event organisation.",       project:"Equify",           sdg:10, fee:100, accommodation:false, duration:"4 Weeks",  type:"igv",  lc:"Ludhiana",        link:"https://aiesec.org/opportunity/india" },
+      { id:29, title:"Data Analytics Fellow",       org:"Pratham Education Foundation",               desc:"Analysing learning-outcome data to generate insights that improve programme design for after-school education initiatives.",  project:"FingerPrint",     sdg:4,  fee:200, accommodation:false, duration:"12 Weeks", type:"igta", lc:"MAHE",            link:"https://aiesec.org/opportunity/india" },
+      { id:30, title:"Flood Relief Coordinator",    org:"Goonj",                                       desc:"Supporting disaster-relief logistics, warehouse operations and community liaison in areas recovering from natural disasters.", project:"Heartbeat",       sdg:1,  fee:0,   accommodation:true,  duration:"4 Weeks",  type:"igv",  lc:"Surat",           link:"https://aiesec.org/opportunity/india" },
+      { id:31, title:"EV Awareness Volunteer",      org:"EV Yatra",                                    desc:"Running electric-vehicle awareness drives in tier-2 cities and supporting test-ride events for community members.",         project:"Happy Bus",       sdg:13, fee:150, accommodation:false, duration:"6 Weeks",  type:"igv",  lc:"Amravati",        link:"https://aiesec.org/opportunity/india" },
+      { id:32, title:"Water WASH Fellow",           org:"WaterAid India",                              desc:"Supporting sanitation-programme implementation and community-led total sanitation drives in rural and peri-urban areas.",   project:"FingerPrint",     sdg:6,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"VVN",             link:"https://aiesec.org/opportunity/india" },
+      { id:33, title:"Innovation Lab Facilitator",  org:"Atal Innovation Mission",                     desc:"Facilitating design-thinking and tinkering sessions for school students in Atal Tinkering Labs across the city.",           project:"FingerPrint",     sdg:9,  fee:250, accommodation:false, duration:"8 Weeks",  type:"igte", lc:"Anand",           link:"https://aiesec.org/opportunity/india" },
+    ];
+
+    // ── STATE ────────────────────────────────────────────────────────────────
+    const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:1000, project:"all", query:"" };
+
+    // ── FILTER + RENDER ──────────────────────────────────────────────────────
+    function filtered() {
+        return OPPS.filter(o => {
+            if (state.type !== "all" && o.type !== state.type) return false;
+            if (state.lc !== "all" && o.lc !== state.lc) return false;
+            if (state.duration !== "all" && o.duration !== state.duration) return false;
+            if (state.accom !== "all") {
+                if (state.accom === "yes" && !o.accommodation) return false;
+                if (state.accom === "no"  &&  o.accommodation) return false;
+            }
+            if (o.fee > state.fee) return false;
+            if (state.project !== "all" && o.project !== state.project) return false;
+            if (state.query) {
+                const q = state.query.toLowerCase();
+                if (!o.title.toLowerCase().includes(q) &&
+                    !o.org.toLowerCase().includes(q) &&
+                    !o.project.toLowerCase().includes(q)) return false;
+            }
+            return true;
+        });
+    }
+
+    function render() {
+        const results = filtered();
+        const grid = document.getElementById("opp-grid");
+        document.getElementById("result-count").textContent = results.length;
+        if (!results.length) {
+            grid.innerHTML = `<div class="opp-empty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <p>No opportunities match your filters.</p>
+            </div>`;
+            return;
+        }
+        grid.innerHTML = results.map(o => `
+            <article class="opp-card" data-id="${o.id}" tabindex="0" role="button" aria-label="View ${o.title}">
+                <div class="card-badges">
+                    <span class="sdg-badge">SDG ${o.sdg}</span>
+                    <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">${o.title}</div>
+                    <div class="card-org">${o.org}</div>
+                    <div class="card-lc">📍 ${o.lc}</div>
+                    <div class="card-desc">${o.desc}</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-row"><span class="dl">Project</span><span class="dv">${o.project}</span></div>
+                    <div class="detail-row"><span class="dl">Fee</span><span class="dv">${o.fee === 0 ? 'Free' : '$' + o.fee}</span></div>
+                    <div class="detail-row"><span class="dl">Accom</span><span class="dv">${o.accommodation ? 'Included' : 'Not Included'}</span></div>
+                    <div class="detail-row"><span class="dl">Duration</span><span class="dv">${o.duration}</span></div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-apply" data-link="${o.link}" onclick="event.stopPropagation(); window.open(this.dataset.link,'_blank')">Apply Now</button>
+                    <button class="btn-icon copy-btn" data-link="${o.link}" onclick="event.stopPropagation(); copyLink(this)" title="Copy link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                </div>
+            </article>
+        `).join("");
+
+        // Click → modal
+        grid.querySelectorAll(".opp-card").forEach(card => {
+            card.addEventListener("click", () => openModal(parseInt(card.dataset.id)));
+            card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openModal(parseInt(card.dataset.id)); });
+        });
+    }
+
+    // ── MODAL ────────────────────────────────────────────────────────────────
+    function openModal(id) {
+        const o = OPPS.find(x => x.id === id);
+        if (!o) return;
+        document.getElementById("modal-inner").innerHTML = `
+            <div class="modal-badges">
+                <span class="sdg-badge">SDG ${o.sdg}</span>
+                <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
+            </div>
+            <div class="modal-title">${o.title}</div>
+            <div class="modal-org">${o.org}</div>
+            <div class="modal-lc">📍 ${o.lc}</div>
+            <div class="modal-desc-box">${o.desc}</div>
+            <div class="modal-details-grid">
+                <div class="modal-detail-tile"><div class="mdl">Project</div><div class="mdv">${o.project}</div></div>
+                <div class="modal-detail-tile"><div class="mdl">Fee</div><div class="mdv">${o.fee === 0 ? 'Free' : '$' + o.fee}</div></div>
+                <div class="modal-detail-tile"><div class="mdl">Accommodation</div><div class="mdv">${o.accommodation ? 'Included' : 'Not Included'}</div></div>
+                <div class="modal-detail-tile"><div class="mdl">Duration</div><div class="mdv">${o.duration}</div></div>
+            </div>
+            <hr class="modal-divider">
+            <div class="modal-actions">
+                <a class="modal-apply" href="${o.link}" target="_blank" rel="noopener">Apply Now on AIESEC.org</a>
+                <button class="btn-icon copy-btn" data-link="${o.link}" onclick="copyLink(this)" title="Copy link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+            </div>
+        `;
+        document.getElementById("opp-overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById("opp-overlay").classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+    document.getElementById("opp-overlay").addEventListener("click", e => { if (e.target === e.currentTarget) closeModal(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+    // ── COPY LINK ────────────────────────────────────────────────────────────
+    function copyLink(btn) {
+        navigator.clipboard.writeText(btn.dataset.link).then(() => {
+            btn.classList.add("copied");
+            setTimeout(() => btn.classList.remove("copied"), 1800);
+        });
+    }
+
+    // ── FILTER CONTROLS ──────────────────────────────────────────────────────
+
+    // Type pills
+    document.getElementById("type-pills").addEventListener("click", e => {
+        const pill = e.target.closest(".type-pill");
+        if (!pill) return;
+        document.querySelectorAll(".type-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        state.type = pill.dataset.type;
+        render();
+    });
+
+    // Project pills
+    document.getElementById("project-pills").addEventListener("click", e => {
+        const pill = e.target.closest(".project-pill");
+        if (!pill) return;
+        document.querySelectorAll(".project-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        state.project = pill.dataset.project;
+        render();
+    });
+
+    // Dropdowns
+    document.getElementById("filter-lc").addEventListener("change", e => { state.lc = e.target.value || "all"; render(); });
+    document.getElementById("filter-duration").addEventListener("change", e => { state.duration = e.target.value || "all"; render(); });
+    document.getElementById("filter-accom").addEventListener("change", e => { state.accom = e.target.value || "all"; render(); });
+
+    // Fee slider
+    const feeSlider = document.getElementById("filter-fee");
+    const feeDisplay = document.getElementById("fee-display");
+    feeSlider.addEventListener("input", () => {
+        state.fee = parseInt(feeSlider.value);
+        feeDisplay.textContent = state.fee >= 1000 ? "Any" : "$" + state.fee;
+        render();
+    });
+
+    // Search
+    let searchTimeout;
+    document.getElementById("opp-search").addEventListener("input", e => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => { state.query = e.target.value.trim(); render(); }, 250);
+    });
+
+    // Filter toggle
+    document.getElementById("filter-toggle-btn").addEventListener("click", () => {
+        const panel = document.getElementById("filter-panel");
+        const btn   = document.getElementById("filter-toggle-btn");
+        const collapsed = panel.classList.toggle("collapsed");
+        btn.classList.toggle("active", !collapsed);
+    });
+
+    // ── INIT ─────────────────────────────────────────────────────────────────
+    render();
+    </script>
+</body>
+</html>
