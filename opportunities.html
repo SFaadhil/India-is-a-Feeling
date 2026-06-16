@@ -286,6 +286,11 @@
         }
         .modal-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.45; }
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .filter-dropdowns { grid-template-columns: 1fr 1fr; }
@@ -512,9 +517,15 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script>
-    // ── MOCK DATA ────────────────────────────────────────────────────────────
-    const OPPS = [
+    // ── SUPABASE CONFIG ──────────────────────────────────────────────────────
+    const SUPABASE_URL  = 'https://nzgkjogrtsigwachlxos.supabase.co';
+    const SUPABASE_ANON = 'sb_publishable_XwtEwfuscmD24klYoC3vJw_H1Q8JqxG';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // ── MOCK DATA (fallback while AIESEC India has 0 live opportunities) ─────
+    const MOCK_OPPS = [
       { id:1,  title:"Caretaker",                  org:"Sadhana Institute for Mentally Challenged",   desc:"Taking care of mentally challenged children and assisting in classes with daily activities and learning support.",              project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Mumbai",          link:"https://aiesec.org/opportunity/india" },
       { id:2,  title:"Nursing Assistant",           org:"Sadhana Institute for Mentally Challenged",   desc:"Helping patients with dressing of wounds and providing basic medical care and companionship to residents.",                   project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Pune",            link:"https://aiesec.org/opportunity/india" },
       { id:3,  title:"Dentistry Assistant",         org:"Sadhana Institute for Mentally Challenged",   desc:"Maintaining dental check-ups for patients and assisting dentists in community health camps and outreach.",                   project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Bengaluru",       link:"https://aiesec.org/opportunity/india" },
@@ -550,7 +561,77 @@
       { id:33, title:"Innovation Lab Facilitator",  org:"Atal Innovation Mission",                     desc:"Facilitating design-thinking and tinkering sessions for school students in Atal Tinkering Labs across the city.",           project:"FingerPrint",     sdg:9,  fee:250, accommodation:false, duration:"8 Weeks",  type:"igte", lc:"Anand",           link:"https://aiesec.org/opportunity/india" },
     ];
 
+    // ── LIVE DATA ────────────────────────────────────────────────────────────
+    // Normalise a Supabase row to the same shape as MOCK_OPPS
+    function normalizeRow(r) {
+        return {
+            id:            r.id,
+            title:         r.title || 'Untitled',
+            desc:          r.description || '',
+            type:          r.type || 'igv',
+            project:       r.project || '',
+            org:           r.organisation || '',
+            lc:            r.lc || '',
+            sdg:           r.sdg,
+            fee:           r.fee || 0,
+            accommodation: r.accommodation || false,
+            duration:      r.duration || '',
+            link:          r.link || `https://aiesec.org/opportunity/${r.id}`,
+        };
+    }
+
+    function timeAgo(date) {
+        const s = Math.floor((Date.now() - new Date(date)) / 1000);
+        if (s < 60)    return 'just now';
+        if (s < 3600)  return `${Math.floor(s/60)}m ago`;
+        if (s < 86400) return `${Math.floor(s/3600)}h ago`;
+        return `${Math.floor(s/86400)}d ago`;
+    }
+
+    function showSkeleton() {
+        document.getElementById("result-count").textContent = '…';
+        document.getElementById("opp-grid").innerHTML = Array(6).fill(0).map(() => `
+            <div class="opp-card" style="pointer-events:none;animation:pulse 1.4s ease-in-out infinite;">
+                <div style="height:18px;background:rgba(0,0,0,0.07);border-radius:50px;width:55%;margin-bottom:14px;"></div>
+                <div style="height:20px;background:rgba(0,0,0,0.07);border-radius:8px;width:80%;margin-bottom:6px;"></div>
+                <div style="height:13px;background:rgba(0,0,0,0.04);border-radius:6px;width:60%;margin-bottom:18px;"></div>
+                <div style="height:72px;background:rgba(0,0,0,0.04);border-radius:10px;margin-bottom:14px;"></div>
+                <div style="height:40px;background:rgba(0,0,0,0.07);border-radius:10px;"></div>
+            </div>`).join('');
+    }
+
+    async function init() {
+        showSkeleton();
+        let usingLive = false;
+        try {
+            const [oppsRes, metaRes] = await Promise.all([
+                sb.from('opportunities').select('*').eq('status', 'open').order('synced_at', { ascending: false }),
+                sb.from('sync_meta').select('synced_at, count').eq('id', 1).single(),
+            ]);
+
+            if (!oppsRes.error && oppsRes.data?.length > 0) {
+                OPPS = oppsRes.data.map(normalizeRow);
+                usingLive = true;
+            } else {
+                OPPS = MOCK_OPPS;
+            }
+
+            // Last-synced indicator
+            const el = document.getElementById("last-synced");
+            if (usingLive && metaRes.data?.synced_at) {
+                el.textContent = `Last synced ${timeAgo(metaRes.data.synced_at)} · ${metaRes.data.count} live opportunities`;
+            } else {
+                el.textContent = 'Showing sample data — live opportunities coming soon';
+            }
+        } catch {
+            OPPS = MOCK_OPPS;
+            document.getElementById("last-synced").textContent = 'Showing sample data';
+        }
+        render();
+    }
+
     // ── STATE ────────────────────────────────────────────────────────────────
+    let OPPS = MOCK_OPPS;
     const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:1000, project:"all", query:"" };
 
     // ── FILTER + RENDER ──────────────────────────────────────────────────────
@@ -720,7 +801,7 @@
     });
 
     // ── INIT ─────────────────────────────────────────────────────────────────
-    render();
+    init();
     </script>
 </body>
 </html>
