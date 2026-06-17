@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opportunities — India is a Feeling</title>
+    <title>Searchtool — AIESEC in India</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         /* ── OPPORTUNITIES PAGE ─────────────────────────────── */
-        .opp-page { padding: 108px 0 80px; min-height: 100vh; }
+        .opp-page { padding: 108px 0 80px; min-height: 100vh; position: relative; z-index: 1; }
 
         /* Header */
         .opp-header { text-align: center; padding: 40px 24px 36px; }
@@ -21,111 +21,133 @@
         }
         .opp-header p { color: var(--text-secondary); font-size: 1.0625rem; margin-top: 10px; }
 
-        /* ── SEARCH ROW ─── */
-        .opp-search-row {
-            display: flex; gap: 12px; align-items: center;
-            max-width: 680px; margin: 0 auto 20px;
-            padding: 0 24px;
-        }
-        .opp-search-input {
-            flex: 1; padding: 14px 20px;
-            border: 1.5px solid var(--border);
-            border-radius: 50px; font-size: 0.9375rem;
-            font-family: var(--font-body);
-            background: rgba(255,255,255,0.88);
-            backdrop-filter: blur(16px);
-            color: var(--text); outline: none;
-            transition: border-color 0.25s, box-shadow 0.25s;
-        }
-        .opp-search-input::placeholder { color: var(--text-light); }
-        .opp-search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(248,90,64,0.1); }
-        .opp-filter-toggle {
-            width: 50px; height: 50px; border-radius: 50%; border: none;
-            background: var(--primary); color: #fff; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; transition: all 0.25s;
-        }
-        .opp-filter-toggle:hover { background: var(--primary-dark); transform: scale(1.06); }
-        .opp-filter-toggle.active { background: var(--text); }
-
-        /* ── FILTER PANEL ─── */
-        .opp-filter-wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px 24px; }
+        /* ── FILTER PANEL (integrated search) ─── */
+        .opp-filter-wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px 28px; }
         .opp-filter-panel {
-            background: rgba(255,255,255,0.86);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            padding: 24px 28px 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
+            background: #5C0F0F;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 12px 48px rgba(92,15,15,0.32), 0 2px 8px rgba(0,0,0,0.12);
         }
-        .opp-filter-panel.collapsed { display: none; }
 
-        .filter-row { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+        /* Search row at top of panel */
+        .filter-search-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 18px 22px;
+        }
+        .filter-search-pill {
+            flex: 1; display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.13);
+            border: 1.5px solid rgba(255,255,255,0.22);
+            border-radius: 50px; padding: 10px 18px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .filter-search-pill:focus-within {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.45);
+        }
+        .filter-search-icon { color: rgba(255,255,255,0.5); flex-shrink: 0; }
+        .opp-search-input {
+            flex: 1; background: none; border: none; outline: none;
+            font-size: 0.9375rem; font-family: var(--font-body); font-weight: 400;
+            color: #fff; caret-color: rgba(255,255,255,0.8);
+        }
+        .opp-search-input::placeholder { color: rgba(255,255,255,0.42); }
+        .filter-collapse-btn {
+            width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,0.22);
+            background: rgba(255,255,255,0.09);
+            color: rgba(255,255,255,0.8); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .filter-collapse-btn:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); }
+        .filter-collapse-btn svg { transition: transform 0.28s cubic-bezier(0.4,0,0.2,1); }
+        .filter-collapse-btn.rotated svg { transform: rotate(180deg); }
+
+        /* Filter body */
+        .filter-body { padding: 0 22px 22px; }
+        .filter-body-divider {
+            height: 1px; background: rgba(255,255,255,0.12);
+            margin-bottom: 22px;
+        }
+        .filter-body.collapsed { display: none; }
+
+        .filter-row { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 22px; flex-wrap: wrap; }
         .filter-row:last-child { margin-bottom: 0; }
 
         .filter-label {
-            font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--text-light); margin-bottom: 9px;
+            font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em;
+            text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px;
+            font-family: var(--font-body);
         }
 
         /* Type pills */
         .type-pills-group { flex: 0 0 auto; }
         .type-pills { display: flex; gap: 8px; flex-wrap: wrap; }
         .type-pill {
-            padding: 7px 18px; border-radius: 50px;
-            border: 1.5px solid var(--border);
-            background: white; font-size: 0.8125rem; font-weight: 600;
-            cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
-            letter-spacing: 0.02em;
+            padding: 7px 20px; border-radius: 50px;
+            border: 1.5px solid rgba(255,255,255,0.22);
+            background: transparent; font-size: 0.8125rem; font-weight: 700;
+            cursor: pointer; transition: all 0.2s; color: rgba(255,255,255,0.65);
+            letter-spacing: 0.04em; font-family: var(--font-body);
         }
-        .type-pill:hover { border-color: var(--text-secondary); color: var(--text); }
-        .type-pill[data-type="all"].active    { background: var(--text); border-color: var(--text); color: #fff; }
-        .type-pill[data-type="igv"].active    { background: var(--gv); border-color: var(--gv); color: #fff; }
+        .type-pill:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+        .type-pill[data-type="all"].active    { background: #fff; border-color: #fff; color: #5C0F0F; }
+        .type-pill[data-type="igv"].active    { background: var(--gv);  border-color: var(--gv);  color: #fff; }
         .type-pill[data-type="igta"].active   { background: var(--gta); border-color: var(--gta); color: #fff; }
         .type-pill[data-type="igte"].active   { background: var(--gte); border-color: var(--gte); color: #fff; }
 
         /* Dropdowns */
-        .filter-dropdowns { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; width: 100%; }
+        .filter-dropdowns { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; width: 100%; }
         .filter-select-wrap { position: relative; }
         .filter-select-wrap select {
-            width: 100%; padding: 10px 36px 10px 14px;
-            border: 1.5px solid var(--border); border-radius: 10px;
-            background: white; font-size: 0.875rem; font-family: var(--font-body);
-            color: var(--text); appearance: none; cursor: pointer; outline: none;
-            transition: border-color 0.2s;
+            width: 100%; padding: 11px 36px 11px 16px;
+            border: 1.5px solid rgba(255,255,255,0.2); border-radius: 12px;
+            background: rgba(0,0,0,0.22); font-size: 0.9375rem;
+            font-family: var(--font-body); font-weight: 500;
+            color: #fff; appearance: none; cursor: pointer; outline: none;
+            transition: border-color 0.2s, background 0.2s;
         }
-        .filter-select-wrap select:focus { border-color: var(--primary); }
+        .filter-select-wrap select:focus { border-color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.32); }
+        .filter-select-wrap select:hover { border-color: rgba(255,255,255,0.35); }
+        .filter-select-wrap select option { background: #3A0A0A; color: #fff; }
         .filter-select-wrap::after {
             content: '';
-            position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+            position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
             width: 0; height: 0;
             border-left: 5px solid transparent; border-right: 5px solid transparent;
-            border-top: 6px solid var(--text-light);
+            border-top: 6px solid rgba(255,255,255,0.55);
             pointer-events: none;
         }
 
         /* Fee slider */
         .fee-group { width: 100%; }
         .fee-header { display: flex; justify-content: space-between; align-items: center; }
-        .fee-value { color: var(--primary); font-weight: 700; font-size: 0.875rem; }
+        .fee-value { color: rgba(255,255,255,0.95); font-weight: 800; font-size: 0.9rem; font-family: var(--font-body); }
         .fee-slider {
-            width: 100%; margin-top: 10px; height: 4px;
-            accent-color: var(--primary); cursor: pointer;
-            border-radius: 2px;
+            width: 100%; margin-top: 12px; height: 4px;
+            accent-color: rgba(255,255,255,0.9); cursor: pointer;
+            border-radius: 2px; appearance: none;
+            background: rgba(255,255,255,0.2);
+        }
+        .fee-slider::-webkit-slider-thumb {
+            appearance: none; width: 18px; height: 18px;
+            border-radius: 50%; background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;
         }
 
         /* Project pills */
-        .project-pills-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .project-pills-row { display: flex; flex-wrap: wrap; gap: 7px; }
         .project-pill {
-            padding: 6px 14px; border-radius: 50px;
-            border: 1.5px solid var(--border-light);
-            background: white; font-size: 0.78125rem; font-weight: 500;
-            cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
-            white-space: nowrap;
+            padding: 6px 15px; border-radius: 50px;
+            border: 1.5px solid rgba(255,255,255,0.18);
+            background: transparent; font-size: 0.78125rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; color: rgba(255,255,255,0.6);
+            white-space: nowrap; font-family: var(--font-body);
         }
-        .project-pill:hover { border-color: var(--primary); color: var(--primary); }
-        .project-pill.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .project-pill:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+        .project-pill.active { background: #fff; border-color: #fff; color: #5C0F0F; }
 
         /* ── RESULTS AREA ─── */
         .opp-results-area { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
@@ -153,13 +175,13 @@
         .opp-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 16px 40px rgba(0,0,0,0.1);
-            border-color: rgba(248,90,64,0.35);
+            border-color: rgba(92,15,15,0.25);
         }
 
         .card-badges { display: flex; justify-content: space-between; align-items: center; }
         .sdg-badge {
             padding: 4px 11px; border-radius: 50px;
-            background: #f0a030; color: #fff;
+            color: #fff;
             font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.06em;
             text-transform: uppercase;
         }
@@ -202,11 +224,12 @@
         .card-actions { display: flex; gap: 10px; align-items: center; }
         .btn-apply {
             flex: 1; padding: 11px; border: none; border-radius: 10px;
-            background: var(--primary); color: #fff; font-size: 0.875rem;
-            font-weight: 600; font-family: var(--font-body);
+            background: #5C0F0F; color: #fff; font-size: 0.875rem;
+            font-weight: 700; font-family: var(--font-body);
             cursor: pointer; transition: all 0.2s; text-align: center;
+            letter-spacing: 0.02em;
         }
-        .btn-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-apply:hover { background: #3A0808; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(92,15,15,0.35); }
         .btn-icon {
             width: 40px; height: 40px; flex-shrink: 0;
             border-radius: 10px; border: 1.5px solid var(--border);
@@ -258,7 +281,7 @@
             font-family: var(--font-display); font-size: 1.625rem;
             font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 4px;
         }
-        .modal-org { font-size: 0.9375rem; color: var(--primary); font-weight: 600; margin-bottom: 4px; }
+        .modal-org { font-size: 0.9375rem; color: #5C0F0F; font-weight: 600; margin-bottom: 4px; }
         .modal-lc  { font-size: 0.8125rem; color: var(--text-light); margin-bottom: 18px; }
 
         .modal-desc-box {
@@ -279,19 +302,19 @@
         .modal-actions { display: flex; gap: 10px; align-items: center; }
         .modal-apply {
             flex: 1; padding: 14px; border: none; border-radius: 12px;
-            background: var(--primary); color: #fff;
-            font-size: 0.9375rem; font-weight: 600; font-family: var(--font-body);
+            background: #5C0F0F; color: #fff;
+            font-size: 0.9375rem; font-weight: 700; font-family: var(--font-body);
             cursor: pointer; transition: all 0.2s; text-align: center; text-decoration: none;
-            display: block;
+            display: block; letter-spacing: 0.02em;
         }
-        .modal-apply:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .modal-apply:hover { background: #3A0808; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(92,15,15,0.35); }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50%       { opacity: 0.45; }
         }
 
-        /* Responsive adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
             .filter-dropdowns { grid-template-columns: 1fr 1fr; }
             .opp-page { padding: 90px 0 60px; }
@@ -323,7 +346,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="opportunities.html" class="active">Opportunities</a></li>
+                <li><a href="opportunities.html" class="active">Searchtool</a></li>
                 <li class="dropdown">
                     <a href="cities.html">Cities</a>
                     <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -371,110 +394,116 @@
 
         <!-- Page header -->
         <div class="opp-header">
-            <h1>Find Your Exchange</h1>
+            <h1>AIESEC in India's National Searchtool</h1>
             <p>Browse live volunteer, talent &amp; teaching opportunities across 24 cities in India</p>
         </div>
 
-        <!-- Search row -->
-        <div class="opp-search-row">
-            <input type="text" class="opp-search-input" id="opp-search" placeholder="Search projects, roles, or organizations…" autocomplete="off">
-            <button class="opp-filter-toggle active" id="filter-toggle-btn" title="Toggle filters">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            </button>
-        </div>
-
-        <!-- Filter panel -->
+        <!-- Search + Filter panel (integrated) -->
         <div class="opp-filter-wrap">
             <div class="opp-filter-panel" id="filter-panel">
 
-                <!-- Row 1: Opportunity type + dropdowns -->
-                <div class="filter-row" style="align-items:flex-end; gap:20px; flex-wrap:wrap;">
-                    <!-- Type -->
-                    <div class="type-pills-group">
-                        <div class="filter-label">Opportunity Type</div>
-                        <div class="type-pills" id="type-pills">
-                            <button class="type-pill active" data-type="all">All</button>
-                            <button class="type-pill" data-type="igv">IGV</button>
-                            <button class="type-pill" data-type="igta">IGTA</button>
-                            <button class="type-pill" data-type="igte">IGTE</button>
-                        </div>
+                <!-- Search row (always visible) -->
+                <div class="filter-search-row">
+                    <div class="filter-search-pill">
+                        <svg class="filter-search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" class="opp-search-input" id="opp-search" placeholder="Search projects, roles, or organizations…" autocomplete="off">
                     </div>
-                    <!-- Dropdowns -->
-                    <div class="filter-dropdowns" style="flex:1; min-width:280px;">
-                        <div>
-                            <div class="filter-label">LC / City</div>
-                            <div class="filter-select-wrap">
-                                <select id="filter-lc">
-                                    <option value="all">All Cities</option>
-                                    <option>Ahmedabad</option><option>Amravati</option><option>Anand</option>
-                                    <option>Bengaluru</option><option>Chandigarh</option><option>Chennai</option>
-                                    <option>Dehradun</option><option>Delhi IIT</option><option>Delhi University</option>
-                                    <option>Hyderabad</option><option>Indore</option><option>Jaipur</option>
-                                    <option>Jalandhar</option><option>Kolkata</option><option>Ludhiana</option>
-                                    <option>MAHE</option><option>Mumbai</option><option>Navi Mumbai</option>
-                                    <option>Noida</option><option>Patiala</option><option>Pune</option>
-                                    <option>Surat</option><option>Visakhapatnam</option><option>VVN</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="filter-label">Duration</div>
-                            <div class="filter-select-wrap">
-                                <select id="filter-duration">
-                                    <option value="all">Any Duration</option>
-                                    <option>4 Weeks</option><option>6 Weeks</option>
-                                    <option>8 Weeks</option><option>12 Weeks</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="filter-label">Accommodation</div>
-                            <div class="filter-select-wrap">
-                                <select id="filter-accom">
-                                    <option value="all">Any</option>
-                                    <option value="yes">Included</option>
-                                    <option value="no">Not Included</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="filter-collapse-btn" id="filter-toggle-btn" title="Toggle filters">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
                 </div>
 
-                <!-- Row 2: Fee slider -->
-                <div class="filter-row">
-                    <div class="fee-group">
-                        <div class="filter-label fee-header">
-                            <span>Max Fee</span>
-                            <span class="fee-value" id="fee-display">$1,000</span>
-                        </div>
-                        <input type="range" class="fee-slider" id="filter-fee" min="0" max="1000" step="50" value="1000">
-                    </div>
-                </div>
+                <!-- Collapsible filter body -->
+                <div class="filter-body" id="filter-body">
+                    <div class="filter-body-divider"></div>
 
-                <!-- Row 3: Project pills -->
-                <div class="filter-row">
-                    <div style="width:100%">
-                        <div class="filter-label">Project</div>
-                        <div class="project-pills-row" id="project-pills">
-                            <button class="project-pill active" data-project="all">All Projects</button>
-                            <button class="project-pill" data-project="Heartbeat">Heartbeat</button>
-                            <button class="project-pill" data-project="Equify">Equify</button>
-                            <button class="project-pill" data-project="Raise Your Voice">Raise Your Voice</button>
-                            <button class="project-pill" data-project="Youth 4 Impact">Youth 4 Impact</button>
-                            <button class="project-pill" data-project="FingerPrint">FingerPrint</button>
-                            <button class="project-pill" data-project="Global Classroom">Global Classroom</button>
-                            <button class="project-pill" data-project="Skill Up">Skill Up</button>
-                            <button class="project-pill" data-project="Scale Up">Scale Up</button>
-                            <button class="project-pill" data-project="Rooted">Rooted</button>
-                            <button class="project-pill" data-project="Happy Bus">Happy Bus</button>
-                            <button class="project-pill" data-project="Green Leaders">Green Leaders</button>
-                            <button class="project-pill" data-project="Eat 4 Change">Eat 4 Change</button>
-                            <button class="project-pill" data-project="Eco City">Eco City</button>
+                    <!-- Row 1: Opportunity type + dropdowns -->
+                    <div class="filter-row" style="align-items:flex-end; gap:20px; flex-wrap:wrap;">
+                        <div class="type-pills-group">
+                            <div class="filter-label">Opportunity Type</div>
+                            <div class="type-pills" id="type-pills">
+                                <button class="type-pill active" data-type="all">All</button>
+                                <button class="type-pill" data-type="igv">IGV</button>
+                                <button class="type-pill" data-type="igta">IGTA</button>
+                                <button class="type-pill" data-type="igte">IGTE</button>
+                            </div>
+                        </div>
+                        <div class="filter-dropdowns" style="flex:1; min-width:280px;">
+                            <div>
+                                <div class="filter-label">LC / City</div>
+                                <div class="filter-select-wrap">
+                                    <select id="filter-lc">
+                                        <option value="all">All Cities</option>
+                                        <option>Ahmedabad</option><option>Amravati</option><option>Anand</option>
+                                        <option>Bengaluru</option><option>Chandigarh</option><option>Chennai</option>
+                                        <option>Dehradun</option><option>Delhi IIT</option><option>Delhi University</option>
+                                        <option>Hyderabad</option><option>Indore</option><option>Jaipur</option>
+                                        <option>Jalandhar</option><option>Kolkata</option><option>Ludhiana</option>
+                                        <option>MAHE</option><option>Mumbai</option><option>Navi Mumbai</option>
+                                        <option>Noida</option><option>Patiala</option><option>Pune</option>
+                                        <option>Surat</option><option>Visakhapatnam</option><option>VVN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="filter-label">Duration</div>
+                                <div class="filter-select-wrap">
+                                    <select id="filter-duration">
+                                        <option value="all">Any Duration</option>
+                                        <option>4 Weeks</option><option>6 Weeks</option>
+                                        <option>8 Weeks</option><option>12 Weeks</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="filter-label">Accommodation</div>
+                                <div class="filter-select-wrap">
+                                    <select id="filter-accom">
+                                        <option value="all">Any</option>
+                                        <option value="yes">Included</option>
+                                        <option value="no">Not Included</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                    <!-- Row 2: Fee slider -->
+                    <div class="filter-row">
+                        <div class="fee-group">
+                            <div class="filter-label fee-header">
+                                <span>Max Fee</span>
+                                <span class="fee-value" id="fee-display">Any</span>
+                            </div>
+                            <input type="range" class="fee-slider" id="filter-fee" min="0" max="1000" step="50" value="1000">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Project pills -->
+                    <div class="filter-row">
+                        <div style="width:100%">
+                            <div class="filter-label">Project</div>
+                            <div class="project-pills-row" id="project-pills">
+                                <button class="project-pill active" data-project="all">All Projects</button>
+                                <button class="project-pill" data-project="Heartbeat">Heartbeat</button>
+                                <button class="project-pill" data-project="Equify">Equify</button>
+                                <button class="project-pill" data-project="Raise Your Voice">Raise Your Voice</button>
+                                <button class="project-pill" data-project="Youth 4 Impact">Youth 4 Impact</button>
+                                <button class="project-pill" data-project="FingerPrint">FingerPrint</button>
+                                <button class="project-pill" data-project="Global Classroom">Global Classroom</button>
+                                <button class="project-pill" data-project="Skill Up">Skill Up</button>
+                                <button class="project-pill" data-project="Scale Up">Scale Up</button>
+                                <button class="project-pill" data-project="Rooted">Rooted</button>
+                                <button class="project-pill" data-project="Happy Bus">Happy Bus</button>
+                                <button class="project-pill" data-project="Green Leaders">Green Leaders</button>
+                                <button class="project-pill" data-project="Eat 4 Change">Eat 4 Change</button>
+                                <button class="project-pill" data-project="Eco City">Eco City</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /filter-body -->
+            </div><!-- /filter-panel -->
         </div>
 
         <!-- Results -->
@@ -524,7 +553,30 @@
     const SUPABASE_ANON = 'sb_publishable_XwtEwfuscmD24klYoC3vJw_H1Q8JqxG';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    // ── MOCK DATA (fallback while AIESEC India has 0 live opportunities) ─────
+    // ── OFFICIAL UN SDG COLORS ───────────────────────────────────────────────
+    const SDG_COLORS = {
+        1:  '#E5243B',  // No Poverty
+        2:  '#DDA63A',  // Zero Hunger
+        3:  '#4C9F38',  // Good Health & Well-being
+        4:  '#C5192D',  // Quality Education
+        5:  '#FF3A21',  // Gender Equality
+        6:  '#26BDE2',  // Clean Water & Sanitation
+        7:  '#FCC30B',  // Affordable & Clean Energy
+        8:  '#A21942',  // Decent Work & Economic Growth
+        9:  '#FD6925',  // Industry, Innovation & Infrastructure
+        10: '#DD1367',  // Reduced Inequalities
+        11: '#FD9D24',  // Sustainable Cities & Communities
+        12: '#BF8B2E',  // Responsible Consumption
+        13: '#3F7E44',  // Climate Action
+        14: '#0A97D9',  // Life Below Water
+        15: '#56C02B',  // Life on Land
+        16: '#00689D',  // Peace, Justice & Strong Institutions
+        17: '#19486A',  // Partnerships for the Goals
+    };
+
+    function sdgColor(n) { return SDG_COLORS[n] || '#888'; }
+
+    // ── MOCK DATA ────────────────────────────────────────────────────────────
     const MOCK_OPPS = [
       { id:1,  title:"Caretaker",                  org:"Sadhana Institute for Mentally Challenged",   desc:"Taking care of mentally challenged children and assisting in classes with daily activities and learning support.",              project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Mumbai",          link:"https://aiesec.org/opportunity/india" },
       { id:2,  title:"Nursing Assistant",           org:"Sadhana Institute for Mentally Challenged",   desc:"Helping patients with dressing of wounds and providing basic medical care and companionship to residents.",                   project:"Heartbeat",       sdg:3,  fee:100, accommodation:true,  duration:"6 Weeks",  type:"igv",  lc:"Pune",            link:"https://aiesec.org/opportunity/india" },
@@ -562,7 +614,6 @@
     ];
 
     // ── LIVE DATA ────────────────────────────────────────────────────────────
-    // Normalise a Supabase row to the same shape as MOCK_OPPS
     function normalizeRow(r) {
         return {
             id:            r.id,
@@ -616,7 +667,6 @@
                 OPPS = MOCK_OPPS;
             }
 
-            // Last-synced indicator
             const el = document.getElementById("last-synced");
             if (usingLive && metaRes.data?.synced_at) {
                 el.textContent = `Last synced ${timeAgo(metaRes.data.synced_at)} · ${metaRes.data.count} live opportunities`;
@@ -670,7 +720,7 @@
         grid.innerHTML = results.map(o => `
             <article class="opp-card" data-id="${o.id}" tabindex="0" role="button" aria-label="View ${o.title}">
                 <div class="card-badges">
-                    <span class="sdg-badge">SDG ${o.sdg}</span>
+                    <span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>
                     <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
                 </div>
                 <div class="card-body">
@@ -694,7 +744,6 @@
             </article>
         `).join("");
 
-        // Click → modal
         grid.querySelectorAll(".opp-card").forEach(card => {
             card.addEventListener("click", () => openModal(parseInt(card.dataset.id)));
             card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openModal(parseInt(card.dataset.id)); });
@@ -707,7 +756,7 @@
         if (!o) return;
         document.getElementById("modal-inner").innerHTML = `
             <div class="modal-badges">
-                <span class="sdg-badge">SDG ${o.sdg}</span>
+                <span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>
                 <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
             </div>
             <div class="modal-title">${o.title}</div>
@@ -750,8 +799,6 @@
     }
 
     // ── FILTER CONTROLS ──────────────────────────────────────────────────────
-
-    // Type pills
     document.getElementById("type-pills").addEventListener("click", e => {
         const pill = e.target.closest(".type-pill");
         if (!pill) return;
@@ -761,7 +808,6 @@
         render();
     });
 
-    // Project pills
     document.getElementById("project-pills").addEventListener("click", e => {
         const pill = e.target.closest(".project-pill");
         if (!pill) return;
@@ -771,12 +817,10 @@
         render();
     });
 
-    // Dropdowns
     document.getElementById("filter-lc").addEventListener("change", e => { state.lc = e.target.value || "all"; render(); });
     document.getElementById("filter-duration").addEventListener("change", e => { state.duration = e.target.value || "all"; render(); });
     document.getElementById("filter-accom").addEventListener("change", e => { state.accom = e.target.value || "all"; render(); });
 
-    // Fee slider
     const feeSlider = document.getElementById("filter-fee");
     const feeDisplay = document.getElementById("fee-display");
     feeSlider.addEventListener("input", () => {
@@ -785,19 +829,18 @@
         render();
     });
 
-    // Search
     let searchTimeout;
     document.getElementById("opp-search").addEventListener("input", e => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => { state.query = e.target.value.trim(); render(); }, 250);
     });
 
-    // Filter toggle
+    // Filter collapse toggle
     document.getElementById("filter-toggle-btn").addEventListener("click", () => {
-        const panel = document.getElementById("filter-panel");
-        const btn   = document.getElementById("filter-toggle-btn");
-        const collapsed = panel.classList.toggle("collapsed");
-        btn.classList.toggle("active", !collapsed);
+        const body = document.getElementById("filter-body");
+        const btn  = document.getElementById("filter-toggle-btn");
+        const collapsed = body.classList.toggle("collapsed");
+        btn.classList.toggle("rotated", collapsed);
     });
 
     // ── INIT ─────────────────────────────────────────────────────────────────

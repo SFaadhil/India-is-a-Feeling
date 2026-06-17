@@ -1,19 +1,18 @@
 // ============================================================
-// IIAF — AIESEC GIS v2 REST → Supabase Sync
-// Endpoint: https://api.aiesec.org/v2/opportunities.json
-// Auth:     ?access_token=TOKEN  (query param, not header)
-// India MC: 1585  (confirmed via /committees/1585.json)
+// IIAF — AIESEC GIS GraphQL → Supabase Sync
+// Endpoint: https://gis-api.aiesec.org/graphql
+// Auth:     ?access_token=TOKEN  (query param)
+// India MC: 1585
 //
 // Usage:  node sync.js              (full sync)
 //         node sync.js --dry-run    (fetch + count, no DB write)
 // ============================================================
 
-import { config }    from 'dotenv';
+import { config }        from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { createClient } from '@supabase/supabase-js';
+import { createClient }  from '@supabase/supabase-js';
 
-// Load .env from project root (one level up from /sync)
 const __dirname = dirname(fileURLToPath(import.meta.url));
 config({ path: join(__dirname, '../.env') });
 
@@ -21,20 +20,29 @@ config({ path: join(__dirname, '../.env') });
 const AIESEC_TOKEN = process.env.AIESEC_TOKEN;
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
-const INDIA_MC_ID  = process.env.INDIA_MC_ID || '1585';   // AIESEC in India
-const PER_PAGE     = 50;
+const INDIA_MC_ID  = Number(process.env.INDIA_MC_ID || '1585');
+const PER_PAGE     = 100;
 
-const BASE = 'https://api.aiesec.org/v2';
+const GQL_URL = `https://gis-api.aiesec.org/graphql?access_token=${AIESEC_TOKEN}`;
 
-// Programme IDs → opportunity type
+// Programme IDs → opportunity type + URL slug
 const PROGRAMME_MAP = {
-    1: 'igv',   // Global Volunteer
-    2: 'igta',  // Global Talent
-    5: 'igte',  // Global Teacher
-    7: 'igv',   // New platform uses 7 for IGV
-    8: 'igta',
-    9: 'igte',
+    1: { type: 'igv',  slug: 'global-volunteer' },
+    2: { type: 'igta', slug: 'global-talent'    },
+    5: { type: 'igte', slug: 'global-teacher'   },
+    7: { type: 'igv',  slug: 'global-volunteer' },
+    8: { type: 'igta', slug: 'global-talent'    },
+    9: { type: 'igte', slug: 'global-teacher'   },
 };
+
+// Statuses considered "open" for public display
+const OPEN_STATUSES = ['open', 'approved', 'in_progress'];
+
+// Only fetch opportunities whose end date is today or later
+// (null-end-date opportunities are excluded by the API — those are unfinished drafts)
+function todayISO() {
+    return new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+}
 
 // ── Validate env ────────────────────────────────────────────
 function assertEnv({ supabaseRequired = true } = {}) {
@@ -50,55 +58,98 @@ function assertEnv({ supabaseRequired = true } = {}) {
     }
 }
 
-// ── REST helper ─────────────────────────────────────────────
-async function apiGet(path, params = {}) {
-    const qs = new URLSearchParams({
-        access_token: AIESEC_TOKEN,
-        ...params,
+// ── GraphQL helper ───────────────────────────────────────────
+async function gqlQuery(query, variables = {}) {
+    const res = await fetch(GQL_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ query, variables }),
+        signal:  AbortSignal.timeout(20000),
     });
-    // home_mcs[] must be appended manually (URLSearchParams encodes brackets)
-    const url = `${BASE}${path}?${qs}&home_mcs[]=${INDIA_MC_ID}`;
-
-    const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) {
         const body = await res.text();
-        throw new Error(`API ${res.status} for ${path}: ${body.slice(0, 200)}`);
+        throw new Error(`GQL HTTP ${res.status}: ${body.slice(0, 200)}`);
     }
-    return res.json();
+    const json = await res.json();
+    if (json.errors?.length) {
+        throw new Error(`GQL error: ${json.errors[0].message}`);
+    }
+    return json.data;
 }
 
-// ── Transform API record → Supabase row ─────────────────────
-function transform(o, syncedAt) {
-    const type     = PROGRAMME_MAP[o.programme_id] ?? 'igv';
-    const fee      = Math.round(o.programme_fees?.programme_fee ?? o.fee ?? 0);
-    const durMin   = o.duration_min ?? o.min_duration ?? 4;
-    const durMax   = o.duration_max ?? o.max_duration ?? durMin;
-    const duration = durMin === durMax
-        ? `${durMin} Week${durMin !== 1 ? 's' : ''}`
-        : `${durMin}–${durMax} Weeks`;
+// ── Fetch one page of opportunities ─────────────────────────
+const OPPORTUNITY_FIELDS = `
+    id
+    title
+    description
+    current_status
+    programme       { id short_name }
+    home_lc         { name }
+    organisation    { name }
+    sdg_info        { sdg_target { goal_index } }
+    logistics_info  { accommodation_provided }
+    programme_fees
+    duration
+    earliest_start_date
+    latest_end_date
+    openings
+    project_name
+`;
 
-    // Strip HTML tags from description
-    const rawDesc  = o.description ?? o.background ?? '';
-    const desc     = rawDesc.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+async function fetchPage(page) {
+    const today = todayISO();
+    const data = await gqlQuery(`
+        query($committee: Int!, $statuses: [String], $page: Int!, $perPage: Int!) {
+            allOpportunity(
+                filters: {
+                    committee:       $committee
+                    statuses:        $statuses
+                    latest_end_date: { from: "${today}" }
+                }
+                pagination: { page: $page, per_page: $perPage }
+            ) {
+                data { ${OPPORTUNITY_FIELDS} }
+                paging { total_items total_pages }
+            }
+        }
+    `, {
+        committee: INDIA_MC_ID,
+        statuses:  OPEN_STATUSES,
+        page,
+        perPage:   PER_PAGE,
+    });
+    return data.allOpportunity;
+}
+
+// ── Transform GQL record → Supabase row ─────────────────────
+function transform(o, syncedAt) {
+    const prog     = PROGRAMME_MAP[Number(o.programme?.id)] ?? { type: 'igv', slug: 'global-volunteer' };
+    const fee      = o.programme_fees ?? 0;
+    const dur      = o.duration;
+    const duration = dur ? `${dur} Week${dur !== 1 ? 's' : ''}` : null;
+
+    const rawDesc = o.description ?? '';
+    const desc    = rawDesc.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() || null;
+
+    const accommodation = o.logistics_info?.accommodation_provided === 'provided';
+    const isOpen        = OPEN_STATUSES.includes(o.current_status);
 
     return {
         id:            Number(o.id),
         title:         (o.title ?? 'Untitled').trim(),
         description:   desc,
-        type,
-        project:       o.project_name ?? o.project?.name ?? null,
-        organisation:  o.organisation?.name ?? o.host_organisation?.name ?? null,
-        lc:            o.home_lc?.name ?? o.home_committee?.name ?? null,
-        sdg:           o.sdg_goal?.goal_index ?? o.sdg ?? null,
+        type:          prog.type,
+        project:       o.project_name || null,
+        organisation:  o.organisation?.name ?? null,
+        lc:            o.home_lc?.name ?? null,
+        sdg:           o.sdg_info?.sdg_target?.goal_index ?? null,
         fee,
-        accommodation: o.specifics_info?.accommodation_provided
-                       ?? o.accommodation_provided
-                       ?? false,
+        accommodation,
         duration,
-        start_date:    o.earliest_start_date ?? o.start_date ?? null,
-        end_date:      o.latest_end_date ?? o.end_date ?? null,
-        status:        'open',
-        link:          `https://aiesec.org/opportunity/${o.id}`,
+        start_date:    o.earliest_start_date ?? null,
+        end_date:      o.latest_end_date ?? null,
+        status:        isOpen ? 'open' : 'closed',
+        link:          `https://aiesec.org/opportunity/${prog.slug}/${o.id}`,
         synced_at:     syncedAt,
     };
 }
@@ -122,14 +173,10 @@ async function sync(dryRun = false) {
     do {
         process.stdout.write(`  Page ${page}/${totalPages}… `);
 
-        const json = await apiGet('/opportunities.json', {
-            page,
-            per_page: PER_PAGE,
-        });
-
-        const paging = json.paging ?? {};
+        const result = await fetchPage(page);
+        const paging = result.paging;
         totalPages   = paging.total_pages ?? 1;
-        const batch  = json.data ?? [];
+        const batch  = result.data ?? [];
 
         console.log(`${batch.length} records  (total: ${paging.total_items ?? '?'})`);
         allRows.push(...batch.map(o => transform(o, syncStart)));
@@ -139,8 +186,7 @@ async function sync(dryRun = false) {
     console.log(`\n  Fetched ${allRows.length} opportunities total`);
 
     if (allRows.length === 0) {
-        console.log('  Nothing to sync — AIESEC India has 0 open opportunities right now.');
-        console.log('  The sync will automatically pick them up when they go live.');
+        console.log('  Nothing to sync — no open opportunities right now.');
         if (!dryRun) {
             await supabase.from('sync_meta').upsert({
                 id: 1, synced_at: syncStart, count: 0,
@@ -151,9 +197,9 @@ async function sync(dryRun = false) {
     }
 
     if (dryRun) {
-        console.log('\n  [dry-run] First 3 records:');
-        allRows.slice(0, 3).forEach(r =>
-            console.log(`    ${r.id}  ${r.type.toUpperCase()}  ${r.lc}  "${r.title}"`)
+        console.log('\n  [dry-run] First 5 records:');
+        allRows.slice(0, 5).forEach(r =>
+            console.log(`    ${r.id}  ${r.type.toUpperCase().padEnd(4)}  ${(r.lc ?? '?').padEnd(20)}  "${r.title}"`)
         );
         return;
     }
@@ -167,8 +213,9 @@ async function sync(dryRun = false) {
             .from('opportunities')
             .upsert(chunk, { onConflict: 'id' });
         if (error) throw new Error(`Supabase upsert: ${JSON.stringify(error)}`);
-        console.log(`    Rows ${i + 1}–${i + chunk.length} ✓`);
+        process.stdout.write(`    Rows ${i + 1}–${i + chunk.length} ✓\r`);
     }
+    console.log('');
 
     // ── Mark stale rows as closed ────────────────────────────
     await supabase
@@ -177,7 +224,7 @@ async function sync(dryRun = false) {
         .lt('synced_at', syncStart)
         .eq('status', 'open');
 
-    // ── Update sync metadata ──────────────────────────────────
+    // ── Update sync metadata ─────────────────────────────────
     const ms = Date.now() - startMs;
     await supabase.from('sync_meta').upsert({
         id: 1, synced_at: syncStart, count: allRows.length, duration_ms: ms,
