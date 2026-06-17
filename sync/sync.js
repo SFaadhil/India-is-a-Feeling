@@ -12,6 +12,7 @@ import { config }        from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { createClient }  from '@supabase/supabase-js';
+import ws                from 'ws';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 config({ path: join(__dirname, '../.env') });
@@ -158,7 +159,10 @@ function transform(o, syncedAt) {
 async function sync(dryRun = false) {
     assertEnv({ supabaseRequired: !dryRun });
 
-    const supabase  = dryRun ? null : createClient(SUPABASE_URL, SUPABASE_KEY);
+    const supabase  = dryRun ? null : createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth:     { persistSession: false },
+        realtime: { transport: ws },
+    });
     const syncStart = new Date().toISOString();
     const startMs   = Date.now();
 
