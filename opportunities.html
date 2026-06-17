@@ -24,10 +24,10 @@
         /* ── FILTER PANEL (integrated search) ─── */
         .opp-filter-wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px 28px; }
         .opp-filter-panel {
-            background: #5C0F0F;
+            background: linear-gradient(155deg, #6B1313 0%, #5C0F0F 55%, #4A0A0A 100%);
             border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 12px 48px rgba(92,15,15,0.32), 0 2px 8px rgba(0,0,0,0.12);
+            box-shadow: 0 12px 48px rgba(92,15,15,0.5), 0 2px 10px rgba(0,0,0,0.18);
         }
 
         /* Search row at top of panel */
@@ -78,7 +78,7 @@
 
         .filter-label {
             font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em;
-            text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px;
+            text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 10px;
             font-family: var(--font-body);
         }
 
@@ -126,15 +126,40 @@
         .fee-header { display: flex; justify-content: space-between; align-items: center; }
         .fee-value { color: rgba(255,255,255,0.95); font-weight: 800; font-size: 0.9rem; font-family: var(--font-body); }
         .fee-slider {
-            width: 100%; margin-top: 12px; height: 4px;
-            accent-color: rgba(255,255,255,0.9); cursor: pointer;
-            border-radius: 2px; appearance: none;
-            background: rgba(255,255,255,0.2);
+            -webkit-appearance: none; appearance: none;
+            width: 100%; margin-top: 16px; height: 7px;
+            cursor: pointer; border-radius: 99px;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0.95) 0%,
+                rgba(255,255,255,0.95) var(--pct, 100%),
+                rgba(255,255,255,0.18) var(--pct, 100%),
+                rgba(255,255,255,0.18) 100%
+            );
+            transition: height 0.15s;
         }
+        .fee-slider:hover { height: 8px; }
         .fee-slider::-webkit-slider-thumb {
-            appearance: none; width: 18px; height: 18px;
-            border-radius: 50%; background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer;
+            -webkit-appearance: none; appearance: none;
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #fff; cursor: grab;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.9);
+            transition: transform 0.12s, box-shadow 0.12s;
+        }
+        .fee-slider::-webkit-slider-thumb:active {
+            cursor: grabbing; transform: scale(1.18);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+        }
+        .fee-slider::-moz-range-thumb {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #fff; cursor: grab;
+            border: 3px solid rgba(255,255,255,0.9);
+            box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+        }
+        .fee-slider:focus { outline: none; }
+        .fee-slider:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.2), 0 3px 14px rgba(0,0,0,0.4);
         }
 
         /* Project pills */
@@ -160,85 +185,88 @@
         .opp-synced { font-size: 0.8125rem; color: var(--text-light); }
 
         /* ── CARDS GRID ─── */
-        .opp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+        .opp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
         @media (max-width:1024px) { .opp-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width:600px)  { .opp-grid { grid-template-columns: 1fr; } }
 
         /* ── CARD ─── */
         .opp-card {
-            background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
-            border: 1px solid var(--border-light); border-radius: 16px;
-            padding: 22px; cursor: pointer;
-            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-            display: flex; flex-direction: column; gap: 14px;
+            background: linear-gradient(155deg, #6B1313 0%, #5C0F0F 55%, #4A0A0A 100%);
+            border: none; border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.22s, box-shadow 0.22s;
+            display: flex; flex-direction: column;
+            overflow: hidden;
         }
         .opp-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
-            border-color: rgba(92,15,15,0.25);
+            box-shadow: 0 24px 56px rgba(0,0,0,0.35);
         }
 
-        .card-badges { display: flex; justify-content: space-between; align-items: center; }
+        .card-accent { height: 6px; flex-shrink: 0; }
+        .card-accent.igv  { background: var(--gv);  }
+        .card-accent.igta { background: var(--gta); }
+        .card-accent.igte { background: var(--gte); }
+
+        .card-inner { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 13px; flex: 1; }
+
+        .card-head { display: flex; flex-direction: column; gap: 5px; }
+        .card-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
         .sdg-badge {
-            padding: 4px 11px; border-radius: 50px;
-            color: #fff;
+            padding: 4px 11px; border-radius: 50px; color: #fff;
             font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.06em;
             text-transform: uppercase;
         }
         .card-type-badge {
-            padding: 3px 10px; border-radius: 50px;
+            padding: 4px 11px; border-radius: 50px;
             font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em;
             text-transform: uppercase;
         }
-        .card-type-badge.igv  { background: var(--gv-light);  color: var(--gv);  }
-        .card-type-badge.igta { background: var(--gta-light); color: var(--gta); }
-        .card-type-badge.igte { background: var(--gte-light); color: var(--gte); }
+        .card-type-badge.igv  { background: rgba(255,255,255,0.15); color: #fff; }
+        .card-type-badge.igta { background: rgba(255,255,255,0.15); color: #fff; }
+        .card-type-badge.igte { background: rgba(255,255,255,0.15); color: #fff; }
 
-        .card-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .card-lc { font-size: 0.75rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 4px; }
         .card-title {
-            font-family: var(--font-display); font-size: 1.1875rem;
-            font-weight: 700; color: var(--text); line-height: 1.25;
+            font-family: var(--font-display); font-size: 1.125rem;
+            font-weight: 700; color: #fff; line-height: 1.3;
         }
-        .card-org { font-size: 0.8125rem; color: var(--text-secondary); }
-        .card-lc  { font-size: 0.75rem; color: var(--text-light); margin-top: 2px; }
+        .card-org { font-size: 0.8125rem; color: rgba(255,255,255,0.65); font-weight: 500; }
         .card-desc {
-            font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.55;
-            margin-top: 8px;
+            font-size: 0.8125rem; color: rgba(255,255,255,0.6); line-height: 1.6;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .card-details {
-            background: rgba(0,0,0,0.028); border-radius: 10px;
-            padding: 10px 14px;
+        .card-table { background: rgba(0,0,0,0.25); border-radius: 12px; overflow: hidden; }
+        .card-table-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 14px; font-size: 0.8125rem;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
         }
-        .detail-row {
-            display: flex; justify-content: space-between;
-            padding: 5px 0; font-size: 0.8125rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .detail-row:last-child { border-bottom: none; }
-        .detail-row .dl { color: var(--text-secondary); font-weight: 500; }
-        .detail-row .dv { color: var(--text); font-weight: 600; }
+        .card-table-row:last-child { border-bottom: none; }
+        .card-dl { color: rgba(255,255,255,0.55); font-weight: 600; }
+        .card-dv { color: #fff; font-weight: 700; }
+        .card-dv.free { color: #86efac; }
 
-        .card-actions { display: flex; gap: 10px; align-items: center; }
+        .card-actions { display: flex; gap: 10px; align-items: center; margin-top: auto; }
         .btn-apply {
-            flex: 1; padding: 11px; border: none; border-radius: 10px;
-            background: #5C0F0F; color: #fff; font-size: 0.875rem;
+            flex: 1; padding: 12px; border: none; border-radius: 12px;
+            background: #fff; color: #5C0F0F; font-size: 0.875rem;
             font-weight: 700; font-family: var(--font-body);
             cursor: pointer; transition: all 0.2s; text-align: center;
             letter-spacing: 0.02em;
         }
-        .btn-apply:hover { background: #3A0808; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(92,15,15,0.35); }
+        .btn-apply:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
         .btn-icon {
-            width: 40px; height: 40px; flex-shrink: 0;
-            border-radius: 10px; border: 1.5px solid var(--border);
-            background: white; cursor: pointer;
+            width: 42px; height: 42px; flex-shrink: 0;
+            border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.3);
+            background: transparent; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            color: var(--text-light); transition: all 0.2s;
+            color: rgba(255,255,255,0.6); transition: all 0.2s;
         }
-        .btn-icon:hover { border-color: var(--text); color: var(--text); }
-        .btn-icon.copied { border-color: #22c55e; color: #22c55e; }
+        .btn-icon:hover { border-color: #fff; color: #fff; }
+        .btn-icon.copied { border-color: #86efac; color: #86efac; }
 
         /* ── EMPTY STATE ─── */
         .opp-empty {
@@ -276,7 +304,12 @@
         .modal-close:hover { background: var(--text); color: #fff; border-color: var(--text); }
 
         .modal-inner { padding: 28px; }
-        .modal-badges { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .modal-badges { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+        .project-badge {
+            padding: 4px 12px; border-radius: 50px;
+            background: rgba(92,15,15,0.08); color: #5C0F0F;
+            font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.05em;
+        }
         .modal-title {
             font-family: var(--font-display); font-size: 1.625rem;
             font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 4px;
@@ -450,8 +483,10 @@
                                 <div class="filter-select-wrap">
                                     <select id="filter-duration">
                                         <option value="all">Any Duration</option>
-                                        <option>4 Weeks</option><option>6 Weeks</option>
-                                        <option>8 Weeks</option><option>12 Weeks</option>
+                                        <option value="short">Up to 8 Weeks</option>
+                                        <option value="medium">Up to 16 Weeks</option>
+                                        <option value="long">17–26 Weeks</option>
+                                        <option value="extended">27+ Weeks</option>
                                     </select>
                                 </div>
                             </div>
@@ -475,12 +510,12 @@
                                 <span>Max Fee</span>
                                 <span class="fee-value" id="fee-display">Any</span>
                             </div>
-                            <input type="range" class="fee-slider" id="filter-fee" min="0" max="1000" step="50" value="1000">
+                            <input type="range" class="fee-slider" id="filter-fee" min="0" max="300" step="25" value="300">
                         </div>
                     </div>
 
-                    <!-- Row 3: Project pills -->
-                    <div class="filter-row">
+                    <!-- Row 3: Project pills (IGV only) -->
+                    <div class="filter-row" id="project-row" style="display:none">
                         <div style="width:100%">
                             <div class="filter-label">Project</div>
                             <div class="project-pills-row" id="project-pills">
@@ -535,7 +570,7 @@
                     <a href="index.html" class="footer-logo"><span class="logo-india">India</span> <span class="logo-is">is a</span> <span class="logo-feeling">Feeling</span></a>
                     <p>The gateway to discovering AIESEC India — blending destination appeal with cultural interaction and leadership development through exchange programs.</p>
                 </div>
-                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="opportunities.html">Opportunities</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+                <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="opportunities.html">Search Tool</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
                 <div class="footer-links"><h4>Programs</h4><ul><li><a href="global-volunteer.html">Global Volunteer</a></li><li><a href="global-talent.html">Global Talent</a></li><li><a href="global-teacher.html">Global Teacher</a></li></ul></div>
             </div>
             <div class="footer-bottom">
@@ -614,21 +649,48 @@
     ];
 
     // ── LIVE DATA ────────────────────────────────────────────────────────────
+    function inferProject(title, type) {
+        if (type !== 'igv') return '';
+        const m = title && title.match(/^(.+?)\s*\[\d+\s*(?:wks?|weeks?)\]/i);
+        return m ? m[1].trim() : (title || '');
+    }
+
     function normalizeRow(r) {
+        const rawFee = r.fee || 0;
+        const type   = r.type || 'igv';
+        const rawTitle = r.title || 'Untitled';
+        const title  = rawTitle.replace(/\s*\[\d+\s*(?:wks?|weeks?)\]/gi, '').trim();
         return {
             id:            r.id,
-            title:         r.title || 'Untitled',
+            title,
             desc:          r.description || '',
-            type:          r.type || 'igv',
-            project:       r.project || '',
+            type,
+            project:       r.project || inferProject(title, type),
             org:           r.organisation || '',
             lc:            r.lc || '',
             sdg:           r.sdg,
-            fee:           r.fee || 0,
+            fee:           Math.round(rawFee / 10) * 10,
             accommodation: r.accommodation || false,
             duration:      r.duration || '',
             link:          r.link || `https://aiesec.org/opportunity/${r.id}`,
         };
+    }
+
+    // Strip "[X weeks]" / "(X weeks)" suffixes to get the canonical project name
+    function getBaseProject(p) {
+        return p ? p.replace(/\s*[\[(][^\])]*(weeks|wks)[^\])]*[\])]/gi, '').trim() : '';
+    }
+
+    function updateProjectPills(opps) {
+        const baseProjects = [...new Set(
+            opps.filter(o => o.type === 'igv' && o.project)
+                .map(o => getBaseProject(o.project))
+                .filter(Boolean)
+        )].sort();
+        const container = document.getElementById('project-pills');
+        container.innerHTML =
+            `<button class="project-pill active" data-project="all">All Projects</button>` +
+            baseProjects.map(p => `<button class="project-pill" data-project="${p}">${p}</button>`).join('');
     }
 
     function timeAgo(date) {
@@ -666,6 +728,7 @@
             } else {
                 OPPS = MOCK_OPPS;
             }
+            updateProjectPills(OPPS);
 
             const el = document.getElementById("last-synced");
             if (usingLive && metaRes.data?.synced_at) {
@@ -676,26 +739,35 @@
         } catch {
             OPPS = MOCK_OPPS;
             document.getElementById("last-synced").textContent = 'Showing sample data';
+            updateProjectPills(OPPS);
         }
         render();
     }
 
     // ── STATE ────────────────────────────────────────────────────────────────
     let OPPS = MOCK_OPPS;
-    const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:1000, project:"all", query:"" };
+    const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:300, project:"all", query:"" };
 
     // ── FILTER + RENDER ──────────────────────────────────────────────────────
     function filtered() {
         return OPPS.filter(o => {
             if (state.type !== "all" && o.type !== state.type) return false;
             if (state.lc !== "all" && o.lc !== state.lc) return false;
-            if (state.duration !== "all" && o.duration !== state.duration) return false;
+            if (state.duration !== "all") {
+                const m = o.duration ? o.duration.match(/\d+/) : null;
+                const minD = m ? parseInt(m[0]) : null;
+                if (minD === null) return false;
+                if (state.duration === "short"    && minD > 8)                  return false;
+                if (state.duration === "medium"   && minD > 16)                 return false;
+                if (state.duration === "long"     && (minD < 17 || minD > 26)) return false;
+                if (state.duration === "extended" && minD < 27)                 return false;
+            }
             if (state.accom !== "all") {
                 if (state.accom === "yes" && !o.accommodation) return false;
                 if (state.accom === "no"  &&  o.accommodation) return false;
             }
             if (o.fee > state.fee) return false;
-            if (state.project !== "all" && o.project !== state.project) return false;
+            if (state.project !== "all" && getBaseProject(o.project) !== state.project) return false;
             if (state.query) {
                 const q = state.query.toLowerCase();
                 if (!o.title.toLowerCase().includes(q) &&
@@ -719,27 +791,44 @@
         }
         grid.innerHTML = results.map(o => `
             <article class="opp-card" data-id="${o.id}" tabindex="0" role="button" aria-label="View ${o.title}">
-                <div class="card-badges">
-                    <span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>
-                    <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
-                </div>
-                <div class="card-body">
-                    <div class="card-title">${o.title}</div>
-                    <div class="card-org">${o.org}</div>
-                    <div class="card-lc">📍 ${o.lc}</div>
-                    <div class="card-desc">${o.desc}</div>
-                </div>
-                <div class="card-details">
-                    <div class="detail-row"><span class="dl">Project</span><span class="dv">${o.project}</span></div>
-                    <div class="detail-row"><span class="dl">Fee</span><span class="dv">${o.fee === 0 ? 'Free' : '$' + o.fee}</span></div>
-                    <div class="detail-row"><span class="dl">Accom</span><span class="dv">${o.accommodation ? 'Included' : 'Not Included'}</span></div>
-                    <div class="detail-row"><span class="dl">Duration</span><span class="dv">${o.duration}</span></div>
-                </div>
-                <div class="card-actions">
-                    <button class="btn-apply" data-link="${o.link}" onclick="event.stopPropagation(); window.open(this.dataset.link,'_blank')">Apply Now</button>
-                    <button class="btn-icon copy-btn" data-link="${o.link}" onclick="event.stopPropagation(); copyLink(this)" title="Copy link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                    </button>
+                <div class="card-accent ${o.type}"></div>
+                <div class="card-inner">
+                    <div class="card-head">
+                        <div class="card-meta-row">
+                            <div style="display:flex;align-items:center;gap:7px;">
+                                <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
+                                ${o.sdg ? `<span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>` : ''}
+                            </div>
+                            <span class="card-lc">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                ${o.lc}
+                            </span>
+                        </div>
+                        <div class="card-title">${o.title}</div>
+                        <div class="card-org">${o.org}</div>
+                    </div>
+                    ${o.desc ? `<div class="card-desc">${o.desc}</div>` : ''}
+                    <div class="card-table">
+                        <div class="card-table-row">
+                            <span class="card-dl">Fee</span>
+                            <span class="card-dv ${o.fee === 0 ? 'free' : ''}">${o.fee === 0 ? 'Free' : '$' + o.fee}</span>
+                        </div>
+                        <div class="card-table-row">
+                            <span class="card-dl">Accom</span>
+                            <span class="card-dv">${o.accommodation ? 'Yes' : 'No'}</span>
+                        </div>
+                        ${o.duration ? `
+                        <div class="card-table-row">
+                            <span class="card-dl">Duration</span>
+                            <span class="card-dv">${o.duration}</span>
+                        </div>` : ''}
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-apply" data-link="${o.link}" onclick="event.stopPropagation(); window.open(this.dataset.link,'_blank')">Apply Now</button>
+                        <button class="btn-icon copy-btn" data-link="${o.link}" onclick="event.stopPropagation(); copyLink(this)" title="Copy link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                    </div>
                 </div>
             </article>
         `).join("");
@@ -756,18 +845,19 @@
         if (!o) return;
         document.getElementById("modal-inner").innerHTML = `
             <div class="modal-badges">
-                <span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>
+                ${o.sdg ? `<span class="sdg-badge" style="background:${sdgColor(o.sdg)}">SDG ${o.sdg}</span>` : ''}
                 <span class="card-type-badge ${o.type}">${o.type.toUpperCase()}</span>
+                ${o.project ? `<span class="project-badge">${o.project}</span>` : ''}
             </div>
             <div class="modal-title">${o.title}</div>
             <div class="modal-org">${o.org}</div>
             <div class="modal-lc">📍 ${o.lc}</div>
             <div class="modal-desc-box">${o.desc}</div>
             <div class="modal-details-grid">
-                <div class="modal-detail-tile"><div class="mdl">Project</div><div class="mdv">${o.project}</div></div>
+                ${o.project ? `<div class="modal-detail-tile"><div class="mdl">Project</div><div class="mdv">${o.project}</div></div>` : ''}
                 <div class="modal-detail-tile"><div class="mdl">Fee</div><div class="mdv">${o.fee === 0 ? 'Free' : '$' + o.fee}</div></div>
                 <div class="modal-detail-tile"><div class="mdl">Accommodation</div><div class="mdv">${o.accommodation ? 'Included' : 'Not Included'}</div></div>
-                <div class="modal-detail-tile"><div class="mdl">Duration</div><div class="mdv">${o.duration}</div></div>
+                ${o.duration ? `<div class="modal-detail-tile"><div class="mdl">Duration</div><div class="mdv">${o.duration}</div></div>` : ''}
             </div>
             <hr class="modal-divider">
             <div class="modal-actions">
@@ -805,6 +895,13 @@
         document.querySelectorAll(".type-pill").forEach(p => p.classList.remove("active"));
         pill.classList.add("active");
         state.type = pill.dataset.type;
+        // Show project filter only for IGV
+        document.getElementById("project-row").style.display = state.type === "igv" ? "" : "none";
+        if (state.type !== "igv") {
+            state.project = "all";
+            document.querySelectorAll(".project-pill").forEach(p => p.classList.remove("active"));
+            document.querySelector(".project-pill[data-project='all']").classList.add("active");
+        }
         render();
     });
 
@@ -823,11 +920,17 @@
 
     const feeSlider = document.getElementById("filter-fee");
     const feeDisplay = document.getElementById("fee-display");
+    function updateSliderFill() {
+        const pct = ((feeSlider.value - feeSlider.min) / (feeSlider.max - feeSlider.min)) * 100;
+        feeSlider.style.setProperty('--pct', pct + '%');
+    }
     feeSlider.addEventListener("input", () => {
         state.fee = parseInt(feeSlider.value);
-        feeDisplay.textContent = state.fee >= 1000 ? "Any" : "$" + state.fee;
+        feeDisplay.textContent = state.fee >= 300 ? "Any" : "$" + state.fee;
+        updateSliderFill();
         render();
     });
+    updateSliderFill();
 
     let searchTimeout;
     document.getElementById("opp-search").addEventListener("input", e => {

@@ -84,18 +84,20 @@ const OPPORTUNITY_FIELDS = `
     title
     description
     current_status
-    programme       { id short_name }
-    home_lc         { name }
-    organisation    { name }
-    sdg_info        { sdg_target { goal_index } }
-    logistics_info  { accommodation_provided }
-    programme_fees
-    duration
+    programme              { id short_name }
+    home_lc                { name }
+    organisation           { name }
+    sdg_info               { sdg_target { goal_index } }
+    logistics_info         { accommodation_provided }
+    fee_and_health_insurance
+    opportunity_duration_type { duration_min duration_max }
     earliest_start_date
     latest_end_date
     openings
     project_name
 `;
+
+const INR_TO_USD = 84;
 
 async function fetchPage(page) {
     const today = todayISO();
@@ -125,9 +127,17 @@ async function fetchPage(page) {
 // ── Transform GQL record → Supabase row ─────────────────────
 function transform(o, syncedAt) {
     const prog     = PROGRAMME_MAP[Number(o.programme?.id)] ?? { type: 'igv', slug: 'global-volunteer' };
-    const fee      = o.programme_fees ?? 0;
-    const dur      = o.duration;
-    const duration = dur ? `${dur} Week${dur !== 1 ? 's' : ''}` : null;
+
+    // Fee: project fee only (host org cost) in INR → USD, rounded to nearest $10
+    const projectFeeINR = o.fee_and_health_insurance?.project_fee ?? 0;
+    const fee           = Math.round((projectFeeINR / INR_TO_USD) / 10) * 10;
+
+    // Duration: from opportunity_duration_type min/max (in weeks)
+    const durMin   = o.opportunity_duration_type?.duration_min ?? null;
+    const durMax   = o.opportunity_duration_type?.duration_max ?? null;
+    const duration = durMin
+        ? (durMin === durMax ? `${durMin} Weeks` : `${durMin}–${durMax} Weeks`)
+        : null;
 
     const rawDesc = o.description ?? '';
     const desc    = rawDesc.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() || null;
@@ -135,12 +145,21 @@ function transform(o, syncedAt) {
     const accommodation = o.logistics_info?.accommodation_provided === 'provided';
     const isOpen        = OPEN_STATUSES.includes(o.current_status);
 
+    // Project: use project_name if available; for IGV, fall back to stripping
+    // "[X weeks]" from the title (e.g. "Heartbeat [6 weeks]" → "Heartbeat")
+    const title = (o.title ?? 'Untitled').trim();
+    let project = o.project_name || null;
+    if (!project && prog.type === 'igv') {
+        const m = title.match(/^(.+?)\s*\[\d+\s*(?:wks?|weeks?)\]/i);
+        project = m ? m[1].trim() : title;
+    }
+
     return {
         id:            Number(o.id),
-        title:         (o.title ?? 'Untitled').trim(),
+        title,
         description:   desc,
         type:          prog.type,
-        project:       o.project_name || null,
+        project,
         organisation:  o.organisation?.name ?? null,
         lc:            o.home_lc?.name ?? null,
         sdg:           o.sdg_info?.sdg_target?.goal_index ?? null,
