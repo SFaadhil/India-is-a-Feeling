@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -378,20 +378,16 @@
             <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="opportunities.html" class="active">Searchtool</a></li>
+                <li><a href="about.html">About</a></li>                <li><a href="opportunities.html" class="active">Searchtool</a></li>
                 <li class="dropdown">
                     <a href="cities.html">Cities</a>
                     <button class="dropdown-chevron" aria-label="Toggle cities"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
                     <ul class="dropdown-menu">
                         <li><a href="ahmedabad.html">Ahmedabad</a></li>
-                        <li><a href="amravati.html">Amravati</a></li>
-                        <li><a href="anand.html">Anand</a></li>
-                        <li><a href="bengaluru.html">Bengaluru</a></li>
+                       <li><a href="bengaluru.html">Bengaluru</a></li>
                         <li><a href="chandigarh.html">Chandigarh</a></li>
                         <li><a href="chennai.html">Chennai</a></li>
-                        <li><a href="dehradun.html">Dehradun</a></li>
-                        <li><a href="delhi-iit.html">Delhi IIT</a></li>
+                       <li><a href="delhi-iit.html">Delhi IIT</a></li>
                         <li><a href="delhi-university.html">Delhi University</a></li>
                         <li><a href="hyderabad.html">Hyderabad</a></li>
                         <li><a href="indore.html">Indore</a></li>
@@ -402,8 +398,7 @@
                         <li><a href="mahe.html">MAHE</a></li>
                         <li><a href="mumbai.html">Mumbai</a></li>
                         <li><a href="navi-mumbai.html">Navi Mumbai</a></li>
-                        <li><a href="noida.html">Noida</a></li>
-                        <li><a href="patiala.html">Patiala</a></li>
+                       <li><a href="patiala.html">Patiala</a></li>
                         <li><a href="pune.html">Pune</a></li>
                         <li><a href="surat.html">Surat</a></li>
                         <li><a href="visakhapatnam.html">Visakhapatnam</a></li>
@@ -572,10 +567,11 @@
                 </div>
                 <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About India</a></li><li><a href="opportunities.html">Search Tool</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
                 <div class="footer-links"><h4>Programs</h4><ul><li><a href="global-volunteer.html">Global Volunteer</a></li><li><a href="global-talent.html">Global Talent</a></li><li><a href="global-teacher.html">Global Teacher</a></li></ul></div>
+                <div class="footer-links"><h4>Search Tool</h4><ul><li><a href="opportunities.html" onclick="localStorage.setItem('iiaf_type','igv')">Global Volunteer</a></li><li><a href="opportunities.html" onclick="localStorage.setItem('iiaf_type','igta')">Global Talent</a></li><li><a href="opportunities.html" onclick="localStorage.setItem('iiaf_type','igte')">Global Teacher</a></li></ul></div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 AIESEC India. India is a Feeling.</p>
-                <div class="footer-social"><a href="https://www.instagram.com/aiesecindia/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div>
+                <div class="footer-social"><a href="https://www.instagram.com/india_isafeeling/" target="_blank" rel="noopener" aria-label="India is a Feeling on Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div>
+                <p>&copy; 2026 AIESEC in India. India is a Feeling.</p>
             </div>
         </div>
     </footer>
@@ -740,6 +736,25 @@
             OPPS = MOCK_OPPS;
             document.getElementById("last-synced").textContent = 'Showing sample data';
             updateProjectPills(OPPS);
+        }
+        // Apply incoming filters (localStorage preferred, URL param fallback)
+        const _params = new URLSearchParams(window.location.search);
+        const _t  = localStorage.getItem('iiaf_type') || _params.get('type');
+        const _lc = localStorage.getItem('iiaf_lc')   || _params.get('lc');
+        localStorage.removeItem('iiaf_type');
+        localStorage.removeItem('iiaf_lc');
+
+        if (_t && ['igv', 'igta', 'igte'].includes(_t)) {
+            state.type = _t;
+            document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+            const _pill = document.querySelector(`.type-pill[data-type="${_t}"]`);
+            if (_pill) _pill.classList.add('active');
+            document.getElementById('project-row').style.display = _t === 'igv' ? '' : 'none';
+        }
+        if (_lc && _lc !== 'all') {
+            state.lc = _lc;
+            const _lcSel = document.getElementById('filter-lc');
+            if (_lcSel) _lcSel.value = _lc;
         }
         render();
     }
@@ -945,6 +960,19 @@
         const collapsed = body.classList.toggle("collapsed");
         btn.classList.toggle("rotated", collapsed);
     });
+
+    // ── URL PARAM PRE-FILTER ─────────────────────────────────────────────────
+    (function applyUrlFilter() {
+        const params = new URLSearchParams(window.location.search);
+        const t = params.get('type');
+        if (t && ['igv', 'igta', 'igte'].includes(t)) {
+            state.type = t;
+            document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+            const pill = document.querySelector(`.type-pill[data-type="${t}"]`);
+            if (pill) pill.classList.add('active');
+            if (t === 'igv') document.getElementById('project-row').style.display = '';
+        }
+    })();
 
     // ── INIT ─────────────────────────────────────────────────────────────────
     init();
