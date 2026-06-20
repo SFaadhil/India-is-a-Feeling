@@ -1166,64 +1166,134 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 }
 
 @media (max-width: 768px) {
-    .container { padding: 0 20px; }
-    .section { padding: 48px 0; }
+    .container { padding: 0 18px; }
+    .section { padding: 44px 0; }
+    .section-header { margin-bottom: 36px; }
 
-    .intro-grid, .about-grid, .about-grid.reverse, .city-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+    /* Content grids — stack vertically */
+    .intro-grid, .about-grid, .about-grid.reverse, .city-intro-grid { grid-template-columns: 1fr; gap: 32px; }
     .about-grid.reverse { direction: ltr; }
-    .cities-grid, .products-grid, .contact-grid, .highlights-grid, .programs-grid,
-    .practical-grid, .about-products-grid, .intro-cards { grid-template-columns: 1fr; }
 
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    /* Program/product cards — 1 col; they have long text bodies that need full width */
+    .products-grid, .programs-grid, .about-products-grid { grid-template-columns: 1fr; }
+    /* Override data-visible attribute selectors (higher specificity) back to 1 col on mobile */
+    .programs-grid[data-visible="2"], .programs-grid[data-visible="1"] { grid-template-columns: 1fr; max-width: none; }
+    /* Compact cards — keep 2-col, images are short enough to read at ~160px wide */
+    .cities-grid, .contact-grid, .highlights-grid,
+    .practical-grid, .intro-cards { grid-template-columns: repeat(2, 1fr); }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer { padding: 52px 0 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+    /* Buttons & touch targets */
     .hero-actions { flex-direction: column; align-items: center; }
+    .btn { padding: 12px 28px; font-size: 0.9rem; }
+    .nav-toggle { min-width: 44px; min-height: 44px; }
+    .program-link { padding: 9px 16px; }
+
+    /* Facts */
     .facts-grid { grid-template-columns: repeat(2, 1fr); }
-    .fact-item { border-right: none !important; border-bottom: 1px solid var(--border-light); padding: 24px 16px; }
+    .fact-item { border-right: none !important; border-bottom: 1px solid var(--border-light); padding: 20px 10px; }
     .fact-item:nth-last-child(-n+2) { border-bottom: none; }
     .fact-item:nth-child(odd) { border-right: 1px solid var(--border-light) !important; }
+    .fact-value { font-size: 1.15rem; }
 
-    .hero, .city-hero { min-height: 85vh; }
-    .about-image img, .city-intro-image img { height: 280px; }
-    .intro-image img { height: 320px; }
-    .mcp-card { flex-direction: column; text-align: center; padding: 40px 24px; gap: 28px; }
-    .mcp-avatar img { width: 130px; height: 130px; }
+    /* Hero */
+    .hero, .city-hero { min-height: 85vh; min-height: 85svh; }
+    .hero-subtitle { font-size: 0.95rem; margin-bottom: 28px; }
+    .city-hero-feeling { font-size: 0.88rem; }
+    .cities-page-hero { padding-top: 100px; }
+
+    /* Image heights — proportional to ~180px wide columns on phones */
+    .city-card-img { height: 180px; }
+    .program-card-img { height: 160px; }
+    .product-card-image { height: 180px; }
+    .highlight-card-img { height: 155px; }
+    .about-image img, .city-intro-image img { height: 240px; }
+    .intro-image img { height: 280px; }
+    .intro-card img { height: 145px; }
+
+    /* Card body padding — tighter on phone */
+    .program-card-body { padding: 18px 18px 22px; }
+    .product-card-body { padding: 20px 20px 24px; }
+    .highlight-card-body { padding: 16px 16px 18px; }
+
+    /* MCP quote */
+    .mcp-card { flex-direction: column; text-align: center; padding: 36px 20px; gap: 24px; }
+    .mcp-avatar img { width: 110px; height: 110px; }
     .mcp-author-info { align-items: center; }
-    .mcp-card blockquote { font-size: 1.1rem; }
-    .split-banner { height: 260px; }
-    .split-banner.short { height: 200px; }
+    .mcp-card blockquote { font-size: 1rem; }
+
+    /* Misc layout */
+    .split-banner { height: 220px; }
+    .split-banner.short { height: 180px; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-grid img { height: 200px; }
-    .carousel-slide img { height: 300px; }
-    .carousel-slide-content { bottom: 24px; left: 24px; right: 24px; }
-    .carousel-slide-content h3 { font-size: 1.3rem; }
+    .gallery-grid img { height: 180px; }
+    .carousel-slide img { height: 280px; }
+    .carousel-slide-content { bottom: 20px; left: 20px; right: 20px; }
+    .carousel-slide-content h3 { font-size: 1.2rem; }
     .page-hero { min-height: 55vh; }
+    .auto-scroll-card { flex: 0 0 240px; height: 320px; }
 
-    .auto-scroll-card { flex: 0 0 260px; height: 340px; }
-
-    .bg-mandala.tl { width: 70vw; height: 70vw; top: -20vw; left: -20vw; }
-    .bg-mandala.br { width: 60vw; height: 60vw; bottom: -20vw; right: -20vw; }
-    .bg-mandala.tr, .bg-mandala.bl { display: none; }
-    .bg-orb { filter: blur(50px); }
+    /* Performance — cheaper blur on mobile GPU */
+    .bg-orb { filter: blur(40px); }
     .bg-orb:nth-child(3), .bg-orb:nth-child(4) { display: none; }
+    .navbar { backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); }
 
+    /* Misc */
     .contact-details a { font-size: 0.8rem; }
+    .searchtool-banner { padding: 32px 20px; gap: 20px; }
 }
 
 /* Prevent body scroll when mobile nav is open */
 body.nav-open { overflow: hidden; }
 
 @media (max-width: 480px) {
-    .container { padding: 0 16px; }
-    .section { padding: 40px 0; }
-    .gallery-grid img { height: 160px; }
-    .carousel-slide img { height: 240px; }
-    .auto-scroll-card { flex: 0 0 220px; height: 300px; }
-    .image-strip-item { flex: 0 0 260px; }
-    .split-banner { height: 200px; }
-    .split-banner.short { height: 160px; }
+    .container { padding: 0 14px; }
+    .section { padding: 36px 0; }
+    .section-header { margin-bottom: 28px; }
+
+    /* Cards too narrow at 480px — single column */
+    .highlights-grid, .cities-grid, .contact-grid { grid-template-columns: 1fr; }
+    /* Compact cards stay 2-col even on small phones */
+    .practical-grid, .intro-cards { grid-template-columns: repeat(2, 1fr); }
+
+    /* Typography */
+    h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+    h2 { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+    .hero-subtitle { font-size: 0.88rem; }
+    .btn { padding: 11px 22px; font-size: 0.875rem; }
+
+    /* Image heights — single-column cards fill full width, so keep images taller */
+    .program-card-img { height: 200px; }
+    .highlight-card-img { height: 190px; }
+    .product-card-image { height: 180px; }
+    .city-card-img { height: 180px; }
+    .intro-card img { height: 130px; }
+
+    /* Gallery & carousel */
+    .gallery-grid img { height: 150px; }
+    .carousel-slide img { height: 220px; }
+    .auto-scroll-card { flex: 0 0 200px; height: 280px; }
+    .image-strip-item { flex: 0 0 240px; }
+    .split-banner { height: 180px; }
+    .split-banner.short { height: 150px; }
+
+    /* Cities page — single column on very small screens */
     .cities-grid-responsive { grid-template-columns: 1fr; }
-    .intro-cards { grid-template-columns: 1fr 1fr; }
-    h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+
+    /* City brand badge — smaller and tucked tighter into corner */
+    .city-brand-badge { bottom: 16px; right: 12px; }
+    .city-brand-badge-inner { padding: 8px 10px; }
+    .city-brand-badge-inner img { width: 110px; }
+
+    /* Footer */
+    .footer { padding: 44px 0 28px; }
+    .footer-grid { gap: 22px; }
+    .fact-item { padding: 16px 8px; }
+    .fact-value { font-size: 1.05rem; }
 }
 
 /* ============================================

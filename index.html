@@ -82,7 +82,7 @@
     <!-- Hero with Local Video Background -->
     <section class="hero">
         <div class="hero-video-wrap">
-            <video autoplay muted loop playsinline>
+            <video id="hero-video" autoplay muted loop playsinline preload="auto" style="pointer-events:none;">
                 <source src="videos/IIAF - Landing Page.mp4" type="video/mp4">
                 <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80" alt="India is a Feeling">
             </video>
@@ -94,12 +94,7 @@
             <p class="hero-subtitle">A land of vibrant cultures, timeless traditions, and transformative experiences. Discover India through the lens of exchange, growth, and human connection.</p>
             <div class="hero-actions">
                 <a href="#cities" class="btn btn-primary">Explore Cities</a>
-                <a href="about.html" class="btn btn-outline">Learn More</a>
             </div>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll to explore</span>
-            <div class="scroll-line"></div>
         </div>
     </section>
 
@@ -140,7 +135,7 @@
                     </div>
                 </div>
                 <div class="intro-card">
-                    <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=500&q=80" alt="Indian cultural festivals and traditions">
+                    <img src="https://images.unsplash.com/photo-1520312622401-cac590a0d473?w=500&q=80" alt="Indian cultural festivals and traditions">
                     <div class="intro-card-body">
                         <h3>Cultural Immersion</h3>
                         <p>Live India's festivals, food, and traditions — an experience no classroom can teach.</p>
@@ -228,7 +223,7 @@
 
                 <a href="hyderabad.html" class="city-mini-card">
                     <div class="city-mini-img">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Charminar%2C_Hyderabad_01.jpg/400px-Charminar%2C_Hyderabad_01.jpg" alt="Hyderabad" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Charminar%2C_Hyderabad_01.jpg" alt="Hyderabad" loading="lazy">
                         <div class="city-mini-overlay"></div>
                         <div class="city-mini-name">Hyderabad</div>
                     </div>
@@ -240,7 +235,7 @@
 
                 <a href="hyderabad.html" class="city-mini-card">
                     <div class="city-mini-img">
-                        <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?w=400&q=80" alt="Mumbai" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=400&q=80" alt="Mumbai" loading="lazy">
                         <div class="city-mini-overlay"></div>
                         <div class="city-mini-name">Mumbai</div>
                     </div>
@@ -410,5 +405,21 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+    (function() {
+        var v = document.getElementById('hero-video');
+        if (!v) return;
+        v.muted = true;
+        var p = v.play();
+        if (p !== undefined) {
+            p.catch(function() {
+                document.addEventListener('touchstart', function tryPlay() {
+                    v.play();
+                    document.removeEventListener('touchstart', tryPlay);
+                }, { once: true });
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
