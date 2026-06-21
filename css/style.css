@@ -898,7 +898,7 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 /* ============================================
    CONTACT — Portrait Card Style
    ============================================ */
-.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .contact-card {
     background: #fff;
     border-radius: 20px;
@@ -924,6 +924,9 @@ h4 { font-size: 1.1rem; font-weight: 600; }
     box-shadow: 0 8px 32px rgba(0,0,0,0.16);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .pcard:hover {
     transform: translateY(-6px);
@@ -932,9 +935,9 @@ h4 { font-size: 1.1rem; font-weight: 600; }
 .pcard-header {
     height: 90px;
     position: relative;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #9A031E 0%, #C65B1B 100%);
 }
-.contact-grid .pcard:nth-child(1) .pcard-header { background: linear-gradient(90deg, #9A031E 0%, #E8621A 100%); }
-.contact-grid .pcard:nth-child(2) .pcard-header { background: linear-gradient(90deg, #E8621A 0%, #9A031E 100%); }
 .pcard-avatar {
     position: absolute;
     bottom: -44px;
@@ -958,6 +961,9 @@ h4 { font-size: 1.1rem; font-weight: 600; }
     padding: 56px 24px 28px;
     text-align: center;
     background: linear-gradient(160deg, #6B1527 0%, #4A0E1A 100%);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 .pcard-name {
     font-family: var(--font-display);
@@ -975,7 +981,7 @@ h4 { font-size: 1.1rem; font-weight: 600; }
     color: rgba(255,255,255,0.58);
     margin-bottom: 20px;
 }
-.pcard-links { display: flex; flex-direction: column; gap: 8px; }
+.pcard-links { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
 .pcard-link {
     display: flex;
     align-items: center;

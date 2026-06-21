@@ -90,7 +90,13 @@
       "Bash(curl -s https://gis-api.aiesec.org/graphql?access_token=9Z2nakLPXCckOP9Os8G7im6gvRW0mWeu3XMaNvvYvC8 -H 'Content-Type: application/json' -X POST -d '{\"query\":\"{ s: __type\\(name:\\\\\"SlotConnection\\\\\"\\) { fields { name type { name kind } } } d: __type\\(name:\\\\\"OpportunityDurationType\\\\\"\\) { fields { name type { name } } } }\"}')",
       "Bash(curl -s https://gis-api.aiesec.org/graphql?access_token=9Z2nakLPXCckOP9Os8G7im6gvRW0mWeu3XMaNvvYvC8 -H 'Content-Type: application/json' -X POST -d '{\"query\":\"{ allOpportunity\\(filters:{committee:1585,statuses:[\\\\\"open\\\\\",\\\\\"approved\\\\\",\\\\\"in_progress\\\\\"],latest_end_date:{from:\\\\\"2026-06-17\\\\\"}},pagination:{page:1,per_page:5}\\) { data { id title remote_experience_duration opportunity_duration_type { id min_duration max_duration } } } }\"}')",
       "Bash(node sync.js)",
-      "Bash(xargs sed -i 's|href=\"opportunities\\\\.html\">Opportunities|href=\"opportunities.html\">Search Tool|g')"
+      "Bash(xargs sed -i 's|href=\"opportunities\\\\.html\">Opportunities|href=\"opportunities.html\">Search Tool|g')",
+      "Bash(node _add_rasul.js)",
+      "Bash(cd \"/c/Users/faadh/OneDrive/Desktop/IXP DSP/IIAF v1.0\" && grep -rniE 'href=\"\\(amravati|anand|dehradun|noida|vvn\\)\\\\.html' --include=\"*.html\" --include=\"*.js\" . )",
+      "Bash(grep -v '\"></div>$')",
+      "Bash(cd \"/c/Users/faadh/OneDrive/Desktop/IXP DSP/IIAF v1.0\" && sed -i -E 's/ style=\"background: linear-gradient\\\\\\([^\"]*\\\\\\)\"//' *.html && echo \"remaining:\" && grep -c 'pcard-header\" style' *.html | grep -v ':0')",
+      "Bash(sed -i -E 's/^<a href=\"\\(bengaluru|delhi-iit|patiala\\)\\\\.html\" class=\"city-mini-card\">/                <a href=\"\\\\1.html\" class=\"city-mini-card\">/' cities.html)",
+      "Bash(echo \"done, remaining count: $?\")"
     ]
   }
 }
