@@ -97,7 +97,21 @@ const OPPORTUNITY_FIELDS = `
     project_name
 `;
 
-const INR_TO_USD = 84;
+// Fallback only — the real rate is fetched live at sync start so this never goes stale.
+const FALLBACK_INR_TO_USD = 94.5;
+
+async function fetchInrToUsdRate() {
+    try {
+        const res = await fetch('https://api.frankfurter.app/latest?from=USD&to=INR', {
+            signal: AbortSignal.timeout(8000),
+        });
+        const json = await res.json();
+        const rate = json?.rates?.INR;
+        if (typeof rate === 'number' && rate > 0) return rate;
+    } catch {}
+    console.warn(`  Could not fetch live USD/INR rate — using fallback ${FALLBACK_INR_TO_USD}`);
+    return FALLBACK_INR_TO_USD;
+}
 
 async function fetchPage(page) {
     const today = todayISO();
@@ -125,12 +139,13 @@ async function fetchPage(page) {
 }
 
 // ── Transform GQL record → Supabase row ─────────────────────
-function transform(o, syncedAt) {
+function transform(o, syncedAt, inrToUsd) {
     const prog     = PROGRAMME_MAP[Number(o.programme?.id)] ?? { type: 'igv', slug: 'global-volunteer' };
 
-    // Fee: project fee only (host org cost) in INR → USD, rounded to nearest $10
+    // Fee: project fee only (host org cost) in INR → USD, rounded to the nearest dollar.
+    // IGTA/IGTE rarely carry a project fee (paid placements) — only IGV does.
     const projectFeeINR = o.fee_and_health_insurance?.project_fee ?? 0;
-    const fee           = Math.round((projectFeeINR / INR_TO_USD) / 10) * 10;
+    const fee           = Math.round(projectFeeINR / inrToUsd);
 
     // Duration: from opportunity_duration_type min/max (in weeks)
     const durMin   = o.opportunity_duration_type?.duration_min ?? null;
@@ -188,6 +203,9 @@ async function sync(dryRun = false) {
     console.log(`[${syncStart}] IIAF sync starting`);
     console.log(`  India MC: ${INDIA_MC_ID}  |  dry-run: ${dryRun}\n`);
 
+    const inrToUsd = await fetchInrToUsdRate();
+    console.log(`  Using USD/INR rate: ${inrToUsd}\n`);
+
     let page       = 1;
     let totalPages = 1;
     const allRows  = [];
@@ -202,7 +220,7 @@ async function sync(dryRun = false) {
         const batch  = result.data ?? [];
 
         console.log(`${batch.length} records  (total: ${paging.total_items ?? '?'})`);
-        allRows.push(...batch.map(o => transform(o, syncStart)));
+        allRows.push(...batch.map(o => transform(o, syncStart, inrToUsd)));
         page++;
     } while (page <= totalPages);
 

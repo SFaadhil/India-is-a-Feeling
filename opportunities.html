@@ -507,7 +507,7 @@
                                 <span>Max Fee</span>
                                 <span class="fee-value" id="fee-display">Any</span>
                             </div>
-                            <input type="range" class="fee-slider" id="filter-fee" min="0" max="300" step="25" value="300">
+                            <input type="range" class="fee-slider" id="filter-fee" min="0" max="1000" step="25" value="1000">
                         </div>
                     </div>
 
@@ -667,7 +667,7 @@
             org:           r.organisation || '',
             lc:            r.lc || '',
             sdg:           r.sdg,
-            fee:           Math.round(rawFee / 10) * 10,
+            fee:           Math.round(rawFee),
             accommodation: r.accommodation || false,
             duration:      r.duration || '',
             link:          r.link || `https://aiesec.org/opportunity/${r.id}`,
@@ -763,13 +763,17 @@
 
     // ── STATE ────────────────────────────────────────────────────────────────
     let OPPS = MOCK_OPPS;
-    const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:300, project:"all", query:"" };
+    const state = { type:"all", lc:"all", duration:"all", accom:"all", fee:1000, project:"all", query:"" };
 
     // ── FILTER + RENDER ──────────────────────────────────────────────────────
+    // LCs are sometimes registered in AIESEC's system with punctuation that differs
+    // from the site's display label (e.g. "M.A.H.E" vs "MAHE") — compare loosely.
+    function normLc(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+
     function filtered() {
         return OPPS.filter(o => {
             if (state.type !== "all" && o.type !== state.type) return false;
-            if (state.lc !== "all" && o.lc !== state.lc) return false;
+            if (state.lc !== "all" && normLc(o.lc) !== normLc(state.lc)) return false;
             if (state.duration !== "all") {
                 const m = o.duration ? o.duration.match(/\d+/) : null;
                 const minD = m ? parseInt(m[0]) : null;
@@ -828,7 +832,7 @@
                     <div class="card-table">
                         <div class="card-table-row">
                             <span class="card-dl">Fee</span>
-                            <span class="card-dv ${o.fee === 0 ? 'free' : ''}">${o.fee === 0 ? 'Free' : '$' + o.fee}</span>
+                            <span class="card-dv ${o.fee === 0 ? 'free' : ''}">${o.fee === 0 ? ' - ' : '$' + o.fee}</span>
                         </div>
                         <div class="card-table-row">
                             <span class="card-dl">Accom</span>
@@ -872,7 +876,7 @@
             <div class="modal-desc-box">${o.desc}</div>
             <div class="modal-details-grid">
                 ${o.project ? `<div class="modal-detail-tile"><div class="mdl">Project</div><div class="mdv">${o.project}</div></div>` : ''}
-                <div class="modal-detail-tile"><div class="mdl">Fee</div><div class="mdv">${o.fee === 0 ? 'Free' : '$' + o.fee}</div></div>
+                <div class="modal-detail-tile"><div class="mdl">Fee</div><div class="mdv">${o.fee === 0 ? ' - ' : '$' + o.fee}</div></div>
                 <div class="modal-detail-tile"><div class="mdl">Accommodation</div><div class="mdv">${o.accommodation ? 'Included' : 'Not Included'}</div></div>
                 ${o.duration ? `<div class="modal-detail-tile"><div class="mdl">Duration</div><div class="mdv">${o.duration}</div></div>` : ''}
             </div>
@@ -943,7 +947,7 @@
     }
     feeSlider.addEventListener("input", () => {
         state.fee = parseInt(feeSlider.value);
-        feeDisplay.textContent = state.fee >= 300 ? "Any" : "$" + state.fee;
+        feeDisplay.textContent = state.fee >= 1000 ? "Any" : "$" + state.fee;
         updateSliderFill();
         render();
     });

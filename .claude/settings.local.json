@@ -102,7 +102,12 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/National_Institute_of_Sports%2C_Patiala.jpg/500px-National_Institute_of_Sports%2C_Patiala.jpg\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Moti_Bagh_Palace%2C_Patiala.jpg/500px-Moti_Bagh_Palace%2C_Patiala.jpg\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Gurdwa_Dukh_Nivaran_Sahib_%28Night_view%29_01.jpg/500px-Gurdwa_Dukh_Nivaran_Sahib_%28Night_view%29_01.jpg\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Punjabi_university%2C_patiala.jpg/500px-Punjabi_university%2C_patiala.jpg\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Punjabi_university%2C_patiala.jpg/500px-Punjabi_university%2C_patiala.jpg\")",
+      "Bash(node introspect.mjs)",
+      "Bash(node test_exact.mjs)",
+      "Bash(node test_transform.mjs)",
+      "Bash(node test_currency.mjs)",
+      "Bash(node analyze.mjs)"
     ]
   }
 }
