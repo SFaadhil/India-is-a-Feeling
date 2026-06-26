@@ -142,10 +142,18 @@ async function fetchPage(page) {
 function transform(o, syncedAt, inrToUsd) {
     const prog     = PROGRAMME_MAP[Number(o.programme?.id)] ?? { type: 'igv', slug: 'global-volunteer' };
 
-    // Fee: project fee only (host org cost) in INR → USD, rounded to the nearest dollar.
+    // Fee: project fee only (host org cost), rounded to the nearest dollar.
     // IGTA/IGTE rarely carry a project fee (paid placements) — only IGV does.
-    const projectFeeINR = o.fee_and_health_insurance?.project_fee ?? 0;
-    const fee           = Math.round(projectFeeINR / inrToUsd);
+    // NOTE: the AIESEC API appears to geo-localize this field by requester IP —
+    // it returns raw INR for some callers but pre-converted USD for others (e.g.
+    // GitHub Actions' US-based runners). Only divide by the FX rate when the API
+    // actually says the amount is in INR, to avoid double-converting it.
+    const feeInfo        = o.fee_and_health_insurance;
+    const projectFeeRaw  = feeInfo?.project_fee ?? 0;
+    const feeCurrency    = feeInfo?.currency ?? 'INR';
+    const fee             = feeCurrency === 'INR'
+        ? Math.round(projectFeeRaw / inrToUsd)
+        : Math.round(projectFeeRaw);
 
     // Duration: from opportunity_duration_type min/max (in weeks)
     const durMin   = o.opportunity_duration_type?.duration_min ?? null;
