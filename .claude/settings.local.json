@@ -107,7 +107,11 @@
       "Bash(node test_exact.mjs)",
       "Bash(node test_transform.mjs)",
       "Bash(node test_currency.mjs)",
-      "Bash(node analyze.mjs)"
+      "Bash(node analyze.mjs)",
+      "Bash(git fetch *)",
+      "Bash(gh run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
