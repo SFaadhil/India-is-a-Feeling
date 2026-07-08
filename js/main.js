@@ -219,13 +219,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Searchtool deep-links: city program cards → searchtool with LC + type pre-selected ---
     const LC_NAME_MAP = {
         'ahmedabad': 'Ahmedabad',
-        'bengaluru': 'Bengaluru', 'chandigarh': 'Chandigarh', 'chennai': 'Chennai',
+        'bengaluru': 'Bengaluru', 'bhopal': 'Bhopal', 'chandigarh': 'Chandigarh', 'chennai': 'Chennai',
         'delhi-iit': 'Delhi IIT', 'delhi-university': 'Delhi University',
         'hyderabad': 'Hyderabad', 'indore': 'Indore', 'jaipur': 'Jaipur',
         'jalandhar': 'Jalandhar', 'kolkata': 'Kolkata', 'ludhiana': 'Ludhiana',
         'mahe': 'MAHE', 'mumbai': 'Mumbai', 'navi-mumbai': 'Navi Mumbai',
         'patiala': 'Patiala', 'pune': 'Pune',
         'surat': 'Surat', 'visakhapatnam': 'Visakhapatnam',
+        'vvn': 'Vallabh Vidyanagar (VVN)',
     };
     const PROG_TYPE_MAP = { gv: 'igv', gta: 'igta', gte: 'igte' };
 

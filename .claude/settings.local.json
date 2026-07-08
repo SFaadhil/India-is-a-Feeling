@@ -111,7 +111,13 @@
       "Bash(git fetch *)",
       "Bash(gh run *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(perl -v)",
+      "Bash(ls .claude/launch.json)",
+      "Bash(cat .claude/launch.json)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL ok'\\)\")",
+      "Bash(python -c \"from PIL import Image; print\\('PIL OK'\\)\")",
+      "Bash(curl -s \"https://nzgkjogrtsigwachlxos.supabase.co/rest/v1/opportunities?select=id,title,type,lc,status&lc=ilike.*bhopal*\" -H \"apikey: sb_publishable_XwtEwfuscmD24klYoC3vJw_H1Q8JqxG\" -H \"Authorization: Bearer sb_publishable_XwtEwfuscmD24klYoC3vJw_H1Q8JqxG\")"
     ]
   }
 }
